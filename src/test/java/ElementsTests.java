@@ -1,14 +1,15 @@
 import basePages.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pageObjects.CheckBoxPage;
 import pageObjects.TextBoxPage;
 
-import static pageObjects.Navigation.ELEMENTS;
-import static pageObjects.Navigation.TEXT_BOX;
+import static pageObjects.Navigation.*;
 
 public class ElementsTests extends BaseTest {
 
     TextBoxPage textBoxPage = new TextBoxPage();
+    CheckBoxPage checkBoxPage = new CheckBoxPage();
 
     @Test(description = "Have used ordinary data for filling the user's data")
     public void fillingTextForm() {
@@ -53,5 +54,37 @@ public class ElementsTests extends BaseTest {
         Assert.assertEquals(user.getEmail(), textBoxPage.getResult().get("Email"));
         Assert.assertEquals(user.getCurrentAddress(), textBoxPage.getResult().get("Current Address"));
         Assert.assertEquals(user.getPermanentAddress(), textBoxPage.getResult().get("Permananet Address"));
+    }
+
+    @Test(description = "Click checkbox randomly, and check result")
+    public void clickCheckboxRandomly() {
+        checkBoxPage.open("http://85.192.34.140:8081/");
+        checkBoxPage.navigateTo(ELEMENTS);
+        checkBoxPage.navigateToMenu(CHECK_BOX);
+
+        checkBoxPage.clickExpandAllBtn();
+        checkBoxPage.clickRandomItem();
+
+        String actualResult = checkBoxPage.getCheckedCheckBoxes();
+        String expectedResult = checkBoxPage.getOutputResult();
+
+        Assert.assertEquals(actualResult, expectedResult);
+
+    }
+
+    @Test(description = "Click checkbox on name, and check result")
+    public void clickCheckboxName() {
+        checkBoxPage.open("http://85.192.34.140:8081/");
+        checkBoxPage.navigateTo(ELEMENTS);
+        checkBoxPage.navigateToMenu(CHECK_BOX);
+
+        checkBoxPage.clickExpandAllBtn();
+
+        String checkboxName = "Notes";
+        checkBoxPage.clickCheckboxName(checkboxName);
+        String expectedResult = checkBoxPage.getExpectedResult(checkboxName);
+        String actualResult = checkBoxPage.getOutputResult();
+
+        Assert.assertEquals(expectedResult, actualResult);
     }
 }

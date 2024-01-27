@@ -4,7 +4,8 @@ public enum Navigation {
 
     /** Elements list items */
     ELEMENTS ("'Elements'"),
-    TEXT_BOX ("'Text Box'");
+    TEXT_BOX ("'Text Box'"),
+    CHECK_BOX ("'Check Box'");
 
     private final String item;
 
