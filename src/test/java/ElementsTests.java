@@ -2,6 +2,7 @@ import basePages.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.CheckBoxPage;
+import pageObjects.RadioButtonPage;
 import pageObjects.TextBoxPage;
 
 import static pageObjects.Navigation.*;
@@ -10,6 +11,7 @@ public class ElementsTests extends BaseTest {
 
     TextBoxPage textBoxPage = new TextBoxPage();
     CheckBoxPage checkBoxPage = new CheckBoxPage();
+    RadioButtonPage radioButtonPage = new RadioButtonPage();
 
     @Test(description = "Have used ordinary data for filling the user's data")
     public void fillingTextForm() {
@@ -86,5 +88,38 @@ public class ElementsTests extends BaseTest {
         String actualResult = checkBoxPage.getOutputResult();
 
         Assert.assertEquals(expectedResult, actualResult);
+    }
+
+    @Test(description = "Radio button click Yes test")
+    public void radioBtnTest1() {
+        radioButtonPage.open("http://85.192.34.140:8081/");
+        radioButtonPage.navigateTo(ELEMENTS);
+        radioButtonPage.navigateToMenu(RADIO_BUTTON);
+
+        radioButtonPage.clickYesBtn();
+        String result = radioButtonPage.getResult();
+
+        Assert.assertEquals(result, "Yes");
+    }
+
+    @Test(description = "Radio button click Impressive test")
+    public void radioBtnTest2() {
+        radioButtonPage.open("http://85.192.34.140:8081/");
+        radioButtonPage.navigateTo(ELEMENTS);
+        radioButtonPage.navigateToMenu(RADIO_BUTTON);
+
+        radioButtonPage.clickImpressiveBtn();
+        String result = radioButtonPage.getResult();
+
+        Assert.assertEquals(result, "Impressive");
+    }
+
+    @Test(description = "Radio button No is disabled")
+    public void radioBtnTest3() {
+        radioButtonPage.open("http://85.192.34.140:8081/");
+        radioButtonPage.navigateTo(ELEMENTS);
+        radioButtonPage.navigateToMenu(RADIO_BUTTON);
+
+        Assert.assertTrue(radioButtonPage.noBtnIsDisabled());
     }
 }
