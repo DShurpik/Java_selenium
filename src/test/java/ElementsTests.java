@@ -1,9 +1,13 @@
 import basePages.BaseTest;
+import dataGenerator.Generator;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.CheckBoxPage;
 import pageObjects.RadioButtonPage;
 import pageObjects.TextBoxPage;
+import pageObjects.WebTablePage;
+
+import java.util.List;
 
 import static pageObjects.Navigation.*;
 
@@ -12,6 +16,7 @@ public class ElementsTests extends BaseTest {
     TextBoxPage textBoxPage = new TextBoxPage();
     CheckBoxPage checkBoxPage = new CheckBoxPage();
     RadioButtonPage radioButtonPage = new RadioButtonPage();
+    WebTablePage webTablePage = new WebTablePage();
 
     @Test(description = "Have used ordinary data for filling the user's data")
     public void fillingTextForm() {
@@ -122,4 +127,87 @@ public class ElementsTests extends BaseTest {
 
         Assert.assertTrue(radioButtonPage.noBtnIsDisabled());
     }
+
+    @Test(description = "Adding a new person, and checking that there is a new person in a web table")
+    public void addNewUserInWebTable() {
+        Generator user = new Generator();
+
+        webTablePage.open("http://85.192.34.140:8081/");
+        webTablePage.navigateTo(ELEMENTS);
+        webTablePage.navigateToMenu(WEB_TABLES);
+
+        webTablePage.clickAddNewPersonBtn();
+        webTablePage
+                .fillFirstName(user.getName())
+                .fillLastName(user.getLastName())
+                .fillEmail(user.getEmail())
+                .fillAge(user.getAge())
+                .fillSalary(user.getSalary())
+                .fillDepartment(user.getDepartment())
+                .clickSubmitBtn();
+
+        List<List<String>> usersList = webTablePage.getPersonsList();
+        Assert.assertTrue(webTablePage.checkPersonAdded(usersList, user));
+    }
+
+    @Test(description = "Checking that user is in a web table after searching")
+    public void searchTableTest() {
+        Generator user = new Generator();
+
+        webTablePage.open("http://85.192.34.140:8081/");
+        webTablePage.navigateTo(ELEMENTS);
+        webTablePage.navigateToMenu(WEB_TABLES);
+
+        webTablePage.clickAddNewPersonBtn();
+        webTablePage
+                .fillFirstName(user.getName())
+                .fillLastName(user.getLastName())
+                .fillEmail(user.getEmail())
+                .fillAge(user.getAge())
+                .fillSalary(user.getSalary())
+                .fillDepartment(user.getDepartment())
+                .clickSubmitBtn();
+
+        webTablePage.search(user.getDepartment());
+
+        List<List<String>> usersList = webTablePage.getPersonsList();
+        Assert.assertTrue(webTablePage.checkPersonAdded(usersList, user));
+    }
+
+    @Test(description = "Checking that there is not user after deleting")
+    public void deleteUser() {
+        Generator user = new Generator();
+
+        webTablePage.open("http://85.192.34.140:8081/");
+        webTablePage.navigateTo(ELEMENTS);
+        webTablePage.navigateToMenu(WEB_TABLES);
+
+        webTablePage.clickAddNewPersonBtn();
+
+        webTablePage
+                .fillFirstName(user.getName())
+                .fillLastName(user.getLastName())
+                .fillEmail(user.getEmail())
+                .fillAge(user.getAge())
+                .fillSalary(user.getSalary())
+                .fillDepartment(user.getDepartment())
+                .clickSubmitBtn();
+
+        webTablePage.search(user.getDepartment());
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        webTablePage.clickDeleteBtn();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        List<List<String>> usersList = webTablePage.getPersonsList();
+        Assert.assertFalse(webTablePage.checkPersonAdded(usersList, user));
+    }
+
+
 }
