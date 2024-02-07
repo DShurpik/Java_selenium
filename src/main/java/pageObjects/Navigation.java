@@ -7,7 +7,8 @@ public enum Navigation {
     TEXT_BOX ("'Text Box'"),
     CHECK_BOX ("'Check Box'"),
     RADIO_BUTTON ("'Radio Button'"),
-    WEB_TABLES ("'Web Tables'");
+    WEB_TABLES ("'Web Tables'"),
+    BUTTONS ("'Buttons'");
 
     private final String item;
 

@@ -2,10 +2,7 @@ import basePages.BaseTest;
 import dataGenerator.Generator;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pageObjects.CheckBoxPage;
-import pageObjects.RadioButtonPage;
-import pageObjects.TextBoxPage;
-import pageObjects.WebTablePage;
+import pageObjects.*;
 
 import java.util.List;
 
@@ -17,6 +14,7 @@ public class ElementsTests extends BaseTest {
     CheckBoxPage checkBoxPage = new CheckBoxPage();
     RadioButtonPage radioButtonPage = new RadioButtonPage();
     WebTablePage webTablePage = new WebTablePage();
+    ButtonsPage buttonsPage = new ButtonsPage();
 
     @Test(description = "Have used ordinary data for filling the user's data")
     public void fillingTextForm() {
@@ -207,6 +205,42 @@ public class ElementsTests extends BaseTest {
         }
         List<List<String>> usersList = webTablePage.getPersonsList();
         Assert.assertFalse(webTablePage.checkPersonAdded(usersList, user));
+    }
+
+    @Test(description = "Testing different clicks, double lmb, RMB, ordinary click")
+    public void doubleCLickTest() {
+        buttonsPage.open("http://85.192.34.140:8081/");
+
+        buttonsPage.navigateTo(ELEMENTS);
+        buttonsPage.navigateToMenu(BUTTONS);
+
+        buttonsPage.doubleClick();
+
+        Assert.assertEquals(buttonsPage.doubleClickResult(), "You have done a double click");
+    }
+
+    @Test(description = "Testing different clicks, double lmb, RMB, ordinary click")
+    public void rightCLickTest() {
+        buttonsPage.open("http://85.192.34.140:8081/");
+
+        buttonsPage.navigateTo(ELEMENTS);
+        buttonsPage.navigateToMenu(BUTTONS);
+
+        buttonsPage.rightClick();
+
+        Assert.assertEquals(buttonsPage.rightClickResult(), "You have done a right click");
+    }
+
+    @Test(description = "Testing different clicks, double lmb, RMB, ordinary click")
+    public void cLickTest() {
+        buttonsPage.open("http://85.192.34.140:8081/");
+
+        buttonsPage.navigateTo(ELEMENTS);
+        buttonsPage.navigateToMenu(BUTTONS);
+
+        buttonsPage.clickMe();
+
+        Assert.assertEquals(buttonsPage.clickGetResult(), "You have done a dynamic click");
     }
 
 
