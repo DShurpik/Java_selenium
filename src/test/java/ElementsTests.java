@@ -1,9 +1,15 @@
 import basePages.BaseTest;
 import dataGenerator.Generator;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.*;
 
+import java.io.IOException;
 import java.util.List;
 
 import static pageObjects.Navigation.*;
@@ -15,6 +21,7 @@ public class ElementsTests extends BaseTest {
     RadioButtonPage radioButtonPage = new RadioButtonPage();
     WebTablePage webTablePage = new WebTablePage();
     ButtonsPage buttonsPage = new ButtonsPage();
+    LinksPage linksPage = new LinksPage();
 
     @Test(description = "Have used ordinary data for filling the user's data")
     public void fillingTextForm() {
@@ -243,5 +250,57 @@ public class ElementsTests extends BaseTest {
         Assert.assertEquals(buttonsPage.clickGetResult(), "You have done a dynamic click");
     }
 
+    @Test(description = "API testing using network tab")
+    public void createdApiTest() throws IOException {
+        linksPage.open("http://85.192.34.140:8081/");
 
+        linksPage.navigateTo(ELEMENTS);
+        linksPage.navigateToMenu(LINKS);
+
+        linksPage.clickCreatedLink();
+
+        HttpClient httpClient = HttpClients.createDefault();
+        HttpGet request = new HttpGet("http://85.192.34.140/api/created");
+        HttpResponse response = httpClient.execute(request);
+
+        Assert.assertEquals(response.getStatusLine().getStatusCode(), 201);
+    }
+
+    @Test(description = "API testing using network tab")
+    public void noContentTest() throws IOException {
+        linksPage.open("http://85.192.34.140:8081/");
+
+        linksPage.navigateTo(ELEMENTS);
+        linksPage.navigateToMenu(LINKS);
+
+        linksPage.clickNoContentLink();
+
+        HttpClient httpClient = HttpClients.createDefault();
+        HttpGet request = new HttpGet("http://85.192.34.140/api/no-content");
+        HttpResponse response = httpClient.execute(request);
+
+        Assert.assertEquals(response.getStatusLine().getStatusCode(), 204);
+    }
+
+    @Test(description = "API testing using network tab")
+    public void movedTest() throws IOException {
+        linksPage.open("http://85.192.34.140:8081/");
+
+        linksPage.navigateTo(ELEMENTS);
+        linksPage.navigateToMenu(LINKS);
+
+        linksPage.clickMovedLink();
+
+        /* Создаем HttpClient и отключаем автоматическую обработку перенаправлений
+        disableRedirectHandling() используется для отключения автоматической обработки перенаправлений. */
+
+        CloseableHttpClient httpClient = HttpClients.custom()
+                .disableRedirectHandling()
+                .build();
+
+        HttpGet request = new HttpGet("http://85.192.34.140/api/moved");
+        HttpResponse response = httpClient.execute(request);
+
+        Assert.assertEquals(response.getStatusLine().getStatusCode(), 301);
+    }
 }
