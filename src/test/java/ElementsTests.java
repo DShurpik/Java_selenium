@@ -1,15 +1,18 @@
 import basePages.BaseTest;
 import dataGenerator.Generator;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
+import org.apache.hc.client5.http.classic.HttpClient;
+import org.apache.hc.client5.http.classic.methods.HttpGet;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
+import org.apache.hc.client5.http.impl.classic.HttpClients;
+import org.apache.hc.core5.http.HttpResponse;
+import org.apache.hc.core5.http.ProtocolException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.*;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 import static pageObjects.Navigation.*;
@@ -259,15 +262,16 @@ public class ElementsTests extends BaseTest {
 
         linksPage.clickCreatedLink();
 
-        HttpClient httpClient = HttpClients.createDefault();
+        CloseableHttpClient httpClient = HttpClients.createDefault();
         HttpGet request = new HttpGet("http://85.192.34.140/api/created");
-        HttpResponse response = httpClient.execute(request);
+        CloseableHttpResponse response = httpClient.execute(request);
 
-        Assert.assertEquals(response.getStatusLine().getStatusCode(), 201);
+        Assert.assertEquals(response.getCode(), 201);
+
     }
 
     @Test(description = "API testing using network tab")
-    public void noContentTest() throws IOException {
+    public void noContentTest() throws IOException, ProtocolException {
         linksPage.open("http://85.192.34.140:8081/");
 
         linksPage.navigateTo(ELEMENTS);
@@ -275,11 +279,18 @@ public class ElementsTests extends BaseTest {
 
         linksPage.clickNoContentLink();
 
-        HttpClient httpClient = HttpClients.createDefault();
+        CloseableHttpClient httpClient = HttpClients.createDefault();
         HttpGet request = new HttpGet("http://85.192.34.140/api/no-content");
-        HttpResponse response = httpClient.execute(request);
+        CloseableHttpResponse response = httpClient.execute(request);
 
-        Assert.assertEquals(response.getStatusLine().getStatusCode(), 204);
+        /**Можно брать либо хеддер по имени, либо весь хеддер, также можно проверить есть ли хеддер,
+         * локаль*/
+
+        System.out.println(Arrays.toString(response.getHeaders()));
+        System.out.println(response.getHeader("X-Frame-Options") + " X-Frame-Options header information");
+        System.out.println(response.getLocale() + " LOCALE");
+        System.out.println(response.getVersion() + " PROTOCOL VERSION");
+        Assert.assertEquals(response.getCode(), 204);
     }
 
     @Test(description = "API testing using network tab")
@@ -299,8 +310,72 @@ public class ElementsTests extends BaseTest {
                 .build();
 
         HttpGet request = new HttpGet("http://85.192.34.140/api/moved");
-        HttpResponse response = httpClient.execute(request);
+        CloseableHttpResponse response = httpClient.execute(request);
 
-        Assert.assertEquals(response.getStatusLine().getStatusCode(), 301);
+        Assert.assertEquals(response.getCode(), 301);
+    }
+
+    @Test(description = "API testing using network tab")
+    public void badRequestTest() throws IOException {
+        linksPage.open("http://85.192.34.140:8081/");
+
+        linksPage.navigateTo(ELEMENTS);
+        linksPage.navigateToMenu(LINKS);
+
+        linksPage.clickBadRequestLink();
+
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+        HttpGet request = new HttpGet("http://85.192.34.140/api/bad-request");
+        CloseableHttpResponse response = httpClient.execute(request);
+
+        Assert.assertEquals(response.getCode(), 400);
+    }
+
+    @Test(description = "API testing using network tab")
+    public void unauthorizedTest() throws IOException {
+        linksPage.open("http://85.192.34.140:8081/");
+
+        linksPage.navigateTo(ELEMENTS);
+        linksPage.navigateToMenu(LINKS);
+
+        linksPage.clickUnauthorizedLink();
+
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+        HttpGet request = new HttpGet("http://85.192.34.140/api/unauthorized");
+        CloseableHttpResponse response = httpClient.execute(request);
+
+        Assert.assertEquals(response.getCode(), 401);
+    }
+
+    @Test(description = "API testing using network tab")
+    public void forbiddenTest() throws IOException {
+        linksPage.open("http://85.192.34.140:8081/");
+
+        linksPage.navigateTo(ELEMENTS);
+        linksPage.navigateToMenu(LINKS);
+
+        linksPage.clickForbiddenLink();
+
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+        HttpGet request = new HttpGet("http://85.192.34.140/api/forbidden");
+        CloseableHttpResponse response = httpClient.execute(request);
+
+        Assert.assertEquals(response.getCode(), 403);
+    }
+
+    @Test(description = "API testing using network tab")
+    public void notFoundTest() throws IOException {
+        linksPage.open("http://85.192.34.140:8081/");
+
+        linksPage.navigateTo(ELEMENTS);
+        linksPage.navigateToMenu(LINKS);
+
+        linksPage.clickForbiddenLink();
+
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+        HttpGet request = new HttpGet("http://85.192.34.140/api/invalid-url");
+        CloseableHttpResponse response = httpClient.execute(request);
+
+        Assert.assertEquals(response.getCode(), 404);
     }
 }

@@ -16,6 +16,18 @@ public class LinksPage extends BasePage {
     @FindBy(id = "moved")
     private WebElement movedLink;
 
+    @FindBy(id = "bad-request")
+    private WebElement badRequestLink;
+
+    @FindBy(id = "unauthorized")
+    private WebElement unauthorizedLink;
+
+    @FindBy(id = "forbidden")
+    private WebElement forbiddenLink;
+
+    @FindBy(id = "invalid-url")
+    private WebElement notFoundLink;
+
     public LinksPage() {
         PageFactory.initElements(driver, this);
     }
@@ -30,5 +42,21 @@ public class LinksPage extends BasePage {
 
     public void clickMovedLink() {
         movedLink.click();
+    }
+
+    public void clickBadRequestLink() {
+        badRequestLink.click();
+    }
+
+    public void clickUnauthorizedLink() {
+        unauthorizedLink.click();
+    }
+
+    public void clickForbiddenLink() {
+        forbiddenLink.click();
+    }
+
+    public void clickNotFound() {
+        notFoundLink.click();
     }
 }
