@@ -1,11 +1,9 @@
 import basePages.BaseTest;
 import dataGenerator.Generator;
-import org.apache.hc.client5.http.classic.HttpClient;
 import org.apache.hc.client5.http.classic.methods.HttpGet;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
 import org.apache.hc.client5.http.impl.classic.HttpClients;
-import org.apache.hc.core5.http.HttpResponse;
 import org.apache.hc.core5.http.ProtocolException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -283,8 +281,7 @@ public class ElementsTests extends BaseTest {
         HttpGet request = new HttpGet("http://85.192.34.140/api/no-content");
         CloseableHttpResponse response = httpClient.execute(request);
 
-        /**Можно брать либо хеддер по имени, либо весь хеддер, также можно проверить есть ли хеддер,
-         * локаль*/
+        //Можно брать либо хеддер по имени, либо весь хеддер, также можно проверить есть ли хеддер
 
         System.out.println(Arrays.toString(response.getHeaders()));
         System.out.println(response.getHeader("X-Frame-Options") + " X-Frame-Options header information");
