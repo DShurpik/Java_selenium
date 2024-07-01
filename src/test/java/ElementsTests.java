@@ -23,6 +23,7 @@ public class ElementsTests extends BaseTest {
     WebTablePage webTablePage = new WebTablePage();
     ButtonsPage buttonsPage = new ButtonsPage();
     LinksPage linksPage = new LinksPage();
+    BrokenLinksPage brokenLinksPage = new BrokenLinksPage();
 
     @Test(description = "Have used ordinary data for filling the user's data")
     public void fillingTextForm() {
@@ -374,5 +375,16 @@ public class ElementsTests extends BaseTest {
         CloseableHttpResponse response = httpClient.execute(request);
 
         Assert.assertEquals(response.getCode(), 404);
+    }
+
+    @Test(description = "Checking a broken image on the page")
+    public void brokenImageTest() {
+        brokenLinksPage.open("http://85.192.34.140:8081/");
+
+        brokenLinksPage.navigateTo(ELEMENTS);
+        brokenLinksPage.navigateToMenu(BROKEN_LINKS);
+
+        Assert.assertEquals(brokenLinksPage.clientHeight(), 0);
+        Assert.assertEquals(brokenLinksPage.clientWidth(), 0);
     }
 }

@@ -9,7 +9,8 @@ public enum Navigation {
     RADIO_BUTTON ("'Radio Button'"),
     WEB_TABLES ("'Web Tables'"),
     BUTTONS ("'Buttons'"),
-    LINKS ("'Links'");
+    LINKS ("'Links'"),
+    BROKEN_LINKS ("'Broken Links - Images'");
 
     private final String item;
 
