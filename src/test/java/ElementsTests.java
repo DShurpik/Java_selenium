@@ -387,4 +387,16 @@ public class ElementsTests extends BaseTest {
         Assert.assertEquals(brokenLinksPage.clientHeight(), 0);
         Assert.assertEquals(brokenLinksPage.clientWidth(), 0);
     }
+
+    @Test(description = "Checking valid link")
+    public void validLinkTest() {
+        brokenLinksPage.open("http://85.192.34.140:8081/");
+
+        brokenLinksPage.navigateTo(ELEMENTS);
+        brokenLinksPage.navigateToMenu(BROKEN_LINKS);
+
+        brokenLinksPage.validLinkClick();
+
+        Assert.assertTrue(brokenLinksPage.googleIsVisible());
+    }
 }
