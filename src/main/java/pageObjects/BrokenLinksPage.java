@@ -16,6 +16,12 @@ public class BrokenLinksPage extends BasePage {
     @FindBy(xpath = "//img[@alt='Google']")
     private WebElement googleImg;
 
+    @FindBy(xpath = "//a[text()='Click Here for Broken Link']")
+    private WebElement brokenLink;
+
+    @FindBy(xpath = "//p[contains(text(), 'This page returned a 500 status code.')]")
+    private WebElement statusCodeElement;
+
     public BrokenLinksPage() {
         PageFactory.initElements(driver, this);
     }
@@ -34,5 +40,13 @@ public class BrokenLinksPage extends BasePage {
 
     public boolean googleIsVisible() {
         return googleImg.isDisplayed();
+    }
+
+    public void clickBrokenLink() {
+        brokenLink.click();
+    }
+
+    public boolean statusCodeIsDisplayed() {
+        return statusCodeElement.isDisplayed();
     }
 }

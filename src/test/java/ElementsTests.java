@@ -399,4 +399,32 @@ public class ElementsTests extends BaseTest {
 
         Assert.assertTrue(brokenLinksPage.googleIsVisible());
     }
+
+    @Test(description = "Checking broken link by other page element")
+    public void brokenLinkTest() {
+        brokenLinksPage.open("http://85.192.34.140:8081/");
+
+        brokenLinksPage.navigateTo(ELEMENTS);
+        brokenLinksPage.navigateToMenu(BROKEN_LINKS);
+
+        brokenLinksPage.clickBrokenLink();
+
+        Assert.assertTrue(brokenLinksPage.statusCodeIsDisplayed());
+    }
+
+    @Test(description = "Checking broken link by http server")
+    public void brokenLinkByServer() throws IOException {
+        brokenLinksPage.open("http://85.192.34.140:8081/");
+
+        brokenLinksPage.navigateTo(ELEMENTS);
+        brokenLinksPage.navigateToMenu(BROKEN_LINKS);
+
+        brokenLinksPage.clickBrokenLink();
+
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+        HttpGet request = new HttpGet("https://the-internet.herokuapp.com/status_codes/500");
+        CloseableHttpResponse response = httpClient.execute(request);
+
+        Assert.assertEquals(response.getCode(), 500);
+    }
 }
