@@ -24,6 +24,7 @@ public class ElementsTests extends BaseTest {
     ButtonsPage buttonsPage = new ButtonsPage();
     LinksPage linksPage = new LinksPage();
     BrokenLinksPage brokenLinksPage = new BrokenLinksPage();
+    DynamicPropertiesPage dynamicPropertiesPage = new DynamicPropertiesPage();
 
     @Test(description = "Have used ordinary data for filling the user's data")
     public void fillingTextForm() {
@@ -426,5 +427,15 @@ public class ElementsTests extends BaseTest {
         CloseableHttpResponse response = httpClient.execute(request);
 
         Assert.assertEquals(response.getCode(), 500);
+    }
+
+    @Test(description = "Checking element will enable in 5 seconds")
+    public void elementWillBeEnableIn5sec() {
+        dynamicPropertiesPage.open("http://85.192.34.140:8081/");
+
+        dynamicPropertiesPage.navigateTo(ELEMENTS);
+        dynamicPropertiesPage.navigateToMenu(DYNAMIC_PROPERTIES);
+
+        Assert.assertTrue(dynamicPropertiesPage.elementIsEnableIn5Sec());
     }
 }

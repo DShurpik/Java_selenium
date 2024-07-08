@@ -10,7 +10,8 @@ public enum Navigation {
     WEB_TABLES ("'Web Tables'"),
     BUTTONS ("'Buttons'"),
     LINKS ("'Links'"),
-    BROKEN_LINKS ("'Broken Links - Images'");
+    BROKEN_LINKS ("'Broken Links - Images'"),
+    DYNAMIC_PROPERTIES ("'Dynamic Properties'");
 
     private final String item;
 
