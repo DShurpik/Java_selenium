@@ -438,4 +438,14 @@ public class ElementsTests extends BaseTest {
 
         Assert.assertTrue(dynamicPropertiesPage.elementIsEnableIn5Sec());
     }
+
+    @Test(description = "Checking that color has changed")
+    public void colorChangeTest() throws InterruptedException {
+        dynamicPropertiesPage.open("http://85.192.34.140:8081/");
+
+        dynamicPropertiesPage.navigateTo(ELEMENTS);
+        dynamicPropertiesPage.navigateToMenu(DYNAMIC_PROPERTIES);
+
+        Assert.assertTrue(dynamicPropertiesPage.colorHasChanged());
+    }
 }
