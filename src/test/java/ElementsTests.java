@@ -448,4 +448,14 @@ public class ElementsTests extends BaseTest {
 
         Assert.assertTrue(dynamicPropertiesPage.colorHasChanged());
     }
+
+    @Test(description = "Checking that element will be visible after 5 sec")
+    public void visibleAfter5Sec() {
+        dynamicPropertiesPage.open("http://85.192.34.140:8081/");
+
+        dynamicPropertiesPage.navigateTo(ELEMENTS);
+        dynamicPropertiesPage.navigateToMenu(DYNAMIC_PROPERTIES);
+
+        Assert.assertTrue(dynamicPropertiesPage.buttonIsVisibleIn5Sec());
+    }
 }
