@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static pageObjects.Navigation.*;
+import static utils.PropertyReader.getProperties;
 
 public class ElementsTests extends BaseTest {
 
@@ -28,26 +29,21 @@ public class ElementsTests extends BaseTest {
 
     @Test(description = "Have used ordinary data for filling the user's data")
     public void fillingTextForm() {
-        String fullName = "D S";
-        String email = "ds@gmail.com";
-        String currentAddress = "Minsk";
-        String permanentAddress = "Minsk";
-
-        textBoxPage.open("http://85.192.34.140:8081/");
+        textBoxPage.open(getProperties().getProperty("url"));
         textBoxPage.navigateTo(ELEMENTS);
         textBoxPage.navigateToMenu(TEXT_BOX);
 
         textBoxPage
-                .fillFullNameField(fullName)
-                .fillEmailField(email)
-                .fillCurrentAddressField(currentAddress)
-                .fillPermanentAddressField(permanentAddress);
+                .fillFullNameField(getProperties().getProperty("fullName"))
+                .fillEmailField(getProperties().getProperty("email"))
+                .fillCurrentAddressField(getProperties().getProperty("currentAddress"))
+                .fillPermanentAddressField(getProperties().getProperty("permanentAddress"));
         textBoxPage.clickSubmitBtn();
 
-        Assert.assertEquals(fullName, textBoxPage.getResult().get("Name"));
-        Assert.assertEquals(email, textBoxPage.getResult().get("Email"));
-        Assert.assertEquals(currentAddress, textBoxPage.getResult().get("Current Address"));
-        Assert.assertEquals(permanentAddress, textBoxPage.getResult().get("Permananet Address"));
+        Assert.assertEquals(getProperties().getProperty("fullName"), textBoxPage.getResult().get("Name"));
+        Assert.assertEquals(getProperties().getProperty("email"), textBoxPage.getResult().get("Email"));
+        Assert.assertEquals(getProperties().getProperty("currentAddress"), textBoxPage.getResult().get("Current Address"));
+        Assert.assertEquals(getProperties().getProperty("permanentAddress"), textBoxPage.getResult().get("Permananet Address"));
     }
 
     @Test(description = "Have used a faker for filling the user's data")
