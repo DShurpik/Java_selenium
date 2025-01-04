@@ -1,6 +1,7 @@
 package pageObjects;
 
 import basePages.BasePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -31,26 +32,31 @@ public class TextBoxPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
+    @Step("Enter {0} into Full Name field")
     public TextBoxPage fillFullNameField(String fullName) {
         userNameField.sendKeys(fullName);
         return this;
     }
 
+    @Step("Enter {0} into Email field")
     public TextBoxPage fillEmailField(String email) {
         userEmailField.sendKeys(email);
         return this;
     }
 
+    @Step("Enter {0} into Current Address field")
     public TextBoxPage fillCurrentAddressField(String address) {
         currentAddressField.sendKeys(address);
         return this;
     }
 
+    @Step("Enter {0} into Permanent Address field")
     public TextBoxPage fillPermanentAddressField(String address) {
         permanentAddressField.sendKeys(address);
         return this;
     }
 
+    @Step ("Press 'Submit' button")
     public void clickSubmitBtn() {
         submitBtn.click();
     }

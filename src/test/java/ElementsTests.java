@@ -1,5 +1,6 @@
 import basePages.BaseTest;
 import dataGenerator.Generator;
+import io.qameta.allure.*;
 import org.apache.hc.client5.http.classic.methods.HttpGet;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
@@ -27,7 +28,11 @@ public class ElementsTests extends BaseTest {
     BrokenLinksPage brokenLinksPage = new BrokenLinksPage();
     DynamicPropertiesPage dynamicPropertiesPage = new DynamicPropertiesPage();
 
-    @Test(description = "Have used ordinary data for filling the user's data")
+    @Owner("John Doe")
+    @Severity(SeverityLevel.CRITICAL)
+    @TmsLink("TC-1")
+    @Story("Values from different property files")
+    @Test(description = "Have used from property to fill the user's data fields")
     public void fillingTextForm() {
         textBoxPage.open(getProperties().getProperty("url"));
         textBoxPage.navigateTo(ELEMENTS);
