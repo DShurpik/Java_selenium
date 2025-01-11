@@ -16,9 +16,12 @@ public class SingletonDriver {
         if (driver == null) {
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--remote-allow-origins=*");
-            options.addArguments(PropertyReader.getProperties().getProperty("browser.headless"));
-            options.addArguments(PropertyReader.getProperties().getProperty("browser.size"));
-            options.addArguments(PropertyReader.getProperties().getProperty("browser.gpu"));
+
+            if (Boolean.parseBoolean(PropertyReader.getProperties().getProperty("browser.headless", "false"))) {
+                options.addArguments("--headless");
+                options.addArguments("--disable-gpu");
+                options.addArguments("--window-size=1920x1080");
+            }
 
             driver = new ChromeDriver(options);
             driver.manage().window().maximize();

@@ -17,11 +17,11 @@ import static utils.PropertyReader.getProperties;
 public class ElementsTests extends BaseTest {
 
     @Owner("John Doe")
-    @Severity(SeverityLevel.CRITICAL)
+    @Severity(SeverityLevel.NORMAL)
     @TmsLink("TC-1")
-    @Story("Values from different property files")
+    @Story("Values from a property file")
     @Test(description = "Have used from property to fill the user's data fields")
-    public void fillingTextForm() {
+    public void fillTextForm() {
         TextBoxPage textBoxPage = new TextBoxPage();
         textBoxPage.open(getProperties().getProperty("url"));
         textBoxPage.navigateTo(ELEMENTS);
@@ -40,12 +40,16 @@ public class ElementsTests extends BaseTest {
         Assert.assertEquals(getProperties().getProperty("permanentAddress"), textBoxPage.getResult().get("Permananet Address"));
     }
 
-    @Test(description = "Have used a faker for filling the user's data")
+    @Owner("John Doe")
+    @Severity(SeverityLevel.NORMAL)
+    @TmsLink("TC-2")
+    @Story("Values from a Faker library")
+    @Test(description = "Have used a faker to fill user's data")
     public void fillFieldByFaker() {
         Generator user = new Generator();
         TextBoxPage textBoxPage = new TextBoxPage();
 
-        textBoxPage.open("http://85.192.34.140:8081/");
+        textBoxPage.open(getProperties().getProperty("url"));
         textBoxPage.navigateTo(ELEMENTS);
         textBoxPage.navigateToMenu(TEXT_BOX);
 
@@ -62,10 +66,14 @@ public class ElementsTests extends BaseTest {
         Assert.assertEquals(user.getPermanentAddress(), textBoxPage.getResult().get("Permananet Address"));
     }
 
+    @Owner("John Doe")
+    @Severity(SeverityLevel.NORMAL)
+    @TmsLink("TC-3")
+    @Story("Click checkbox randomly, and check result")
     @Test(description = "Click checkbox randomly, and check result")
     public void clickCheckboxRandomly() {
         CheckBoxPage checkBoxPage = new CheckBoxPage();
-        checkBoxPage.open("http://85.192.34.140:8081/");
+        checkBoxPage.open(getProperties().getProperty("url"));
         checkBoxPage.navigateTo(ELEMENTS);
         checkBoxPage.navigateToMenu(CHECK_BOX);
 
@@ -76,7 +84,22 @@ public class ElementsTests extends BaseTest {
         String expectedResult = checkBoxPage.getOutputResult();
 
         Assert.assertEquals(actualResult, expectedResult);
+    }
 
+    @Owner("John Doe")
+    @Severity(SeverityLevel.NORMAL)
+    @TmsLink("TC-4")
+    @Story("Click a define (Public) checkbox and check result")
+    @Test(description = "Click a define (Public) checkbox and check result")
+    public void defineCheckBoxTest() {
+        CheckBoxPage checkBoxPage = new CheckBoxPage();
+        checkBoxPage.open(getProperties().getProperty("url"));
+        checkBoxPage.navigateTo(ELEMENTS);
+        checkBoxPage.navigateToMenu(CHECK_BOX);
+
+        checkBoxPage.clickExpandAllBtn();
+        checkBoxPage.clickCheckboxName("Public");
+        Assert.assertEquals(checkBoxPage.getExpectedResult(), "you have selected : public");
     }
 
     @Test(description = "API testing using network tab")
