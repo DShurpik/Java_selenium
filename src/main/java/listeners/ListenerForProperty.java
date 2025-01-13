@@ -1,10 +1,9 @@
 package listeners;
 
 import lombok.extern.log4j.Log4j2;
-import org.testng.ITestContext;
-import org.testng.ITestListener;
-import org.testng.ITestResult;
+import org.testng.*;
 import utils.PropertyReader;
+
 @Log4j2
 public class ListenerForProperty implements ITestListener {
     @Override

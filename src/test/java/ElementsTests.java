@@ -8,6 +8,7 @@ import org.apache.hc.client5.http.impl.classic.HttpClients;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.*;
+import testData.DataCheckBox;
 
 import java.io.IOException;
 
@@ -80,26 +81,25 @@ public class ElementsTests extends BaseTest {
         checkBoxPage.clickExpandAllBtn();
         checkBoxPage.clickRandomItem();
 
-        String actualResult = checkBoxPage.getCheckedCheckBoxes();
-        String expectedResult = checkBoxPage.getOutputResult();
-
-        Assert.assertEquals(actualResult, expectedResult);
+        Assert.assertEquals(checkBoxPage.getCheckedCheckBoxes(), checkBoxPage.getOutputResult());
     }
 
     @Owner("John Doe")
     @Severity(SeverityLevel.NORMAL)
     @TmsLink("TC-4")
-    @Story("Click a define (Public) checkbox and check result")
-    @Test(description = "Click a define (Public) checkbox and check result")
-    public void defineCheckBoxTest() {
+    @Story("Click a define checkbox and check result")
+    @Test(description = "Click a define checkbox and check result",
+    dataProviderClass = DataCheckBox.class,
+    dataProvider = "All values for test")
+    public void defineCheckBoxTest(String checkBoxName, String expectedResult) {
         CheckBoxPage checkBoxPage = new CheckBoxPage();
         checkBoxPage.open(getProperties().getProperty("url"));
         checkBoxPage.navigateTo(ELEMENTS);
         checkBoxPage.navigateToMenu(CHECK_BOX);
 
         checkBoxPage.clickExpandAllBtn();
-        checkBoxPage.clickCheckboxName("Public");
-        Assert.assertEquals(checkBoxPage.getExpectedResult(), "you have selected : public");
+        checkBoxPage.clickCheckboxName(checkBoxName);
+        Assert.assertEquals(checkBoxPage.getExpectedResult(), expectedResult);
     }
 
     @Test(description = "API testing using network tab")

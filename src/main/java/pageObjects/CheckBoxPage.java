@@ -3,14 +3,10 @@ package pageObjects;
 import basePages.BasePage;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Log4j2
 public class CheckBoxPage extends BasePage {
@@ -92,14 +88,8 @@ public class CheckBoxPage extends BasePage {
 
     @Step("Get test result")
     public String getExpectedResult() {
-        StringBuilder str = new StringBuilder();
-        str.append(outputResultWebElement.getText().toLowerCase()
-                .replaceAll("doc", "")
-                .replaceAll("\\.", "")
-                //.replaceAll(" ", "")
-                .replaceAll("\n", " "));
-        return str.toString();
+        return outputResultWebElement.getText().toLowerCase()
+                .replaceAll(".doc", "")
+                .replaceAll("\n", " ").trim();
     }
-
-
 }
