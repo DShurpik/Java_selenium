@@ -1,17 +1,13 @@
 package pageObjects;
 
 import basePages.BasePage;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.*;
 
+@Log4j2
 public class RadioButtonPage extends BasePage {
-
-    @FindBy(xpath = "//label[@for='yesRadio']")
-    private WebElement yesBtn;
-
-    @FindBy(xpath = "//label[@for='impressiveRadio']")
-    private WebElement impressiveBtn;
 
     @FindBy(xpath = "//span[@class='text-success']")
     private WebElement resultField;
@@ -23,20 +19,20 @@ public class RadioButtonPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    public void clickYesBtn() {
-        yesBtn.click();
+    @Step("Click on {0}")
+    public void click(String buttonName) {
+        log.info("Click on {} button", buttonName);
+        driver.findElement(By.xpath("//label[@for='" + buttonName + "']")).click();
     }
 
-    public void clickImpressiveBtn() {
-        impressiveBtn.click();
-    }
-
+    @Step("Get result from result field")
     public String getResult() {
+        log.info("Get result from result field");
         return resultField.getText();
     }
 
-    public boolean noBtnIsDisabled() {
-        String res = noBtn.getAttribute("disabled");
-        return res.equals("true");
+    @Step("Check, that No radio button is enabled")
+    public boolean noBtnIsEnabled() {
+        return noBtn.isEnabled();
     }
 }

@@ -8,7 +8,7 @@ import org.apache.hc.client5.http.impl.classic.HttpClients;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.*;
-import testData.DataCheckBox;
+import testData.TestData;
 
 import java.io.IOException;
 
@@ -89,8 +89,8 @@ public class ElementsTests extends BaseTest {
     @TmsLink("TC-4")
     @Story("Click a define checkbox and check result")
     @Test(description = "Click a define checkbox and check result",
-    dataProviderClass = DataCheckBox.class,
-    dataProvider = "All values for test")
+            dataProviderClass = TestData.class,
+            dataProvider = "All values for test")
     public void defineCheckBoxTest(String checkBoxName, String expectedResult) {
         CheckBoxPage checkBoxPage = new CheckBoxPage();
         checkBoxPage.open(getProperties().getProperty("url"));
@@ -100,6 +100,38 @@ public class ElementsTests extends BaseTest {
         checkBoxPage.clickExpandAllBtn();
         checkBoxPage.clickCheckboxName(checkBoxName);
         Assert.assertEquals(checkBoxPage.getExpectedResult(), expectedResult);
+    }
+
+    @Owner("John Doe")
+    @Severity(SeverityLevel.NORMAL)
+    @TmsLink("TC-5")
+    @Story("Radio buttons check")
+    @Test(description = "Check radio button work",
+            dataProviderClass = TestData.class,
+            dataProvider = "Radio buttons")
+    public void radioButtonTest(String buttonName, String expectedResult) {
+        RadioButtonPage radioButtonPage = new RadioButtonPage();
+        radioButtonPage.open(getProperties().getProperty("url"));
+        radioButtonPage.navigateTo(ELEMENTS);
+        radioButtonPage.navigateToMenu(RADIO_BUTTON);
+
+        radioButtonPage.click(buttonName);
+
+        Assert.assertEquals(radioButtonPage.getResult(), expectedResult);
+    }
+
+    @Owner("John Doe")
+    @Severity(SeverityLevel.NORMAL)
+    @TmsLink("TC-6")
+    @Story("No radio button check")
+    @Test(description = "Check No radio button isDisabled")
+    public void radioButtonNoTest() {
+        RadioButtonPage radioButtonPage = new RadioButtonPage();
+        radioButtonPage.open(getProperties().getProperty("url"));
+        radioButtonPage.navigateTo(ELEMENTS);
+        radioButtonPage.navigateToMenu(RADIO_BUTTON);
+
+        Assert.assertFalse(radioButtonPage.noBtnIsEnabled());
     }
 
     @Test(description = "API testing using network tab")

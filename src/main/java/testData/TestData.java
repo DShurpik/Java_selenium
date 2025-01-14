@@ -2,7 +2,7 @@ package testData;
 
 import org.testng.annotations.DataProvider;
 
-public class DataCheckBox {
+public class TestData {
 
     @DataProvider(name = "All values for test")
     public static Object[][] getTestData() {
@@ -24,6 +24,14 @@ public class DataCheckBox {
                 {"Downloads", "you have selected : downloads wordfile excelfile"},
                 {"Word File.doc", "you have selected : wordfile"},
                 {"Excel File.doc", "you have selected : excelfile"}
+        };
+    }
+
+    @DataProvider(name = "Radio buttons")
+    public static Object[][] getButtonsName() {
+        return new Object[][] {
+                {"yesRadio", "Yes"},
+                {"impressiveRadio", "Impressive"}
         };
     }
 }
