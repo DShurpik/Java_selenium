@@ -1,5 +1,6 @@
 package basePages;
 
+import listeners.InvokedMethodListener;
 import listeners.ListenerForProperty;
 import lombok.extern.log4j.Log4j2;
 import org.testng.annotations.AfterMethod;
@@ -11,7 +12,7 @@ import java.util.Properties;
 import static driver.SingletonDriver.closeDriver;
 import static utils.PropertyReader.getProperties;
 
-@Listeners(ListenerForProperty.class)
+@Listeners({ListenerForProperty.class, InvokedMethodListener.class})
 @Log4j2
 
 public abstract class BaseTest {

@@ -5,9 +5,11 @@ import org.apache.hc.client5.http.classic.methods.HttpGet;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
 import org.apache.hc.client5.http.impl.classic.HttpClients;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.*;
+import testData.TableUser;
 import testData.TestData;
 
 import java.io.IOException;
@@ -133,6 +135,79 @@ public class ElementsTests extends BaseTest {
 
         Assert.assertFalse(radioButtonPage.noBtnIsEnabled());
     }
+
+    @Owner("John Doe")
+    @Severity(SeverityLevel.NORMAL)
+    @TmsLink("TC-7")
+    @Story("Delete a user from table")
+    @Test(description = "After deleting user, count of lines equals 2")
+    public void deleteUserTableTest() {
+        WebTablePage webTablePage = new WebTablePage();
+        webTablePage.open(getProperties().getProperty("url"));
+        webTablePage.navigateTo(ELEMENTS);
+        webTablePage.navigateToMenu(WEB_TABLES);
+
+        webTablePage.clickDeleteBtn();
+
+        Assert.assertEquals(webTablePage.getPersonsList().size(), 2);
+    }
+
+    @Owner("John Doe")
+    @Severity(SeverityLevel.NORMAL)
+    @TmsLink("TC-8")
+    @Story("Add a new user")
+    @Test(description = "Add a new user in table and check it")
+    public void addUserTableTest() {
+        WebTablePage webTablePage = new WebTablePage();
+        Generator user = new Generator();
+
+        webTablePage.open(getProperties().getProperty("url"));
+        webTablePage.navigateTo(ELEMENTS);
+        webTablePage.navigateToMenu(WEB_TABLES);
+
+        webTablePage.clickAddNewPersonBtn();
+        webTablePage.fillForm(TableUser.builder()
+                .firstName(user.getName())
+                .lastName(user.getLastName())
+                .age(user.getAge())
+                .email(user.getEmail())
+                .salary(user.getSalary())
+                .department(user.getDepartment())
+                .build());
+
+        Assert.assertTrue(webTablePage.checkPersonAdded(webTablePage.getPersonsList(), user));
+    }
+
+    @Owner("John Doe")
+    @Severity(SeverityLevel.NORMAL)
+    @TmsLink("TC-9")
+    @Story("Add a new user and check him in searh")
+    @Test(description = "Add a new user in table and check him in search")
+    public void searchTableTest() {
+        WebTablePage webTablePage = new WebTablePage();
+        Generator user = new Generator();
+
+        webTablePage.open(getProperties().getProperty("url"));
+        webTablePage.navigateTo(ELEMENTS);
+        webTablePage.navigateToMenu(WEB_TABLES);
+
+        TableUser tableUser = TableUser.builder()
+                .firstName(user.getName())
+                .lastName(user.getLastName())
+                .age(user.getAge())
+                .email(user.getEmail())
+                .salary(user.getSalary())
+                .department(user.getDepartment())
+                .build();
+        webTablePage.clickAddNewPersonBtn();
+        webTablePage.fillForm(tableUser);
+
+        webTablePage.search(tableUser);
+
+        Assert.assertTrue(webTablePage.checkPersonAdded(webTablePage.getPersonsList(), user));
+        Assert.assertEquals(webTablePage.getPersonsList().size(), 1);
+    }
+
 
     @Test(description = "API testing using network tab")
     public void unauthorizedTest() throws IOException {

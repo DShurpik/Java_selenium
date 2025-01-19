@@ -7,8 +7,8 @@
         <classes>
             <class name="ElementsTests">
                 <methods>
-                    <include name="radioButtonTest"/>
-                    <include name="radioButtonNoTest"/>
+
+                    <include name="searchTableTest"/>
                 </methods>
             </class>
 
