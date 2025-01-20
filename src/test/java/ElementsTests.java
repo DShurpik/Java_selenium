@@ -208,6 +208,36 @@ public class ElementsTests extends BaseTest {
         Assert.assertEquals(webTablePage.getPersonsList().size(), 1);
     }
 
+    @Owner("John Doe")
+    @Severity(SeverityLevel.NORMAL)
+    @TmsLink("TC-10")
+    @Story("Edit user info")
+    @Test(description = "Edit informtion bout user")
+    public void editTableTest() {
+        WebTablePage webTablePage = new WebTablePage();
+        Generator user = new Generator();
+
+        webTablePage.open(getProperties().getProperty("url"));
+        webTablePage.navigateTo(ELEMENTS);
+        webTablePage.navigateToMenu(WEB_TABLES);
+
+        TableUser tableUser = TableUser.builder()
+                .firstName(user.getName())
+                .lastName(user.getLastName())
+                .age(user.getAge())
+                .email(user.getEmail())
+                .salary(user.getSalary())
+                .department(user.getDepartment())
+                .build();
+        webTablePage.clickEditBtn();
+        webTablePage.fillForm(tableUser);
+
+        webTablePage.search(tableUser);
+
+        Assert.assertTrue(webTablePage.checkPersonAdded(webTablePage.getPersonsList(), user));
+        Assert.assertEquals(webTablePage.getPersonsList().size(), 1);
+    }
+
 
     @Test(description = "API testing using network tab")
     public void unauthorizedTest() throws IOException {

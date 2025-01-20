@@ -45,6 +45,9 @@ public class WebTablePage extends BasePage {
     @FindBy(xpath = "//span[@title='Delete']")
     private WebElement deleteBtn;
 
+    @FindBy(xpath = "//span[@title='Edit']")
+    private WebElement editUserBtn;
+
     private final By fullPersonList = By.xpath("//div[@class='rt-tr-group']");
 
     public WebTablePage() {
@@ -65,12 +68,18 @@ public class WebTablePage extends BasePage {
 
     @Step("Fill a new user's data with {0}")
     public void fillForm(TableUser userData) {
-        log.info("Add user with {}", userData.toString());
+        log.info("Fill user data with values {}", userData.toString());
+        firstNameField.clear();
         firstNameField.sendKeys(userData.getFirstName());
+        lastNameField.clear();
         lastNameField.sendKeys(userData.getLastName());
+        emailField.clear();
         emailField.sendKeys(userData.getEmail());
+        ageField.clear();
         ageField.sendKeys(Integer.toString(userData.getAge()));
+        salaryField.clear();
         salaryField.sendKeys(Integer.toString(userData.getSalary()));
+        departmentField.clear();
         departmentField.sendKeys(userData.getDepartment());
         clickSubmitBtn();
     }
@@ -79,6 +88,12 @@ public class WebTablePage extends BasePage {
     public void clickDeleteBtn() {
         log.info("Click delete button");
         deleteBtn.click();
+    }
+
+    @Step("Click edit user button")
+    public void clickEditBtn() {
+        log.info("Click edit button");
+        editUserBtn.click();
     }
 
     @Step("Fill field search")
