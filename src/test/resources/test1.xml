@@ -7,8 +7,7 @@
         <classes>
             <class name="ElementsTests">
                 <methods>
-                    <include name="searchTableTest"/>
-                    <include name="editTableTest"/>
+                    <include name="doubleClickTest"/>
                 </methods>
             </class>
 

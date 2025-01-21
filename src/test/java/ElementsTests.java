@@ -238,6 +238,27 @@ public class ElementsTests extends BaseTest {
         Assert.assertEquals(webTablePage.getPersonsList().size(), 1);
     }
 
+    @Owner("John Doe")
+    @Severity(SeverityLevel.NORMAL)
+    @TmsLink("TC-11")
+    @Story("Mouse clicks")
+    @Test(description = "Different kind of clicks")
+    public void doubleClickTest() {
+        ButtonsPage buttonsPage = new ButtonsPage();
+
+        buttonsPage.open(getProperties().getProperty("url"));
+        buttonsPage.navigateTo(ELEMENTS);
+        buttonsPage.navigateToMenu(BUTTONS);
+
+        buttonsPage.doubleClick();
+        buttonsPage.rightClick();
+        buttonsPage.clickMe();
+
+        Assert.assertEquals(buttonsPage.doubleClickResult(), "You have done a double click");
+        Assert.assertEquals(buttonsPage.rightClickResult(), "You have done a right click");
+        Assert.assertEquals(buttonsPage.clickGetResult(), "You have done a dynamic click");
+    }
+
 
     @Test(description = "API testing using network tab")
     public void unauthorizedTest() throws IOException {
