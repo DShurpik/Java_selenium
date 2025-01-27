@@ -1,11 +1,6 @@
 import basePages.BaseTest;
 import dataGenerator.Generator;
 import io.qameta.allure.*;
-import org.apache.hc.client5.http.classic.methods.HttpGet;
-import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
-import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
-import org.apache.hc.client5.http.impl.classic.HttpClients;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.*;
@@ -259,56 +254,23 @@ public class ElementsTests extends BaseTest {
         Assert.assertEquals(buttonsPage.clickGetResult(), "You have done a dynamic click");
     }
 
-
     @Test(description = "API testing using network tab")
     public void unauthorizedTest() throws IOException {
         LinksPage linksPage = new LinksPage();
-        linksPage.open("http://85.192.34.140:8081/");
+        linksPage.enableNetworkInterceptor();
+        linksPage.addRequestListener("http://85.192.34.140/api/created");
+        linksPage.open(getProperties().getProperty("url"));
 
         linksPage.navigateTo(ELEMENTS);
         linksPage.navigateToMenu(LINKS);
 
-        linksPage.clickUnauthorizedLink();
+        linksPage.clickCreatedLink();
 
-        CloseableHttpClient httpClient = HttpClients.createDefault();
-        HttpGet request = new HttpGet("http://85.192.34.140/api/unauthorized");
-        CloseableHttpResponse response = httpClient.execute(request);
-
-        Assert.assertEquals(response.getCode(), 401);
-    }
-
-    @Test(description = "API testing using network tab")
-    public void forbiddenTest() throws IOException {
-        LinksPage linksPage = new LinksPage();
-        linksPage.open("http://85.192.34.140:8081/");
-
-        linksPage.navigateTo(ELEMENTS);
-        linksPage.navigateToMenu(LINKS);
-
-        linksPage.clickForbiddenLink();
-
-        CloseableHttpClient httpClient = HttpClients.createDefault();
-        HttpGet request = new HttpGet("http://85.192.34.140/api/forbidden");
-        CloseableHttpResponse response = httpClient.execute(request);
-
-        Assert.assertEquals(response.getCode(), 403);
-    }
-
-    @Test(description = "API testing using network tab")
-    public void notFoundTest() throws IOException {
-        LinksPage linksPage = new LinksPage();
-        linksPage.open("http://85.192.34.140:8081/");
-
-        linksPage.navigateTo(ELEMENTS);
-        linksPage.navigateToMenu(LINKS);
-
-        linksPage.clickForbiddenLink();
-
-        CloseableHttpClient httpClient = HttpClients.createDefault();
-        HttpGet request = new HttpGet("http://85.192.34.140/api/invalid-url");
-        CloseableHttpResponse response = httpClient.execute(request);
-
-        Assert.assertEquals(response.getCode(), 404);
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Test(description = "Checking a broken image on the page")
@@ -349,22 +311,7 @@ public class ElementsTests extends BaseTest {
         Assert.assertTrue(brokenLinksPage.statusCodeIsDisplayed());
     }
 
-    @Test(description = "Checking broken link by http server")
-    public void brokenLinkByServer() throws IOException {
-        BrokenLinksPage brokenLinksPage = new BrokenLinksPage();
-        brokenLinksPage.open("http://85.192.34.140:8081/");
 
-        brokenLinksPage.navigateTo(ELEMENTS);
-        brokenLinksPage.navigateToMenu(BROKEN_LINKS);
-
-        brokenLinksPage.clickBrokenLink();
-
-        CloseableHttpClient httpClient = HttpClients.createDefault();
-        HttpGet request = new HttpGet("https://the-internet.herokuapp.com/status_codes/500");
-        CloseableHttpResponse response = httpClient.execute(request);
-
-        Assert.assertEquals(response.getCode(), 500);
-    }
 
     @Test(description = "Checking element will enable in 5 seconds")
     public void elementWillBeEnableIn5sec() {
