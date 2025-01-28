@@ -1,13 +1,13 @@
 import basePages.BaseTest;
 import dataGenerator.Generator;
 import io.qameta.allure.*;
+import models.ResponseData;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.*;
-import testData.TableUser;
-import testData.TestData;
+import testData.*;
 
-import java.io.IOException;
+import java.util.List;
 
 import static pageObjects.Navigation.*;
 import static utils.PropertyReader.getProperties;
@@ -254,11 +254,18 @@ public class ElementsTests extends BaseTest {
         Assert.assertEquals(buttonsPage.clickGetResult(), "You have done a dynamic click");
     }
 
-    @Test(description = "API testing using network tab")
-    public void unauthorizedTest() throws IOException {
+    @Owner("John Doe")
+    @Severity(SeverityLevel.NORMAL)
+    @TmsLink("TC-12")
+    @Story("Check Created response through devtools")
+    @Test(description = "Validate that Created response has 201 code")
+    public void unauthorizedTest() {
         LinksPage linksPage = new LinksPage();
         linksPage.enableNetworkInterceptor();
-        linksPage.addRequestListener("http://85.192.34.140/api/created");
+
+        linksPage.addRequestListener(getProperties().getProperty("url.api") + "created");
+        linksPage.addResponseListener(getProperties().getProperty("url.api") + "created");
+
         linksPage.open(getProperties().getProperty("url"));
 
         linksPage.navigateTo(ELEMENTS);
@@ -267,10 +274,100 @@ public class ElementsTests extends BaseTest {
         linksPage.clickCreatedLink();
 
         try {
-            Thread.sleep(3000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+
+        List<ResponseData> resp = linksPage.getInterceptedResponses();
+        Assert.assertEquals(resp.get(0).getStatusCode(), 201);
+    }
+
+    @Owner("John Doe")
+    @Severity(SeverityLevel.NORMAL)
+    @TmsLink("TC-13")
+    @Story("Check No Content response through devtools")
+    @Test(description = "Validate that Created response has 204 code")
+    public void noContentTest() {
+        LinksPage linksPage = new LinksPage();
+        linksPage.enableNetworkInterceptor();
+
+        linksPage.addRequestListener(getProperties().getProperty("url.api") + "no-content");
+        linksPage.addResponseListener(getProperties().getProperty("url.api") + "no-content");
+
+        linksPage.open(getProperties().getProperty("url"));
+
+        linksPage.navigateTo(ELEMENTS);
+        linksPage.navigateToMenu(LINKS);
+
+        linksPage.clickNoContentLink();
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        List<ResponseData> resp = linksPage.getInterceptedResponses();
+        Assert.assertEquals(resp.get(0).getStatusCode(), 204);
+    }
+
+    @Owner("John Doe")
+    @Severity(SeverityLevel.NORMAL)
+    @TmsLink("TC-14")
+    @Story("Check Moved response through devtools")
+    @Test(description = "Validate that Moved response has 301 code")
+    public void movedTest() {
+        LinksPage linksPage = new LinksPage();
+        linksPage.enableNetworkInterceptor();
+
+        linksPage.addRequestListener(getProperties().getProperty("url.api") + "moved");
+        linksPage.addResponseListener(getProperties().getProperty("url.api") + "moved");
+
+        linksPage.open(getProperties().getProperty("url"));
+
+        linksPage.navigateTo(ELEMENTS);
+        linksPage.navigateToMenu(LINKS);
+
+        linksPage.clickMovedLink();
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        List<ResponseData> resp = linksPage.getInterceptedResponses();
+        Assert.assertEquals(resp.get(0).getStatusCode(), 301);
+    }
+
+    @Owner("John Doe")
+    @Severity(SeverityLevel.NORMAL)
+    @TmsLink("TC-15")
+    @Story("Check Bad request response through devtools")
+    @Test(description = "Validate that Bad request response has 400 code")
+    public void badRequestTest() {
+        LinksPage linksPage = new LinksPage();
+        linksPage.enableNetworkInterceptor();
+
+        linksPage.addRequestListener(getProperties().getProperty("url.api") + "bad-request");
+        linksPage.addResponseListener(getProperties().getProperty("url.api") + "bad-request");
+
+        linksPage.open(getProperties().getProperty("url"));
+
+        linksPage.navigateTo(ELEMENTS);
+        linksPage.navigateToMenu(LINKS);
+
+        linksPage.clickBadRequestLink();
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        List<ResponseData> resp = linksPage.getInterceptedResponses();
+        Assert.assertEquals(resp.get(0).getStatusCode(), 400);
     }
 
     @Test(description = "Checking a broken image on the page")
@@ -310,7 +407,6 @@ public class ElementsTests extends BaseTest {
 
         Assert.assertTrue(brokenLinksPage.statusCodeIsDisplayed());
     }
-
 
 
     @Test(description = "Checking element will enable in 5 seconds")
