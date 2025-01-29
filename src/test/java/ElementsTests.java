@@ -259,7 +259,7 @@ public class ElementsTests extends BaseTest {
     @TmsLink("TC-12")
     @Story("Check Created response through devtools")
     @Test(description = "Validate that Created response has 201 code")
-    public void unauthorizedTest() {
+    public void createdTest() {
         LinksPage linksPage = new LinksPage();
         linksPage.enableNetworkInterceptor();
 
@@ -368,6 +368,93 @@ public class ElementsTests extends BaseTest {
 
         List<ResponseData> resp = linksPage.getInterceptedResponses();
         Assert.assertEquals(resp.get(0).getStatusCode(), 400);
+    }
+
+    @Owner("John Doe")
+    @Severity(SeverityLevel.NORMAL)
+    @TmsLink("TC-16")
+    @Story("Check forbidden response through devtools")
+    @Test(description = "Validate that forbidden response has 403 code")
+    public void forbiddenTest() {
+        LinksPage linksPage = new LinksPage();
+        linksPage.enableNetworkInterceptor();
+
+        linksPage.addRequestListener(getProperties().getProperty("url.api") + "forbidden");
+        linksPage.addResponseListener(getProperties().getProperty("url.api") + "forbidden");
+
+        linksPage.open(getProperties().getProperty("url"));
+
+        linksPage.navigateTo(ELEMENTS);
+        linksPage.navigateToMenu(LINKS);
+
+        linksPage.clickForbiddenLink();
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        List<ResponseData> resp = linksPage.getInterceptedResponses();
+        Assert.assertEquals(resp.get(0).getStatusCode(), 403);
+    }
+
+    @Owner("John Doe")
+    @Severity(SeverityLevel.NORMAL)
+    @TmsLink("TC-17")
+    @Story("Check forbidden response through devtools")
+    @Test(description = "Validate that forbidden response has 403 code")
+    public void notFoundTest() {
+        LinksPage linksPage = new LinksPage();
+        linksPage.enableNetworkInterceptor();
+
+        linksPage.addRequestListener(getProperties().getProperty("url.api") + "invalid-url");
+        linksPage.addResponseListener(getProperties().getProperty("url.api") + "invalid-url");
+
+        linksPage.open(getProperties().getProperty("url"));
+
+        linksPage.navigateTo(ELEMENTS);
+        linksPage.navigateToMenu(LINKS);
+
+        linksPage.clickNotFound();
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        List<ResponseData> resp = linksPage.getInterceptedResponses();
+        Assert.assertEquals(resp.get(0).getStatusCode(), 404);
+    }
+
+    @Owner("John Doe")
+    @Severity(SeverityLevel.NORMAL)
+    @TmsLink("TC-18")
+    @Story("Check Unauthorized request response through devtools")
+    @Test(description = "Validate that Unauthorized response has 401 code")
+    public void unauthorizedTest() {
+        LinksPage linksPage = new LinksPage();
+        linksPage.enableNetworkInterceptor();
+
+        linksPage.addRequestListener(getProperties().getProperty("url.api") + "unauthorized");
+        linksPage.addResponseListener(getProperties().getProperty("url.api") + "unauthorized");
+
+        linksPage.open(getProperties().getProperty("url"));
+
+        linksPage.navigateTo(ELEMENTS);
+        linksPage.navigateToMenu(LINKS);
+
+        linksPage.clickUnauthorizedLink();
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        List<ResponseData> resp = linksPage.getInterceptedResponses();
+        Assert.assertEquals(resp.get(0).getStatusCode(), 401);
     }
 
     @Test(description = "Checking a broken image on the page")

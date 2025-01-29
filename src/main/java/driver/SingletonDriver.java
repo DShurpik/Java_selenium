@@ -21,6 +21,7 @@ public class SingletonDriver {
                 options.addArguments("--headless");
                 options.addArguments("--disable-gpu");
                 options.addArguments("--window-size=1920x1080");
+                options.addArguments("--disable-web-security");
             }
 
             driver = new ChromeDriver(options);

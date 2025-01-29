@@ -1,6 +1,7 @@
 package pageObjects;
 
 import basePages.BasePage;
+import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import models.ResponseData;
 import org.openqa.selenium.WebElement;
@@ -12,9 +13,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import com.google.gson.Gson;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Log4j2
 public class LinksPage extends BasePage {
@@ -42,6 +41,7 @@ public class LinksPage extends BasePage {
     protected DevTools devTools;
     private List<Request> interceptedRequests = new ArrayList<>();
     private List<ResponseData> interceptedResponses = new ArrayList<>();
+    private List<Integer> interceptedStatusCodes = new ArrayList<>();
     private final Gson gson = new Gson();
 
     public LinksPage() {
@@ -116,35 +116,46 @@ public class LinksPage extends BasePage {
         return interceptedResponses;
     }
 
+
+    @Step("Click on created link")
     public void clickCreatedLink() {
         log.info("Click on created link");
         createdLink.click();
     }
 
+    @Step("Click on No Content link")
     public void clickNoContentLink() {
         log.info("Click on No Content link");
         noContentLink.click();
     }
 
+    @Step("Click on Moved link")
     public void clickMovedLink() {
         log.info("Click on Moved link");
         movedLink.click();
     }
 
+    @Step("Click on Bad Request link")
     public void clickBadRequestLink() {
         log.info("Click on Bad Request link");
         badRequestLink.click();
     }
 
+    @Step("Click on Unauthorized link")
     public void clickUnauthorizedLink() {
+        log.info("Click on Unauthorized link");
         unauthorizedLink.click();
     }
 
+    @Step("Click on forbidden link")
     public void clickForbiddenLink() {
+        log.info("Click on forbidden link");
         forbiddenLink.click();
     }
 
+    @Step("Click on Not Found link")
     public void clickNotFound() {
+        log.info("Click on Not Found link");
         notFoundLink.click();
     }
 }

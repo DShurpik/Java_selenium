@@ -7,7 +7,7 @@
         <classes>
             <class name="ElementsTests">
                 <methods>
-                    <include name="badRequestTest"/>
+                    <include name="unauthorizedTest"/>
                 </methods>
             </class>
 
