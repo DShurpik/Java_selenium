@@ -457,10 +457,14 @@ public class ElementsTests extends BaseTest {
         Assert.assertEquals(resp.get(0).getStatusCode(), 401);
     }
 
+    @Owner("John Doe")
+    @Severity(SeverityLevel.NORMAL)
+    @TmsLink("TC-19")
+    @Story("Check that Broken image has 0x0 size")
     @Test(description = "Checking a broken image on the page")
     public void brokenImageTest() {
         BrokenLinksPage brokenLinksPage = new BrokenLinksPage();
-        brokenLinksPage.open("http://85.192.34.140:8081/");
+        brokenLinksPage.open(getProperties().getProperty("url"));
 
         brokenLinksPage.navigateTo(ELEMENTS);
         brokenLinksPage.navigateToMenu(BROKEN_LINKS);
@@ -469,10 +473,14 @@ public class ElementsTests extends BaseTest {
         Assert.assertEquals(brokenLinksPage.clientWidth(), 0);
     }
 
+    @Owner("John Doe")
+    @Severity(SeverityLevel.NORMAL)
+    @TmsLink("TC-20")
+    @Story("Check that valid link refers to google.com")
     @Test(description = "Checking valid link")
     public void validLinkTest() {
         BrokenLinksPage brokenLinksPage = new BrokenLinksPage();
-        brokenLinksPage.open("http://85.192.34.140:8081/");
+        brokenLinksPage.open(getProperties().getProperty("url"));
 
         brokenLinksPage.navigateTo(ELEMENTS);
         brokenLinksPage.navigateToMenu(BROKEN_LINKS);
@@ -482,10 +490,14 @@ public class ElementsTests extends BaseTest {
         Assert.assertTrue(brokenLinksPage.googleIsVisible());
     }
 
+    @Owner("John Doe")
+    @Severity(SeverityLevel.NORMAL)
+    @TmsLink("TC-21")
+    @Story("Check that broken link refers to a page with 500 status code")
     @Test(description = "Checking broken link by other page element")
     public void brokenLinkTest() {
         BrokenLinksPage brokenLinksPage = new BrokenLinksPage();
-        brokenLinksPage.open("http://85.192.34.140:8081/");
+        brokenLinksPage.open(getProperties().getProperty("url"));
 
         brokenLinksPage.navigateTo(ELEMENTS);
         brokenLinksPage.navigateToMenu(BROKEN_LINKS);
