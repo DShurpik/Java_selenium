@@ -507,11 +507,14 @@ public class ElementsTests extends BaseTest {
         Assert.assertTrue(brokenLinksPage.statusCodeIsDisplayed());
     }
 
-
+    @Owner("John Doe")
+    @Severity(SeverityLevel.NORMAL)
+    @TmsLink("TC-22")
+    @Story("Check that element will be enable in 5 seconds")
     @Test(description = "Checking element will enable in 5 seconds")
     public void elementWillBeEnableIn5sec() {
         DynamicPropertiesPage dynamicPropertiesPage = new DynamicPropertiesPage();
-        dynamicPropertiesPage.open("http://85.192.34.140:8081/");
+        dynamicPropertiesPage.open(getProperties().getProperty("url"));
 
         dynamicPropertiesPage.navigateTo(ELEMENTS);
         dynamicPropertiesPage.navigateToMenu(DYNAMIC_PROPERTIES);
@@ -519,10 +522,14 @@ public class ElementsTests extends BaseTest {
         Assert.assertTrue(dynamicPropertiesPage.elementIsEnableIn5Sec());
     }
 
+    @Owner("John Doe")
+    @Severity(SeverityLevel.NORMAL)
+    @TmsLink("TC-23")
+    @Story("Check that color has changed")
     @Test(description = "Checking that color has changed")
     public void colorChangeTest() {
         DynamicPropertiesPage dynamicPropertiesPage = new DynamicPropertiesPage();
-        dynamicPropertiesPage.open("http://85.192.34.140:8081/");
+        dynamicPropertiesPage.open(getProperties().getProperty("url"));
 
         dynamicPropertiesPage.navigateTo(ELEMENTS);
         dynamicPropertiesPage.navigateToMenu(DYNAMIC_PROPERTIES);
@@ -530,10 +537,14 @@ public class ElementsTests extends BaseTest {
         Assert.assertTrue(dynamicPropertiesPage.colorHasChanged());
     }
 
+    @Owner("John Doe")
+    @Severity(SeverityLevel.NORMAL)
+    @TmsLink("TC-24")
+    @Story("Check that element will be visible after 5 sec")
     @Test(description = "Checking that element will be visible after 5 sec")
     public void visibleAfter5Sec() {
         DynamicPropertiesPage dynamicPropertiesPage = new DynamicPropertiesPage();
-        dynamicPropertiesPage.open("http://85.192.34.140:8081/");
+        dynamicPropertiesPage.open(getProperties().getProperty("url"));
 
         dynamicPropertiesPage.navigateTo(ELEMENTS);
         dynamicPropertiesPage.navigateToMenu(DYNAMIC_PROPERTIES);
