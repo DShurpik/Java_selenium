@@ -4,6 +4,7 @@ public enum Navigation {
 
     /** Elements list items */
     ELEMENTS ("'Elements'"),
+    FORMS ("'Forms'"),
     TEXT_BOX ("'Text Box'"),
     CHECK_BOX ("'Check Box'"),
     RADIO_BUTTON ("'Radio Button'"),
@@ -11,7 +12,8 @@ public enum Navigation {
     BUTTONS ("'Buttons'"),
     LINKS ("'Links'"),
     BROKEN_LINKS ("'Broken Links - Images'"),
-    DYNAMIC_PROPERTIES ("'Dynamic Properties'");
+    DYNAMIC_PROPERTIES ("'Dynamic Properties'"),
+    PRACTICE_FORM ("'Practice Form'");
 
     private final String item;
 

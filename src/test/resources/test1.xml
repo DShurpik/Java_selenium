@@ -7,7 +7,7 @@
         <classes>
             <class name="ElementsTests">
                 <methods>
-                    <include name="visibleAfter5Sec"/>
+                    <include name="practiceFormTest"/>
                 </methods>
             </class>
 

@@ -552,5 +552,32 @@ public class ElementsTests extends BaseTest {
         Assert.assertTrue(dynamicPropertiesPage.buttonIsVisibleIn5Sec());
     }
 
+    @Owner("Jhn Doe")
+    @Severity(SeverityLevel.NORMAL)
+    @TmsLink("TC-25")
+    @Story("Fill practice form by valid values")
+    @Test(description = "Fill practice form by valid values")
+    public void practiceFormTest() {
+        PracticeFormPage practiceFormPage = new PracticeFormPage();
+        practiceFormPage.open(getProperties().getProperty("url"));
 
+        practiceFormPage.navigateTo(FORMS);
+        practiceFormPage.navigateToMenu(PRACTICE_FORM);
+
+        practiceFormPage.enterFirstName(getProperties().getProperty("firstName"));
+        practiceFormPage.enterLastName(getProperties().getProperty("lastName"));
+        practiceFormPage.enterEmail(getProperties().getProperty("email"));
+        practiceFormPage.chooseGender(getProperties().getProperty("gender"));
+        practiceFormPage.enterNumber(getProperties().getProperty("phoneNumber"));
+        practiceFormPage.chooseDate("20", "January", "1990");
+        practiceFormPage.enterSubject("English");
+        practiceFormPage.selectRandomHobbies();
+
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 }
