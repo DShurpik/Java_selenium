@@ -3,17 +3,12 @@ package pageObjects;
 import basePages.BasePage;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.*;
+import org.openqa.selenium.support.ui.*;
+import testData.FormData;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 @Log4j2
 public class PracticeFormPage extends BasePage {
@@ -39,8 +34,26 @@ public class PracticeFormPage extends BasePage {
     @FindBy(id = "subjectsInput")
     private WebElement subjectInput;
 
+    @FindBy(id = "submit")
+    private WebElement submitBtn;
+
+    @FindBy(xpath = "//table[@class='table table-dark table-striped table-bordered table-hover']")
+    private WebElement resultTable;
+
     public PracticeFormPage() {
         PageFactory.initElements(driver, this);
+    }
+
+    @Step("Fill out the practice form with provided data")
+    public void fillPracticeForm(FormData data) {
+        enterFirstName(data.getFirstName());
+        enterLastName(data.getLastName());
+        enterEmail(data.getEmail());
+        enterNumber(data.getNumber());
+        chooseGender(data.getGender());
+        chooseDate(data.getDay(), data.getMonth(), data.getYear());
+        enterSubject(data.getSubject());
+        selectRandomHobbies(data.getHobbies());
     }
 
     @Step("Enter {0} like first name")
@@ -102,16 +115,29 @@ public class PracticeFormPage extends BasePage {
     }
 
     @Step("Select hobbies randomly")
-    public void selectRandomHobbies() {
+    public void selectRandomHobbies(Set<String> hobbies) {
         Random random = new Random();
         List<WebElement> labels = driver.findElements(By.cssSelector(".col-md-9 .custom-control.custom-checkbox.custom-control-inline .custom-control-input + .custom-control-label"));
-        int count = random.nextInt(4);
+        int count = random.nextInt(hobbies.size() + 1);
         java.util.Collections.shuffle(labels);
-        log.info("Select {} hobbies", random.toString());
+        log.info("Select {} hobbies", hobbies);
         for (int i = 0; i < count; i++) {
             if (!labels.get(i).isSelected()) {
                 labels.get(i).click();
             }
         }
+    }
+
+    @Step("Click submit button")
+    public void clickSubmitBtn() {
+        log.info("Click submit button");
+        submitBtn.click();
+    }
+
+    @Step("Get result table")
+    public String getResultTable() {
+        wait.until(ExpectedConditions.elementToBeClickable(resultTable));
+        log.info("Get result table");
+        return resultTable.getText();
     }
 }

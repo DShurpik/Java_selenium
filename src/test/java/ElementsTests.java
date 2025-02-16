@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import pageObjects.*;
 import testData.*;
 
-import java.util.List;
+import java.util.*;
 
 import static pageObjects.Navigation.*;
 import static utils.PropertyReader.getProperties;
@@ -559,25 +559,37 @@ public class ElementsTests extends BaseTest {
     @Test(description = "Fill practice form by valid values")
     public void practiceFormTest() {
         PracticeFormPage practiceFormPage = new PracticeFormPage();
+        FormData formData = new FormData.Builder()
+                .firstName(getProperties().getProperty("firstName"))
+                .lastName(getProperties().getProperty("lastName"))
+                .email(getProperties().getProperty("email"))
+                .number(getProperties().getProperty("phoneNumber"))
+                .gender(getProperties().getProperty("gender"))
+                .subject(getProperties().getProperty("subject"))
+                .day("20")
+                .month("January")
+                .year("1990")
+                .hobbies(Set.of("Sports", "Reading"))
+                .build();
+
+        List<String> expectedValues = List.of(
+                getProperties().getProperty("firstName"),
+                getProperties().getProperty("lastName"),
+                getProperties().getProperty("email"),
+                getProperties().getProperty("gender"),
+                getProperties().getProperty("phoneNumber"),
+                getProperties().getProperty("subject")
+        );
+
         practiceFormPage.open(getProperties().getProperty("url"));
 
         practiceFormPage.navigateTo(FORMS);
         practiceFormPage.navigateToMenu(PRACTICE_FORM);
+        practiceFormPage.fillPracticeForm(formData);
+        practiceFormPage.clickSubmitBtn();
 
-        practiceFormPage.enterFirstName(getProperties().getProperty("firstName"));
-        practiceFormPage.enterLastName(getProperties().getProperty("lastName"));
-        practiceFormPage.enterEmail(getProperties().getProperty("email"));
-        practiceFormPage.chooseGender(getProperties().getProperty("gender"));
-        practiceFormPage.enterNumber(getProperties().getProperty("phoneNumber"));
-        practiceFormPage.chooseDate("20", "January", "1990");
-        practiceFormPage.enterSubject("English");
-        practiceFormPage.selectRandomHobbies();
-
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
+        expectedValues.forEach(value ->
+                Assert.assertTrue(practiceFormPage.getResultTable().contains(value), "Expected value '" + value + "' not found in the result table")
+        );
     }
 }
