@@ -4,8 +4,10 @@ public enum Navigation {
 
     /** Elements list items */
     ELEMENTS ("'Elements'"),
+    ALERTS ("'Alerts, Frame & Windows'"),
     FORMS ("'Forms'"),
     TEXT_BOX ("'Text Box'"),
+    BROWSER_WINDOWS ("'Browser Windows'"),
     CHECK_BOX ("'Check Box'"),
     RADIO_BUTTON ("'Radio Button'"),
     WEB_TABLES ("'Web Tables'"),

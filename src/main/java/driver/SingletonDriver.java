@@ -35,9 +35,13 @@ public class SingletonDriver {
 
     public static void closeDriver() {
         if (driver != null) {
-            driver.close();
+            for (String windowHandle : driver.getWindowHandles()) {
+                driver.switchTo().window(windowHandle);
+                driver.close();
+            }
             driver.quit();
             driver = null;
         }
     }
+
 }
