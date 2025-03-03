@@ -3,14 +3,11 @@ package pageObjects;
 import basePages.BasePage;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.*;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.ArrayList;
-import java.util.NoSuchElementException;
-import java.util.Set;
+
 
 @Log4j2
 public class BrowserWindowPage extends BasePage {

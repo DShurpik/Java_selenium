@@ -7,7 +7,7 @@
         <classes>
             <class name="AlertTests">
                 <methods>
-                    <include name="newAboutWindowTest"/>
+                    <include name="alertTest"/>
                 </methods>
             </class>
 

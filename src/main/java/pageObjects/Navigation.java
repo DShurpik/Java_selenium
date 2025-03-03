@@ -8,6 +8,7 @@ public enum Navigation {
     FORMS ("'Forms'"),
     TEXT_BOX ("'Text Box'"),
     BROWSER_WINDOWS ("'Browser Windows'"),
+    ALERTS_MENU ("'Alerts'"),
     CHECK_BOX ("'Check Box'"),
     RADIO_BUTTON ("'Radio Button'"),
     WEB_TABLES ("'Web Tables'"),

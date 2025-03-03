@@ -2,6 +2,7 @@ import basePages.BaseTest;
 import io.qameta.allure.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pageObjects.AlertsPage;
 import pageObjects.BrowserWindowPage;
 
 import static pageObjects.Navigation.*;
@@ -44,5 +45,22 @@ public class AlertTests extends BaseTest {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Owner("John Doe")
+    @Severity(SeverityLevel.NORMAL)
+    @TmsLink("TC-28")
+    @Story("Check that alert is visible")
+    @Test(description = "Check, that alert is visible after clicking")
+    public void alertTest() {
+        AlertsPage alertsPage = new AlertsPage();
+        alertsPage.open(getProperties().getProperty("url"));
+        alertsPage.navigateTo(ALERTS);
+        alertsPage.navigateToMenu(ALERTS_MENU);
+
+        alertsPage.clickOnAlertBtn();
+
+        Assert.assertTrue(alertsPage.isAlertPresent());
+        alertsPage.acceptAlert();
     }
 }
