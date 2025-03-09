@@ -28,10 +28,6 @@ public class TextBoxPage extends BasePage {
     @FindBy(xpath = "//div[@class='border col-md-12 col-sm-12']")
     private WebElement result;
 
-    public TextBoxPage() {
-        PageFactory.initElements(driver, this);
-    }
-
     @Step("Enter {0} into Full Name field")
     public TextBoxPage fillFullNameField(String fullName) {
         log.info("Enter {} into Full Name field", fullName);

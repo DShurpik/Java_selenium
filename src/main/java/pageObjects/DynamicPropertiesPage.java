@@ -21,10 +21,6 @@ public class DynamicPropertiesPage extends BasePage {
     @FindBy(id = "visibleAfter")
     private WebElement visibleAfter5secBtn;
 
-    public DynamicPropertiesPage() {
-        PageFactory.initElements(driver, this);
-    }
-
     @Step("Element is enable in 5 seconds")
     public boolean elementIsEnableIn5Sec() {
         try {

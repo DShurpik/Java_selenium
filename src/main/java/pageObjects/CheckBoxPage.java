@@ -21,11 +21,6 @@ public class CheckBoxPage extends BasePage {
     private final By titleItemBy = By.xpath(".//ancestor::span[@class='rct-text']");
     private final By outputResult = By.xpath("//span[@class='text-success']");
 
-
-    public CheckBoxPage() {
-        PageFactory.initElements(driver,this);
-    }
-
     @Step("Click on expand all button")
     public void clickExpandAllBtn() {
         log.info("Click on expand all button");

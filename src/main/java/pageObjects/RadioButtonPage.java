@@ -15,10 +15,6 @@ public class RadioButtonPage extends BasePage {
     @FindBy(xpath = "//input[@id='noRadio']")
     private WebElement noBtn;
 
-    public RadioButtonPage() {
-        PageFactory.initElements(driver, this);
-    }
-
     @Step("Click on {0}")
     public void click(String buttonName) {
         log.info("Click on {} button", buttonName);

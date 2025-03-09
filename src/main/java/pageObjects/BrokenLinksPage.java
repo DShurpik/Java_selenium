@@ -25,10 +25,6 @@ public class BrokenLinksPage extends BasePage {
     @FindBy(xpath = "//p[contains(text(), 'This page returned a 500 status code.')]")
     private WebElement statusCodeElement;
 
-    public BrokenLinksPage() {
-        PageFactory.initElements(driver, this);
-    }
-
     @Step("Get broken image height")
     public int clientHeight() {
         log.info("Get broken image height");

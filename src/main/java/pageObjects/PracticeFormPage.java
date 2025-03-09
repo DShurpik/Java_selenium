@@ -40,10 +40,6 @@ public class PracticeFormPage extends BasePage {
     @FindBy(xpath = "//table[@class='table table-dark table-striped table-bordered table-hover']")
     private WebElement resultTable;
 
-    public PracticeFormPage() {
-        PageFactory.initElements(driver, this);
-    }
-
     @Step("Fill out the practice form with provided data")
     public void fillPracticeForm(FormData data) {
         enterFirstName(data.getFirstName());

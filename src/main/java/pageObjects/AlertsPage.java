@@ -15,10 +15,6 @@ public class AlertsPage extends BasePage {
     @FindBy(id = "alertButton")
     private WebElement alertBtn;
 
-    public AlertsPage() {
-        PageFactory.initElements(driver, this);
-    }
-
     @Step("Click on alert button")
     public void clickOnAlertBtn() {
         log.info("Click on alert button");

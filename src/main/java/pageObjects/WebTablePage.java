@@ -50,10 +50,6 @@ public class WebTablePage extends BasePage {
 
     private final By fullPersonList = By.xpath("//div[@class='rt-tr-group']");
 
-    public WebTablePage() {
-        PageFactory.initElements(driver, this);
-    }
-
     @Step("Click add new person button")
     public void clickAddNewPersonBtn() {
         log.info("Click add new person button");

@@ -4,6 +4,7 @@ import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.Navigation;
 
@@ -26,6 +27,7 @@ public abstract class BasePage {
         actions = new Actions(driver);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         properties = getProperties();
+        PageFactory.initElements(driver, this);
     }
 
     @Step("Navigate to {0} menu")

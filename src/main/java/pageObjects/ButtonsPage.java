@@ -27,10 +27,6 @@ public class ButtonsPage extends BasePage {
     @FindBy(id = "dynamicClickMessage")
     private WebElement dynamicClickMessageField;
 
-    public ButtonsPage() {
-        PageFactory.initElements(driver, this);
-    }
-
     @Step("Click on 'Double Click Me'")
     public void doubleClick() {
         log.info("Click on Double Click Me button");

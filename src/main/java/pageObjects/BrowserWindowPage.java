@@ -21,10 +21,6 @@ public class BrowserWindowPage extends BasePage {
     @FindBy(id = "windowButton")
     private WebElement newWindowBtn;
 
-    public BrowserWindowPage() {
-        PageFactory.initElements(driver, this);
-    }
-
     @Step("Click on new tab button")
     public void clickNewTabButton() {
         log.info("Click on {}", newTabBtn.toString());
