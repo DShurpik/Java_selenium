@@ -80,4 +80,22 @@ public class AlertTests extends BaseTest {
         Assert.assertTrue(alertsPage.isAlertPresent());
         alertsPage.acceptAlert();
     }
+
+    @Owner("John Doe")
+    @Severity(SeverityLevel.NORMAL)
+    @TmsLink("TC-30")
+    @Story("Check that confirm alert is visible")
+    @Test(description = "Check, that confirm alert is visible after clicking")
+    public void confirmAlertTest() {
+        AlertsPage alertsPage = new AlertsPage();
+        alertsPage.open(getProperties().getProperty("url"));
+        alertsPage.navigateTo(ALERTS);
+        alertsPage.navigateToMenu(ALERTS_MENU);
+
+        alertsPage.clickOnConfirmBtn();
+
+        Assert.assertTrue(alertsPage.isAlertPresent());
+        alertsPage.acceptAlert();
+        Assert.assertEquals(alertsPage.getConfirmResult(), "You selected Ok");
+    }
 }

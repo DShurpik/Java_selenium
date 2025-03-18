@@ -18,6 +18,12 @@ public class AlertsPage extends BasePage {
     @FindBy(id = "timerAlertButton")
     private WebElement timerAlertBtn;
 
+    @FindBy(id = "confirmButton")
+    private WebElement confirmBtn;
+
+    @FindBy(id = "confirmResult")
+    private WebElement confirmResult;
+
     @Step("Click on alert button")
     public void clickOnAlertBtn() {
         log.info("Click on alert button");
@@ -28,6 +34,18 @@ public class AlertsPage extends BasePage {
     public void clickOnTimerAlertBtn() {
         log.info("Click on timer alert button");
         timerAlertBtn.click();
+    }
+
+    @Step("Click on confirm button")
+    public void clickOnConfirmBtn() {
+        log.info("Click on confirm button");
+        confirmBtn.click();
+    }
+
+    @Step("Get confirm result")
+    public String getConfirmResult() {
+        log.info("Get confirm result");
+        return confirmResult.getText();
     }
 
     @Step("Check that alert is present")
