@@ -1,8 +1,5 @@
 import basePages.BaseTest;
 import io.qameta.allure.*;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.AlertsPage;
@@ -62,6 +59,23 @@ public class AlertTests extends BaseTest {
         alertsPage.navigateToMenu(ALERTS_MENU);
 
         alertsPage.clickOnAlertBtn();
+
+        Assert.assertTrue(alertsPage.isAlertPresent());
+        alertsPage.acceptAlert();
+    }
+
+    @Owner("John Doe")
+    @Severity(SeverityLevel.NORMAL)
+    @TmsLink("TC-29")
+    @Story("Check that timer alert is visible")
+    @Test(description = "Check, that timer alert is visible after clicking")
+    public void timerAlertTest() {
+        AlertsPage alertsPage = new AlertsPage();
+        alertsPage.open(getProperties().getProperty("url"));
+        alertsPage.navigateTo(ALERTS);
+        alertsPage.navigateToMenu(ALERTS_MENU);
+
+        alertsPage.clickOnTimerAlertBtn();
 
         Assert.assertTrue(alertsPage.isAlertPresent());
         alertsPage.acceptAlert();

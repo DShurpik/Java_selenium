@@ -15,10 +15,19 @@ public class AlertsPage extends BasePage {
     @FindBy(id = "alertButton")
     private WebElement alertBtn;
 
+    @FindBy(id = "timerAlertButton")
+    private WebElement timerAlertBtn;
+
     @Step("Click on alert button")
     public void clickOnAlertBtn() {
         log.info("Click on alert button");
         alertBtn.click();
+    }
+
+    @Step("Click on timer alert button")
+    public void clickOnTimerAlertBtn() {
+        log.info("Click on timer alert button");
+        timerAlertBtn.click();
     }
 
     @Step("Check that alert is present")

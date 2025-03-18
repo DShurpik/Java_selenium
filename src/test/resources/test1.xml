@@ -7,7 +7,7 @@
         <classes>
             <class name="AlertTests">
                 <methods>
-                    <include name="alertTest"/>
+                    <include name="timerAlertTest"/>
                 </methods>
             </class>
 
