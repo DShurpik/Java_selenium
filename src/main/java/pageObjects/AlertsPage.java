@@ -24,6 +24,12 @@ public class AlertsPage extends BasePage {
     @FindBy(id = "confirmResult")
     private WebElement confirmResult;
 
+    @FindBy(id = "promtButton")
+    private WebElement promtBtn;
+
+    @FindBy(id = "promptResult")
+    private WebElement promptResult;
+
     @Step("Click on alert button")
     public void clickOnAlertBtn() {
         log.info("Click on alert button");
@@ -46,6 +52,24 @@ public class AlertsPage extends BasePage {
     public String getConfirmResult() {
         log.info("Get confirm result");
         return confirmResult.getText();
+    }
+
+    @Step("Click on promt button")
+    public void clickOnPromtBtn() {
+        log.info("Click on promt button");
+        promtBtn.click();
+    }
+
+    @Step("Get prompt result")
+    public String getPromptResult() {
+        log.info("Get prompt result");
+        return promptResult.getText();
+    }
+
+    @Step("Send text to alert")
+    public void sendTextToAlert(String text) {
+        log.info("Send text to alert");
+        driver.switchTo().alert().sendKeys(text);
     }
 
     @Step("Check that alert is present")

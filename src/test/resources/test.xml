@@ -2,17 +2,11 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 
-<suite name="Test one method from element tests, but only one method">
-    <test name="Test one method from element tests, but only one method">
+<suite name="Test all methods from ElementsTests and AlertTests">
+    <test name="Test all methods from ElementsTests and AlertTests">
         <classes>
-            <class name="ElementsTests">
-                <methods>
-                    <include name="fillTextForm"/>
-                    <include name="fillFieldByFaker"/>
-                    <include name="clickCheckboxRandomly"/>
-                </methods>
-            </class>
-
+            <class name="ElementsTests"/>
+            <class name="AlertTests"/>
         </classes>
     </test>
 </suite>
