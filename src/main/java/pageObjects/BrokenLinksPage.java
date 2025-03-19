@@ -44,9 +44,9 @@ public class BrokenLinksPage extends BasePage {
     }
 
     @Step("Open google page")
-    public boolean googleIsVisible() {
+    public String googleTitle() {
         log.info("Google is opened");
-        return googleImg.isDisplayed();
+        return driver.getTitle();
     }
 
     @Step("Click on Broken Link")
