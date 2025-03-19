@@ -117,4 +117,9 @@ public class AlertTests extends BaseTest {
         alertsPage.acceptAlert();
         Assert.assertEquals(alertsPage.getPromptResult(), "You entered John");
     }
+
+    @Test
+    public void test() {
+        System.out.println("Hello, World!");
+    }
 }

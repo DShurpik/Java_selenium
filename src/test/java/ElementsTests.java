@@ -486,8 +486,7 @@ public class ElementsTests extends BaseTest {
         brokenLinksPage.navigateToMenu(BROKEN_LINKS);
 
         brokenLinksPage.validLinkClick();
-
-        Assert.assertTrue(brokenLinksPage.googleIsVisible());
+        Assert.assertEquals(brokenLinksPage.googleTitle(),"Google");
     }
 
     @Owner("John Doe")
