@@ -5,6 +5,7 @@ import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.Navigation;
 
@@ -33,7 +34,7 @@ public abstract class BasePage {
     @Step("Navigate to {0} menu")
     public void navigateTo(Navigation menuName) {
         log.info("Navigate to -> {}", menuName.getItem());
-        driver.findElement(By.xpath("//div[h5=" + menuName.getItem() + "]")).click();
+        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//div[h5=" + menuName.getItem() + "]")))).click();
     }
 
     @Step("Navigate to {0} menu field")
