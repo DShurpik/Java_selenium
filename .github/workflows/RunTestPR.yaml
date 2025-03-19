@@ -27,7 +27,7 @@ jobs:
           restore-keys: ${{ runner.os }}-maven-
 
       - name: Run TestNG tests with custom suite
-        run: mvn clean test -DsuiteXml="test1" -Dconfig="threadQA" allure:report
+        run: mvn clean test -DsuiteXml="test" -Dconfig="threadQA" allure:report
 
       - name: Upload Allure results
         uses: actions/upload-artifact@v4

@@ -98,4 +98,23 @@ public class AlertTests extends BaseTest {
         alertsPage.acceptAlert();
         Assert.assertEquals(alertsPage.getConfirmResult(), "You selected Ok");
     }
+
+    @Owner("John Doe")
+    @Severity(SeverityLevel.NORMAL)
+    @TmsLink("TC-31")
+    @Story("Check that prompt alert is visible")
+    @Test(description = "Check, that prompt alert is visible after clicking and check text")
+    public void promptAlertTest() {
+        AlertsPage alertsPage = new AlertsPage();
+        alertsPage.open(getProperties().getProperty("url"));
+        alertsPage.navigateTo(ALERTS);
+        alertsPage.navigateToMenu(ALERTS_MENU);
+
+        alertsPage.clickOnPromtBtn();
+        alertsPage.sendTextToAlert(getProperties().getProperty("firstName"));
+
+        Assert.assertTrue(alertsPage.isAlertPresent());
+        alertsPage.acceptAlert();
+        Assert.assertEquals(alertsPage.getPromptResult(), "You entered John");
+    }
 }
