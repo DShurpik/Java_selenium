@@ -16,7 +16,7 @@ public class BrokenLinksPage extends BasePage {
     @FindBy(xpath = "//a[text()='Click Here for Valid Link']")
     private WebElement validLink;
 
-    @FindBy(xpath = "//img[@alt='Google']")
+    @FindBy(xpath = "//a[@aria-label='Приложения Google']")
     private WebElement googleImg;
 
     @FindBy(xpath = "//a[text()='Click Here for Broken Link']")

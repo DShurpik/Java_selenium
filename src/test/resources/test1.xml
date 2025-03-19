@@ -5,9 +5,9 @@
 <suite name="Test one method from element tests, but only one method">
     <test name="Test one method from element tests, but only one method">
         <classes>
-            <class name="AlertTests">
+            <class name="ElementsTests">
                 <methods>
-                    <include name="promptAlertTest"/>
+                    <include name="validLinkTest"/>
                 </methods>
             </class>
 
