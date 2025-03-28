@@ -5,9 +5,9 @@
 <suite name="Test one method from element tests, but only one method">
     <test name="Test one method from element tests, but only one method">
         <classes>
-            <class name="ElementsTests">
+            <class name="AlertTests">
                 <methods>
-                    <include name="defineCheckBoxTest"/>
+                    <include name="newBrowserWindowTest"/>
                 </methods>
             </class>
 

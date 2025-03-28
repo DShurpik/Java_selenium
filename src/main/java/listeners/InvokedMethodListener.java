@@ -7,8 +7,7 @@ import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
 import org.testng.ITestResult;
 
-import static driver.SingletonDriver.getWebDriver;
-
+import static driver.DriverManager.getWebDriver;
 
 public class InvokedMethodListener implements IInvokedMethodListener {
 

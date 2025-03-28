@@ -551,7 +551,7 @@ public class ElementsTests extends BaseTest {
         Assert.assertTrue(dynamicPropertiesPage.buttonIsVisibleIn5Sec());
     }
 
-    @Owner("Jhn Doe")
+    @Owner("John Doe")
     @Severity(SeverityLevel.NORMAL)
     @TmsLink("TC-25")
     @Story("Fill practice form by valid values")

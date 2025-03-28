@@ -37,7 +37,6 @@ public class BrowserWindowPage extends BasePage {
     public void switchToNewTab() {
         ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(1));
-        System.out.println(tabs + " TABS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         log.info("Switched to new tab: " + tabs.get(1));
     }
 
