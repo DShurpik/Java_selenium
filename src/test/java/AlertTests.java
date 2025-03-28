@@ -38,13 +38,13 @@ public class AlertTests extends BaseTest {
 
         browserWindowPage.clickNewWindowButton();
         browserWindowPage.switchToNewTab();
-        Assert.assertTrue(browserWindowPage.newTabHeaderIsVisible());
 
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+        Assert.assertTrue(browserWindowPage.newTabHeaderIsVisible());
     }
 
     @Owner("John Doe")
@@ -116,10 +116,5 @@ public class AlertTests extends BaseTest {
         Assert.assertTrue(alertsPage.isAlertPresent());
         alertsPage.acceptAlert();
         Assert.assertEquals(alertsPage.getPromptResult(), "You entered John");
-    }
-
-    @Test
-    public void test() {
-        System.out.println("Hello, World!");
     }
 }

@@ -12,7 +12,7 @@ import pageObjects.Navigation;
 import java.time.Duration;
 import java.util.Properties;
 
-import static driver.SingletonDriver.getWebDriver;
+import static driver.DriverManager.getWebDriver;
 import static utils.PropertyReader.getProperties;
 
 @Log4j2

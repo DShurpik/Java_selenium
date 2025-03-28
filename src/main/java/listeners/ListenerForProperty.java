@@ -45,6 +45,11 @@ public class ListenerForProperty implements ITestListener {
                 .getSuite()
                 .getParameter("config") == null ? System.getProperty("config") : context.getSuite().getParameter("config");
         new PropertyReader(propertyName);
+        // Теперь читаем browser из загруженных пропертей или System properties
+        String browser = System.getProperty("browser", PropertyReader.getProperties().getProperty("browser"));
+
+        log.info("Property file: {}", propertyName);
+        log.info("Selected browser: {}", browser);
     }
 
     @Override
