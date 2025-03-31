@@ -9,34 +9,35 @@ import java.time.Duration;
 
 @Log4j2
 public abstract class DriverManager {
-    protected static WebDriver driver;
+    protected static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
     public abstract void createDriver();
 
     {
-        if(driver == null){
+        if(driver.get() == null){
             createDriver();
-            Capabilities capabilities = ((HasCapabilities) driver).getCapabilities();
+            Capabilities capabilities = ((HasCapabilities) driver.get()).getCapabilities();
             log.info("WebDriver is created -> Browser: {} | Version: {} | OS: {} | ID: {}",
                     capabilities.getBrowserName(),
                     capabilities.getBrowserVersion(),
                     System.getProperty("os.name"),
-                    driver);
+                    driver.get());
         }
     }
 
     public static WebDriver getWebDriver() {
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().timeouts().scriptTimeout(Duration.ofSeconds(10));
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
+        driver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.get().manage().timeouts().scriptTimeout(Duration.ofSeconds(10));
+        driver.get().manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
 
-        return driver;
+        return driver.get();
     }
 
     public static void closeDriver() {
         if (driver != null) {
-            driver.quit();
-            driver = null;
+            driver.get().close();
+            driver.get().quit();
+            driver.remove();
         }
     }
 }

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+
+<suite name="Several threads test" thread-count="2" parallel="methods">
+    <listeners>
+        <listener class-name="utils.RetryTransformer"/>
+    </listeners>
+    <test name="AlertTests with several threads">
+        <classes>
+            <class name="AlertTests">
+                <methods>
+                    <include name="justTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
