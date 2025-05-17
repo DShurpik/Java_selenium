@@ -29,17 +29,8 @@ jobs:
       - name: Run TestNG tests with custom suite
         run: mvn clean test -DsuiteXml="test" -Dconfig="threadQA" allure:report
 
-      - name: Upload Allure results
-        uses: actions/upload-artifact@v4
-        with:
-          name: allure-results
-          path: target/allure-results
-
-      - name: Generate Allure report
-        run: mvn allure:report
-
-      - name: Upload Allure report
+      - name: Upload Allure Report
         uses: actions/upload-artifact@v4
         with:
           name: allure-report
-          path: target/site/allure-maven-plugin/ # Путь к HTML-отчёту
+          path: target/site/allure-maven-plugin
