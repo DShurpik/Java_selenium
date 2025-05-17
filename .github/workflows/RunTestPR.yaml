@@ -37,9 +37,3 @@ jobs:
 
       - name: Generate Allure report
         run: mvn allure:report
-
-      - name: Upload Allure report
-        uses: actions/upload-artifact@v4
-        with:
-          name: allure-report
-          path: target/site/allure-maven-plugin/ # Путь к HTML-отчёту
