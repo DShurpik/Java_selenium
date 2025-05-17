@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.*;
 
 import java.util.*;
+
 @Log4j2
 public class TextBoxPage extends BasePage {
 
@@ -28,37 +29,33 @@ public class TextBoxPage extends BasePage {
     @FindBy(xpath = "//div[@class='border col-md-12 col-sm-12']")
     private WebElement result;
 
-    @Step("Enter {0} into Full Name field")
+    @Step("Fill in the 'Full Name' field with {0}")
     public TextBoxPage fillFullNameField(String fullName) {
-        log.info("Enter {} into Full Name field", fullName);
-        userNameField.sendKeys(fullName);
+        sendText(fullName, userNameField);
         return this;
     }
 
-    @Step("Enter {0} into Email field")
+    @Step("Fill in the 'Email' field with {0}")
     public TextBoxPage fillEmailField(String email) {
-        log.info("Enter {} into Email field", email);
-        userEmailField.sendKeys(email);
+        sendText(email, userEmailField);
         return this;
     }
 
-    @Step("Enter {0} into Current Address field")
+    @Step("Fill in the 'Current Address' field with {0}")
     public TextBoxPage fillCurrentAddressField(String address) {
-        log.info("Enter {} into Current Address field", address);
-        currentAddressField.sendKeys(address);
+        sendText(address, currentAddressField);
         return this;
     }
 
-    @Step("Enter {0} into Permanent Address field")
+    @Step("Fill in the 'Permanent Address' field with {0}")
     public TextBoxPage fillPermanentAddressField(String address) {
-        log.info("Enter {} into Permanent Address field", address);
-        permanentAddressField.sendKeys(address);
+        sendText(address, permanentAddressField);
         return this;
     }
 
-    @Step ("Press 'Submit' button")
+    @Step("Click the 'Submit' button")
     public void clickSubmitBtn() {
-        submitBtn.click();
+        click(submitBtn);
     }
 
     public Map<String, String> getResult() {

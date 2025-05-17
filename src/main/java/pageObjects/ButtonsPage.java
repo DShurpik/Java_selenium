@@ -30,7 +30,7 @@ public class ButtonsPage extends BasePage {
     @Step("Click on 'Double Click Me'")
     public void doubleClick() {
         log.info("Click on Double Click Me button");
-        goToElement(doubleClickBtn);
+
         actions.doubleClick(doubleClickBtn).perform();
     }
 
@@ -43,7 +43,7 @@ public class ButtonsPage extends BasePage {
     @Step("Click on 'Right Click Me'")
     public void rightClick() {
         log.info("Click on Right click button");
-        goToElement(rightClickBtn);
+
         actions.contextClick(rightClickBtn).perform();
     }
 
@@ -56,7 +56,7 @@ public class ButtonsPage extends BasePage {
     @Step("Click on 'Click Me'")
     public void clickMe() {
         log.info("Click on Click button");
-        goToElement(clickMeBtn);
+
         clickMeBtn.click();
     }
 
