@@ -1,7 +1,7 @@
 package pageObjects;
 
 import basePages.BasePage;
-import dataGenerator.Generator;
+import dataGenerator.DataUserGenerator;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
@@ -120,7 +120,7 @@ public class WebTablePage extends BasePage {
     }
 
     @Step("Check that a user has been added to table {0}")
-    public boolean checkPersonAdded(List<List<String>> userList, Generator user) {
+    public boolean checkPersonAdded(List<List<String>> userList, DataUserGenerator user) {
         boolean userFound = false;
         for (List<String> userData : userList) {
             if (userData.contains(user.getName())
