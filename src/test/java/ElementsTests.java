@@ -1,5 +1,5 @@
 import basePages.BaseTest;
-import dataGenerator.Generator;
+import dataGenerator.DataUserGenerator;
 import io.qameta.allure.*;
 import models.ResponseData;
 import org.testng.Assert;
@@ -13,34 +13,6 @@ import static pageObjects.Navigation.*;
 import static utils.PropertyReader.getProperties;
 
 public class ElementsTests extends BaseTest {
-
-
-
-    @Owner("John Doe")
-    @Severity(SeverityLevel.NORMAL)
-    @TmsLink("TC-2")
-    @Story("Values from a Faker library")
-    @Test(description = "Have used a faker to fill user's data")
-    public void fillFieldByFaker() {
-        Generator user = new Generator();
-        TextBoxPage textBoxPage = new TextBoxPage();
-
-        textBoxPage.open(getProperties().getProperty("url"));
-        textBoxPage.navigateTo(ELEMENTS);
-        textBoxPage.navigateToMenu(TEXT_BOX);
-
-        textBoxPage
-                .fillFullNameField(user.getFullName())
-                .fillEmailField(user.getEmail())
-                .fillCurrentAddressField(user.getCurrentAddress())
-                .fillPermanentAddressField(user.getPermanentAddress());
-        textBoxPage.clickSubmitBtn();
-
-        Assert.assertEquals(user.getFullName(), textBoxPage.getResult().get("Name"));
-        Assert.assertEquals(user.getEmail(), textBoxPage.getResult().get("Email"));
-        Assert.assertEquals(user.getCurrentAddress(), textBoxPage.getResult().get("Current Address"));
-        Assert.assertEquals(user.getPermanentAddress(), textBoxPage.getResult().get("Permananet Address"));
-    }
 
     @Owner("John Doe")
     @Severity(SeverityLevel.NORMAL)
@@ -132,7 +104,7 @@ public class ElementsTests extends BaseTest {
     @Test(description = "Add a new user in table and check it")
     public void addUserTableTest() {
         WebTablePage webTablePage = new WebTablePage();
-        Generator user = new Generator();
+        DataUserGenerator user = new DataUserGenerator();
 
         webTablePage.open(getProperties().getProperty("url"));
         webTablePage.navigateTo(ELEMENTS);
@@ -158,7 +130,7 @@ public class ElementsTests extends BaseTest {
     @Test(description = "Add a new user in table and check him in search")
     public void searchTableTest() {
         WebTablePage webTablePage = new WebTablePage();
-        Generator user = new Generator();
+        DataUserGenerator user = new DataUserGenerator();
 
         webTablePage.open(getProperties().getProperty("url"));
         webTablePage.navigateTo(ELEMENTS);
@@ -188,7 +160,7 @@ public class ElementsTests extends BaseTest {
     @Test(description = "Edit informtion bout user")
     public void editTableTest() {
         WebTablePage webTablePage = new WebTablePage();
-        Generator user = new Generator();
+        DataUserGenerator user = new DataUserGenerator();
 
         webTablePage.open(getProperties().getProperty("url"));
         webTablePage.navigateTo(ELEMENTS);

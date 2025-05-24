@@ -12,6 +12,8 @@ public class Retry implements IRetryAnalyzer {
 
     @Override
     public boolean retry(ITestResult iTestResult) {
+        Throwable cause = iTestResult.getThrowable();
+        log.warn("Test '{}' failed due to: {}", iTestResult.getName(), cause.getMessage());
         if (!iTestResult.isSuccess() && attempt < MAX_RETRY) {
             log.warn("Test '{}' failed. Retrying attempt {}/{}",
                     iTestResult.getName(), attempt, MAX_RETRY);

@@ -65,4 +65,10 @@ public abstract class BasePage {
             webElement.click();
         }
     }
+
+    public String getText(By by) {
+        log.info("Get text from element: {}", by);
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(by)));
+        return driver.findElement(by).getText();
+    }
 }
