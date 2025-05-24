@@ -3,10 +3,9 @@ package pageObjects;
 import basePages.BasePage;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.*;
-
-import java.util.*;
 
 @Log4j2
 public class TextBoxPage extends BasePage {
@@ -26,8 +25,10 @@ public class TextBoxPage extends BasePage {
     @FindBy(id = "submit")
     private WebElement submitBtn;
 
-    @FindBy(xpath = "//div[@class='border col-md-12 col-sm-12']")
-    private WebElement result;
+    private final By resultName = By.id("name");
+    private final By resultEmail = By.id("email");
+    private final By resultCurrentAddress = By.xpath("//p[@id='currentAddress']");
+    private final By resultPermanentAddress = By.xpath("//p[@id='permanentAddress']");
 
     @Step("Fill in the 'Full Name' field with {0}")
     public TextBoxPage fillFullNameField(String fullName) {
@@ -58,13 +59,23 @@ public class TextBoxPage extends BasePage {
         click(submitBtn);
     }
 
-    public Map<String, String> getResult() {
-        String[] arr = result.getText().split("[:\n]");
+    @Step("Get name result from the form")
+    public String getResultName() {
+        return getText(resultName);
+    }
 
-        Map<String, String> valuesMap = new HashMap<>();
-        for (int i = 0; i < arr.length; i = i + 2) {
-            valuesMap.put(arr[i].trim(), arr[i + 1].trim());
-        }
-        return valuesMap;
+    @Step("Get email result from the form")
+    public String getResultEmail() {
+        return getText(resultEmail);
+    }
+
+    @Step("Get current address result from the form")
+    public String getResultCurrentAddress() {
+        return getText(resultCurrentAddress);
+    }
+
+    @Step("Get permanent address result from the form")
+    public String getResultPermanentAddress() {
+        return getText(resultPermanentAddress);
     }
 }

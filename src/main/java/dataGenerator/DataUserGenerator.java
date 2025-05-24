@@ -2,7 +2,7 @@ package dataGenerator;
 
 import com.github.javafaker.Faker;
 
-public class Generator {
+public class DataUserGenerator {
 
     Faker faker = new Faker();
 
@@ -18,7 +18,7 @@ public class Generator {
     private final String department;
 
 
-    public Generator() {
+    public DataUserGenerator() {
         this.fullName = faker.name().fullName();
         this.email = faker.internet().emailAddress();
         this.currentAddress = faker.address().fullAddress();
