@@ -6,6 +6,7 @@ import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.Navigation;
@@ -56,13 +57,20 @@ public abstract class BasePage {
         webElement.sendKeys(string);
     }
 
-    public void click(WebElement webElement) {
+    public void click(By by) {
         try {
-            log.info("Click on element" + webElement);
-            webElement.click();
-        } catch (ElementClickInterceptedException e){
-            wait.until(ExpectedConditions.elementToBeClickable(webElement));
-            webElement.click();
+            log.info("Click on element " + by);
+            WebElement element = wait.until(ExpectedConditions.elementToBeClickable(by));
+            actions.moveToElement(element).perform();
+            element.click();
+        } catch (StaleElementReferenceException e) {
+            WebElement element = wait.until(ExpectedConditions.elementToBeClickable(by));
+            actions.moveToElement(element).perform();
+            element.click();
+        } catch (ElementClickInterceptedException e) {
+            WebElement element = wait.until(ExpectedConditions.elementToBeClickable(by));
+            actions.moveToElement(element).perform();
+            element.click();
         }
     }
 
@@ -70,5 +78,15 @@ public abstract class BasePage {
         log.info("Get text from element: {}", by);
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(by)));
         return driver.findElement(by).getText();
+    }
+
+    public Boolean isElementDisplayed(By by) {
+        log.info("Check if element is displayed: {}", by);
+        try {
+            return driver.findElement(by).isDisplayed();
+        } catch (NoSuchElementException e) {
+            log.error("Element not found: {}", driver.findElement(by), e);
+            return false;
+        }
     }
 }
