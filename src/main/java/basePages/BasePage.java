@@ -29,8 +29,7 @@ public abstract class BasePage {
         actions = new Actions(driver);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         properties = getProperties();
-        //PageFactory.initElements(driver, this);
-        PageFactory.initElements(new AjaxElementLocatorFactory(driver, 10), this);
+        PageFactory.initElements(driver, this);
     }
 
     @Step("Navigate to {0} menu")
