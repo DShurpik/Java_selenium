@@ -2,15 +2,13 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 
-<suite name="Several threads test" thread-count="2" parallel="methods">
-    <listeners>
-        <listener class-name="utils.RetryTransformer"/>
-    </listeners>
+<suite name="Test only one test">
+
     <test name="AlertTests with several threads">
         <classes>
-            <class name="AlertTests">
+            <class name="TextBoxTests">
                 <methods>
-                    <include name="justTest"/>
+                    <include name="fillFieldWithInvalidEmail"/>
                 </methods>
             </class>
         </classes>

@@ -1,5 +1,5 @@
 import basePages.BaseTest;
-import dataGenerator.DataUserGenerator;
+import dataGenerator.*;
 import io.qameta.allure.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -58,5 +58,25 @@ public class TextBoxTests extends BaseTest {
         Assert.assertEquals("Email:" + user.getEmail(), textBoxPage.getResultEmail());
         Assert.assertEquals("Current Address :" + user.getCurrentAddress(), textBoxPage.getResultCurrentAddress());
         Assert.assertEquals("Permananet Address :" + user.getPermanentAddress(), textBoxPage.getResultPermanentAddress());
+    }
+
+    @Owner("John Doe")
+    @Severity(SeverityLevel.NORMAL)
+    @TmsLink("TC-3")
+    @Story("Filling fields with invalid email")
+    @Test(description = "Using invalid email to fill the user's data fields")
+    public void fillFieldWithInvalidEmail() {
+        TextBoxPage textBoxPage = new TextBoxPage();
+        String invalidEmail = RandomStringGenerator.generateRandomString();
+
+        textBoxPage.open(getProperties().getProperty("url"));
+        textBoxPage.navigateTo(ELEMENTS);
+        textBoxPage.navigateToMenu(TEXT_BOX);
+
+        textBoxPage
+                .fillEmailField(invalidEmail);
+        textBoxPage.clickSubmitBtn();
+
+        Assert.assertTrue(textBoxPage.invalidEmailFieldIsDisplayed());
     }
 }

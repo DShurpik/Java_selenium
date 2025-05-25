@@ -22,13 +22,12 @@ public class TextBoxPage extends BasePage {
     @FindBy(id = "permanentAddress")
     private WebElement permanentAddressField;
 
-    @FindBy(id = "submit")
-    private WebElement submitBtn;
-
     private final By resultName = By.id("name");
     private final By resultEmail = By.id("email");
     private final By resultCurrentAddress = By.xpath("//p[@id='currentAddress']");
     private final By resultPermanentAddress = By.xpath("//p[@id='permanentAddress']");
+    private final By userEmailInvalidField = By.xpath("//input[@id='userEmail' and contains(@class, 'field-error')]");
+    private final By submitBtn = By.id("submit");
 
     @Step("Fill in the 'Full Name' field with {0}")
     public TextBoxPage fillFullNameField(String fullName) {
@@ -77,5 +76,10 @@ public class TextBoxPage extends BasePage {
     @Step("Get permanent address result from the form")
     public String getResultPermanentAddress() {
         return getText(resultPermanentAddress);
+    }
+
+    @Step("Email field has red border")
+    public Boolean invalidEmailFieldIsDisplayed() {
+        return isElementDisplayed(userEmailInvalidField);
     }
 }
