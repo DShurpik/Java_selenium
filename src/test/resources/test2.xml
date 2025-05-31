@@ -4,11 +4,11 @@
 
 <suite name="Test only one test">
 
-    <test name="AlertTests with several threads">
+    <test name="One test from TextBoxTests">
         <classes>
             <class name="TextBoxTests">
                 <methods>
-                    <include name="fillFieldWithInvalidEmail"/>
+                    <include name="fillFieldWithInvalidEmailAndChangeToValid"/>
                 </methods>
             </class>
         </classes>

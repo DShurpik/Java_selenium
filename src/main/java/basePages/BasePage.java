@@ -6,7 +6,6 @@ import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.Navigation;
@@ -57,30 +56,36 @@ public abstract class BasePage {
         webElement.sendKeys(string);
     }
 
-    public void click(By by) {
-        try {
-            log.info("Click on element " + by);
-            WebElement element = wait.until(ExpectedConditions.elementToBeClickable(by));
-            actions.moveToElement(element).perform();
-            element.click();
-        } catch (StaleElementReferenceException e) {
-            WebElement element = wait.until(ExpectedConditions.elementToBeClickable(by));
-            actions.moveToElement(element).perform();
-            element.click();
-        } catch (ElementClickInterceptedException e) {
-            WebElement element = wait.until(ExpectedConditions.elementToBeClickable(by));
-            actions.moveToElement(element).perform();
-            element.click();
+    protected void click(By by) {
+        int attempts = 0;
+        while (attempts < 3) {
+            try {
+                log.info("Attempt #{} to click on element: {}", attempts + 1, by);
+                wait.until(ExpectedConditions.presenceOfElementLocated(by));
+                wait.until(ExpectedConditions.elementToBeClickable(by));
+                WebElement element = driver.findElement(by);
+                actions.moveToElement(element).perform();
+                element.click();
+                return;
+            } catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+                log.warn("Click attempt #{} failed due to: {}", attempts + 1, e.getClass().getSimpleName(), e);
+            } catch (Exception e) {
+                log.warn("Unexpected exception during click attempt #{}", attempts + 1, e);
+                throw e;
+            }
+            attempts++;
         }
+
+        log.error("Failed to click on element after {} attempts: {}", attempts, by);
     }
 
-    public String getText(By by) {
-        log.info("Get text from element: {}", by);
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(by)));
-        return driver.findElement(by).getText();
+    protected String getText(WebElement webElement) {
+        log.info("Get text from element: {}", webElement);
+        wait.until(ExpectedConditions.visibilityOf(webElement));
+        return webElement.getText();
     }
 
-    public Boolean isElementDisplayed(By by) {
+    protected Boolean isElementDisplayed(By by) {
         log.info("Check if element is displayed: {}", by);
         try {
             return driver.findElement(by).isDisplayed();

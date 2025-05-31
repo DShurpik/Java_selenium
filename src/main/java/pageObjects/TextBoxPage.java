@@ -22,12 +22,11 @@ public class TextBoxPage extends BasePage {
     @FindBy(id = "permanentAddress")
     private WebElement permanentAddressField;
 
-    private final By resultName = By.id("name");
-    private final By resultEmail = By.id("email");
-    private final By resultCurrentAddress = By.xpath("//p[@id='currentAddress']");
-    private final By resultPermanentAddress = By.xpath("//p[@id='permanentAddress']");
+    @FindBy(id = "output")
+    private WebElement resultField;
+
     private final By userEmailInvalidField = By.xpath("//input[@id='userEmail' and contains(@class, 'field-error')]");
-    private final By submitBtn = By.id("submit");
+    private final By submitButton = By.id("submit");
 
     @Step("Fill in the 'Full Name' field with {0}")
     public TextBoxPage fillFullNameField(String fullName) {
@@ -55,27 +54,12 @@ public class TextBoxPage extends BasePage {
 
     @Step("Click the 'Submit' button")
     public void clickSubmitBtn() {
-        click(submitBtn);
+        click(submitButton);
     }
 
-    @Step("Get name result from the form")
-    public String getResultName() {
-        return getText(resultName);
-    }
-
-    @Step("Get email result from the form")
-    public String getResultEmail() {
-        return getText(resultEmail);
-    }
-
-    @Step("Get current address result from the form")
-    public String getResultCurrentAddress() {
-        return getText(resultCurrentAddress);
-    }
-
-    @Step("Get permanent address result from the form")
-    public String getResultPermanentAddress() {
-        return getText(resultPermanentAddress);
+    @Step("Get text from the output form")
+    public String getResultText() {
+        return getText(resultField);
     }
 
     @Step("Email field has red border")
