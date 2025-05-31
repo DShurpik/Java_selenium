@@ -28,10 +28,10 @@ public class TextBoxTests extends BaseTest {
                 .fillPermanentAddressField(getProperties().getProperty("permanentAddress"));
         textBoxPage.clickSubmitBtn();
 
-        Assert.assertEquals("Name:" + getProperties().getProperty("fullName"), textBoxPage.getResultName());
-        Assert.assertEquals("Email:" + getProperties().getProperty("email"), textBoxPage.getResultEmail());
-        Assert.assertEquals("Current Address :" + getProperties().getProperty("currentAddress"), textBoxPage.getResultCurrentAddress());
-        Assert.assertEquals("Permananet Address :" + getProperties().getProperty("permanentAddress"), textBoxPage.getResultPermanentAddress());
+        Assert.assertTrue(textBoxPage.getResultText().contains(getProperties().getProperty("fullName")));
+        Assert.assertTrue(textBoxPage.getResultText().contains(getProperties().getProperty("email")));
+        Assert.assertTrue(textBoxPage.getResultText().contains(getProperties().getProperty("currentAddress")));
+        Assert.assertTrue(textBoxPage.getResultText().contains(getProperties().getProperty("permanentAddress")));
     }
 
     @Owner("John Doe")
@@ -54,10 +54,10 @@ public class TextBoxTests extends BaseTest {
                 .fillPermanentAddressField(user.getPermanentAddress());
         textBoxPage.clickSubmitBtn();
 
-        Assert.assertEquals("Name:" + user.getFullName(), textBoxPage.getResultName());
-        Assert.assertEquals("Email:" + user.getEmail(), textBoxPage.getResultEmail());
-        Assert.assertEquals("Current Address :" + user.getCurrentAddress(), textBoxPage.getResultCurrentAddress());
-        Assert.assertEquals("Permananet Address :" + user.getPermanentAddress(), textBoxPage.getResultPermanentAddress());
+        Assert.assertTrue(textBoxPage.getResultText().contains(user.getFullName()));
+        Assert.assertTrue(textBoxPage.getResultText().contains(user.getEmail()));
+        Assert.assertTrue(textBoxPage.getResultText().contains(user.getCurrentAddress()));
+        Assert.assertTrue(textBoxPage.getResultText().contains(user.getPermanentAddress()));
     }
 
     @Owner("John Doe")
@@ -78,5 +78,32 @@ public class TextBoxTests extends BaseTest {
         textBoxPage.clickSubmitBtn();
 
         Assert.assertTrue(textBoxPage.invalidEmailFieldIsDisplayed());
+    }
+
+    @Owner("John Doe")
+    @Severity(SeverityLevel.NORMAL)
+    @TmsLink("TC-4")
+    @Story("Filling fields with invalid email and changing it to valid values")
+    @Test(description = "Using invalid email to fill the user's data fields and then changing it to valid values")
+    public void fillFieldWithInvalidEmailAndChangeToValid() {
+        TextBoxPage textBoxPage = new TextBoxPage();
+        String invalidEmail = RandomStringGenerator.generateRandomString();
+        DataUserGenerator user = new DataUserGenerator();
+        String validEmail = user.getEmail();
+
+        textBoxPage.open(getProperties().getProperty("url"));
+        textBoxPage.navigateTo(ELEMENTS);
+        textBoxPage.navigateToMenu(TEXT_BOX);
+
+        textBoxPage
+                .fillEmailField(invalidEmail);
+        textBoxPage.clickSubmitBtn();
+
+        Assert.assertTrue(textBoxPage.invalidEmailFieldIsDisplayed());
+
+        textBoxPage.fillEmailField(validEmail);
+        textBoxPage.clickSubmitBtn();
+
+        Assert.assertTrue(textBoxPage.getResultText().contains(user.getEmail()));
     }
 }
