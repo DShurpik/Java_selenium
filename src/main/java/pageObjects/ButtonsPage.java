@@ -56,7 +56,6 @@ public class ButtonsPage extends BasePage {
     @Step("Click on 'Click Me'")
     public void clickMe() {
         log.info("Click on Click button");
-
         clickMeBtn.click();
     }
 
