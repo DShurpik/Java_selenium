@@ -61,10 +61,8 @@ public abstract class BasePage {
         while (attempts < 3) {
             try {
                 log.info("Attempt #{} to click on element: {}", attempts + 1, by);
-                wait.until(ExpectedConditions.presenceOfElementLocated(by));
-                wait.until(ExpectedConditions.elementToBeClickable(by));
-                WebElement element = driver.findElement(by);
-                actions.moveToElement(element).perform();
+                WebElement element = wait.until(ExpectedConditions.refreshed(
+                        ExpectedConditions.elementToBeClickable(by)));
                 element.click();
                 return;
             } catch (StaleElementReferenceException | ElementClickInterceptedException e) {
