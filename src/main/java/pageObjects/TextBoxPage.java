@@ -10,20 +10,29 @@ import org.openqa.selenium.support.*;
 @Log4j2
 public class TextBoxPage extends BasePage {
 
-    @FindBy(id = "userName")
+    @FindBy(xpath = "//input[@id='userName']")
     private WebElement userNameField;
 
-    @FindBy(id = "userEmail")
+    @FindBy(xpath = "//input[@id='userEmail']")
     private WebElement userEmailField;
 
-    @FindBy(id = "currentAddress")
+    @FindBy(xpath = "//textarea[@id='currentAddress']")
     private WebElement currentAddressField;
 
-    @FindBy(id = "permanentAddress")
+    @FindBy(xpath = "//textarea[@id='permanentAddress']")
     private WebElement permanentAddressField;
 
-    @FindBy(id = "output")
-    private WebElement resultField;
+    @FindBy(xpath = "//p[@id='name']")
+    private WebElement nameResult;
+
+    @FindBy(xpath = "//p[@id='email']")
+    private WebElement emailResult;
+
+    @FindBy(xpath = "//p[@id='currentAddress']")
+    private WebElement currentAddressResult;
+
+    @FindBy(xpath = "//p[@id='permanentAddress']")
+    private WebElement permanentAddressResult;
 
     private final By userEmailInvalidField = By.xpath("//input[@id='userEmail' and contains(@class, 'field-error')]");
     private final By submitButton = By.id("submit");
@@ -47,9 +56,8 @@ public class TextBoxPage extends BasePage {
     }
 
     @Step("Fill in the 'Permanent Address' field with {0}")
-    public TextBoxPage fillPermanentAddressField(String address) {
+    public void fillPermanentAddressField(String address) {
         sendText(address, permanentAddressField);
-        return this;
     }
 
     @Step("Click the 'Submit' button")
@@ -57,9 +65,24 @@ public class TextBoxPage extends BasePage {
         click(submitButton);
     }
 
-    @Step("Get text from the output form")
-    public String getResultText() {
-        return getText(resultField);
+    @Step("Get the result text from results block")
+    public String getNameText() {
+        return getText(nameResult).split(":")[1].trim();
+    }
+
+    @Step("Get the email text from results block")
+    public String getEmailText() {
+        return getText(emailResult).split(":")[1].trim();
+    }
+
+    @Step("Get the current address text from results block")
+    public String getCurrentAddressText() {
+        return getText(currentAddressResult).split(":")[1].trim();
+    }
+
+    @Step("Get the permanent address text from results block")
+    public String getPermanentAddressText() {
+        return getText(permanentAddressResult).split(":")[1].trim();
     }
 
     @Step("Email field has red border")
