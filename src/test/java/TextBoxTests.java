@@ -1,5 +1,6 @@
 import basePages.BaseTest;
 import dataGenerator.DataUserGenerator;
+import dataGenerator.RandomStringGenerator;
 import io.qameta.allure.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -67,5 +68,26 @@ public class TextBoxTests extends BaseTest {
         Assert.assertEquals(textBoxPage.getEmailText(), userEmail, "User email is not correct");
         Assert.assertEquals(textBoxPage.getCurrentAddressText(), userCurrentAddress, "User current address is not correct");
         Assert.assertEquals(textBoxPage.getPermanentAddressText(), userPermanentAddress, "User permanent address is not correct");
+    }
+
+    @Owner("John Doe")
+    @Severity(SeverityLevel.NORMAL)
+    @TmsLink("TC-3")
+    @Story("Filling fields by random values")
+    @Test(description = "Using random data to fill the user's data fields")
+    public void fillFieldByInvalidEmail() {
+        TextBoxPage textBoxPage = new TextBoxPage();
+        RandomStringGenerator randomString = new RandomStringGenerator();
+        String invalidEmail = randomString.generateRandomString();
+
+        textBoxPage.open(getProperties().getProperty("url"));
+        textBoxPage.navigateTo(ELEMENTS);
+        textBoxPage.navigateToMenu(TEXT_BOX);
+
+        textBoxPage
+                .fillEmailField(invalidEmail);
+        textBoxPage.clickSubmitBtn();
+
+        Assert.assertTrue(textBoxPage.invalidEmailFieldIsDisplayed(), "The email field is not highlighted in red");
     }
 }

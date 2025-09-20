@@ -9,3 +9,4 @@
 5. Add a logger, can read logs from the console and from the file target/logs/log.out
 6. Add a retry mechanism for flaky tests
 7. Add a screenshot for failed tests
+8. Add a thread local for driver to make tests run in parallel
