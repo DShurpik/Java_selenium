@@ -90,4 +90,32 @@ public class TextBoxTests extends BaseTest {
 
         Assert.assertTrue(textBoxPage.invalidEmailFieldIsDisplayed(), "The email field is not highlighted in red");
     }
+
+    @Owner("John Doe")
+    @Severity(SeverityLevel.NORMAL)
+    @TmsLink("TC-4")
+    @Story("Filling fields with invalid email and changing it to valid values")
+    @Test(description = "Using invalid email to fill the user's data fields and then changing it to valid values")
+    public void fillFieldWithInvalidEmailAndChangeToValid() {
+        TextBoxPage textBoxPage = new TextBoxPage();
+        RandomStringGenerator randomString = new RandomStringGenerator();
+        String invalidEmail = randomString.generateRandomString();
+        DataUserGenerator user = new DataUserGenerator();
+        String validEmail = user.getEmail();
+
+        textBoxPage.open(getProperties().getProperty("url"));
+        textBoxPage.navigateTo(ELEMENTS);
+        textBoxPage.navigateToMenu(TEXT_BOX);
+
+        textBoxPage
+                .fillEmailField(invalidEmail);
+        textBoxPage.clickSubmitBtn();
+
+        Assert.assertTrue(textBoxPage.invalidEmailFieldIsDisplayed(), "The email field is not highlighted in red");
+
+        textBoxPage.fillEmailField(validEmail);
+        textBoxPage.clickSubmitBtn();
+
+        Assert.assertTrue(textBoxPage.getEmailText().contains(user.getEmail()), "User email is not correct");
+    }
 }
