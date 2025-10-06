@@ -1,7 +1,9 @@
 import basePages.BaseTest;
 import dataGenerator.DataUserGenerator;
 import dataGenerator.RandomStringGenerator;
+import dataGenerator.User;
 import io.qameta.allure.*;
+import org.instancio.Instancio;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.TextBoxPage;
@@ -117,5 +119,27 @@ public class TextBoxTests extends BaseTest {
         textBoxPage.clickSubmitBtn();
 
         Assert.assertTrue(textBoxPage.getEmailText().contains(user.getEmail()), "User email is not correct");
+    }
+
+    @Owner("John Doe")
+    @Severity(SeverityLevel.NORMAL)
+    @TmsLink("TC-5")
+    @Story("Filling fields using instancio library")
+    @Test(description = "Create user using instancio library to fill all fields")
+    public void fillFieldByInstancio() {
+        TextBoxPage textBoxPage = new TextBoxPage();
+        User user = new User().createUser();
+
+        textBoxPage.open(getProperties().getProperty("url"));
+        textBoxPage.navigateTo(ELEMENTS);
+        textBoxPage.navigateToMenu(TEXT_BOX);
+
+        textBoxPage.fillFields(user)
+                .clickSubmitBtn();
+
+        Assert.assertEquals(textBoxPage.getNameText(), user.getFullName(), "User name is not correct");
+        Assert.assertEquals(textBoxPage.getEmailText(), user.getEmail(), "User email is not correct");
+        Assert.assertEquals(textBoxPage.getCurrentAddressText(), user.getCurrentAddress(), "User current address is not correct");
+        Assert.assertEquals(textBoxPage.getPermanentAddressText(), user.getPermanentAddress(), "User permanent address is not correct");
     }
 }

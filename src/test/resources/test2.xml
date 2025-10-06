@@ -2,13 +2,12 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 
-<suite name="Test only one test">
-
-    <test name="One test from TextBoxTests">
+<suite name="Several threads test" thread-count="2" parallel="methods">
+    <test name="AlertTests with several threads">
         <classes>
             <class name="TextBoxTests">
                 <methods>
-                    <include name="fillFieldWithInvalidEmailAndChangeToValid"/>
+                    <include name="fillFieldByInstancio"/>
                 </methods>
             </class>
         </classes>
