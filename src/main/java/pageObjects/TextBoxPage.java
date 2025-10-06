@@ -1,6 +1,7 @@
 package pageObjects;
 
 import basePages.BasePage;
+import dataGenerator.User;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
@@ -46,6 +47,15 @@ public class TextBoxPage extends BasePage {
     @Step("Fill in the 'Email' field with {0}")
     public TextBoxPage fillEmailField(String email) {
         sendText(email, userEmailField);
+        return this;
+    }
+
+    @Step("22")
+    public TextBoxPage fillFields(User user) {
+        sendText(user.getFullName(), userNameField);
+        sendText(user.getEmail(), userEmailField);
+        sendText(user.getCurrentAddress(), currentAddressField);
+        sendText(user.getPermanentAddress(), permanentAddressField);
         return this;
     }
 
