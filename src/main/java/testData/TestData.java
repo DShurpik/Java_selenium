@@ -1,8 +1,45 @@
 package testData;
 
+import com.github.javafaker.Faker;
+import dataGenerator.UserBuilder;
 import org.testng.annotations.DataProvider;
 
+import static utils.PropertyReader.getProperties;
+
 public class TestData {
+
+    private static final Faker faker = new Faker();
+
+    @DataProvider(name = "User data for text box")
+    public static Object[][] getUserData() {
+
+
+        return new Object[][]{
+                {
+                        new UserBuilder()
+                                .withFullName(getProperties().getProperty("fullName"))
+                                .withEmail(getProperties().getProperty("email"))
+                                .withCurrentAddress(getProperties().getProperty("currentAddress"))
+                                .withPermanentAddress(getProperties().getProperty("permanentAddress"))
+                                .build()
+                },
+
+                {
+                        new UserBuilder()
+                                .withFullName(faker.name().fullName())
+                                .withEmail(faker.internet().emailAddress())
+                                .withCurrentAddress(faker.address().fullAddress())
+                                .withPermanentAddress(faker.address().fullAddress())
+                                .build()
+                },
+
+                {
+                        new UserBuilder().createUser()
+                }
+
+
+        };
+    }
 
     @DataProvider(name = "All values for test")
     public static Object[][] getTestData() {
@@ -29,7 +66,7 @@ public class TestData {
 
     @DataProvider(name = "Radio buttons")
     public static Object[][] getButtonsName() {
-        return new Object[][] {
+        return new Object[][]{
                 {"yesRadio", "Yes"},
                 {"impressiveRadio", "Impressive"}
         };
