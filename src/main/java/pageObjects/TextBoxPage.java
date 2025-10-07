@@ -1,12 +1,16 @@
 package pageObjects;
 
 import basePages.BasePage;
-import dataGenerator.User;
+import dataGenerator.UserBuilder;
+import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
+import io.qameta.allure.Param;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.*;
+
+import static io.qameta.allure.model.Parameter.Mode.HIDDEN;
 
 @Log4j2
 public class TextBoxPage extends BasePage {
@@ -50,8 +54,10 @@ public class TextBoxPage extends BasePage {
         return this;
     }
 
-    @Step("22")
-    public TextBoxPage fillFields(User user) {
+    @Step("Fill in all fields with user data")
+    public TextBoxPage fillFields(@Param(mode = HIDDEN) UserBuilder user) {
+        Allure.addAttachment("User data", "text/plain", user.toString());
+
         sendText(user.getFullName(), userNameField);
         sendText(user.getEmail(), userEmailField);
         sendText(user.getCurrentAddress(), currentAddressField);

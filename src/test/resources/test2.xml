@@ -7,7 +7,7 @@
         <classes>
             <class name="TextBoxTests">
                 <methods>
-                    <include name="fillFieldByInstancio"/>
+                    <include name="fillFieldsByDataProviderTest"/>
                 </methods>
             </class>
         </classes>
