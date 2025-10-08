@@ -36,13 +36,12 @@ public class TextBoxTests extends BaseTest {
 
     @Owner("John Doe")
     @Severity(SeverityLevel.NORMAL)
-    @TmsLink("TC-3")
-    @Story("Filling fields by random values")
-    @Test(description = "Using random data to fill the user's data fields")
-    public void fillFieldByInvalidEmail() {
+    @TmsLink("TC-2")
+    @Story("Filling email field by invalid values")
+    @Test(dataProviderClass = TestData.class, dataProvider = "Invalid emails",
+            description = "Filling email field by invalid values")
+    public void fillFieldByInvalidEmail(String invalidEmail) {
         TextBoxPage textBoxPage = new TextBoxPage();
-        RandomStringGenerator randomString = new RandomStringGenerator();
-        String invalidEmail = randomString.generateRandomString();
 
         textBoxPage.open(getProperties().getProperty("url"));
         textBoxPage.navigateTo(ELEMENTS);
