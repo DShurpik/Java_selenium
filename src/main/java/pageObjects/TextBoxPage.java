@@ -49,9 +49,8 @@ public class TextBoxPage extends BasePage {
     }
 
     @Step("Fill in the 'Email' field with {0}")
-    public TextBoxPage fillEmailField(String email) {
+    public void fillEmailField(String email) {
         sendText(email, userEmailField);
-        return this;
     }
 
     @Step("Fill in all fields with user data")

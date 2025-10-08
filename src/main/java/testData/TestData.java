@@ -41,6 +41,24 @@ public class TestData {
         };
     }
 
+    @DataProvider(name = "Invalid emails")
+    public static Object[][] getInvalidEmails() {
+        return new Object[][]{
+                {"user.mail.com"},
+                {"user@com"},
+                {"user@@gmail.com"},
+                {".user@gmail.com"},
+                {"user@gmail..com"},
+                {"user@gmail,com"},
+                {"user@gmail com"},
+                {"user@.gmail.com"},
+                {"user()@gmail.com"},
+                {"user@gmail.c"},
+                {"user@gmail#com"},
+                {"user@ gmail.com"}
+        };
+    }
+
     @DataProvider(name = "All values for test")
     public static Object[][] getTestData() {
         return new Object[][]{
