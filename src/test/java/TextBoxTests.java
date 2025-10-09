@@ -76,4 +76,5 @@ public class TextBoxTests extends BaseTest {
 
         Assert.assertTrue(textBoxPage.getEmailText().contains(validEmail), "User's email is not correct");
     }
+
 }
