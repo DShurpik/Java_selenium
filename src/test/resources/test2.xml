@@ -7,7 +7,7 @@
         <classes>
             <class name="TextBoxTests">
                 <methods>
-                    <include name="fillFieldByInvalidEmail"/>
+                    <include name="fillFieldWithInvalidEmailAndChangeToValid"/>
                 </methods>
             </class>
         </classes>

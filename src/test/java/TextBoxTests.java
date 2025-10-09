@@ -9,19 +9,18 @@ import pageObjects.TextBoxPage;
 import testData.TestData;
 
 import static pageObjects.Navigation.*;
-import static utils.PropertyReader.getProperties;
 
 public class TextBoxTests extends BaseTest {
 
     @Owner("John Doe")
     @Severity(SeverityLevel.NORMAL)
-    @TmsLink("TC-1")
+    @TmsLink("FORM-TC-001")
     @Story("Filling fields using different ways to create user")
     @Test(dataProviderClass = TestData.class, dataProvider = "User data for text box",
             description = "Filling fields using different ways to create user")
     public void fillFieldsByDataProviderTest(UserBuilder user) {
         TextBoxPage textBoxPage = new TextBoxPage();
-        textBoxPage.open(getProperties().getProperty("url"));
+        textBoxPage.open();
         textBoxPage.navigateTo(ELEMENTS);
         textBoxPage.navigateToMenu(TEXT_BOX);
 
@@ -36,14 +35,14 @@ public class TextBoxTests extends BaseTest {
 
     @Owner("John Doe")
     @Severity(SeverityLevel.NORMAL)
-    @TmsLink("TC-2")
+    @TmsLink("FORM-TC-002")
     @Story("Filling email field by invalid values")
     @Test(dataProviderClass = TestData.class, dataProvider = "Invalid emails",
             description = "Filling email field by invalid values")
     public void fillFieldByInvalidEmail(String invalidEmail) {
         TextBoxPage textBoxPage = new TextBoxPage();
 
-        textBoxPage.open(getProperties().getProperty("url"));
+        textBoxPage.open();
         textBoxPage.navigateTo(ELEMENTS);
         textBoxPage.navigateToMenu(TEXT_BOX);
 
@@ -61,12 +60,10 @@ public class TextBoxTests extends BaseTest {
     @Test(description = "Using invalid email to fill the user's data fields and then changing it to valid values")
     public void fillFieldWithInvalidEmailAndChangeToValid() {
         TextBoxPage textBoxPage = new TextBoxPage();
-        RandomStringGenerator randomString = new RandomStringGenerator();
-        String invalidEmail = randomString.generateRandomString();
-        DataUserGenerator user = new DataUserGenerator();
-        String validEmail = user.getEmail();
+        String invalidEmail = new RandomStringGenerator().generateRandomString();
+        String validEmail = new DataUserGenerator().getEmail();
 
-        textBoxPage.open(getProperties().getProperty("url"));
+        textBoxPage.open();
         textBoxPage.navigateTo(ELEMENTS);
         textBoxPage.navigateToMenu(TEXT_BOX);
 
@@ -79,6 +76,6 @@ public class TextBoxTests extends BaseTest {
         textBoxPage.fillEmailField(validEmail);
         textBoxPage.clickSubmitBtn();
 
-        Assert.assertTrue(textBoxPage.getEmailText().contains(user.getEmail()), "User email is not correct");
+        Assert.assertTrue(textBoxPage.getEmailText().contains(validEmail), "User email is not correct");
     }
 }
