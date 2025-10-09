@@ -55,7 +55,7 @@ public class TextBoxTests extends BaseTest {
 
     @Owner("John Doe")
     @Severity(SeverityLevel.NORMAL)
-    @TmsLink("TC-4")
+    @TmsLink("FORM-TC-003")
     @Story("Filling fields with invalid email and changing it to valid values")
     @Test(description = "Using invalid email to fill the user's data fields and then changing it to valid values")
     public void fillFieldWithInvalidEmailAndChangeToValid() {
