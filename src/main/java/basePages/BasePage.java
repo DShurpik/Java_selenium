@@ -1,7 +1,7 @@
 package basePages;
 
 import driver.DriverManager;
-import io.qameta.allure.Step;
+import io.qameta.allure.*;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -47,6 +47,14 @@ public abstract class BasePage {
     @Step("Open website with {0} address")
     public void open(String url) {
         log.info("Open page: {}", url);
+        driver.get(url);
+    }
+
+    @Step("Open website")
+    public void open() {
+        String url = properties.getProperty("url");
+        log.info("Open page: {}", url);
+        Allure.step("Opening URL: " + url);
         driver.get(url);
     }
 
