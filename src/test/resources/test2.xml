@@ -2,12 +2,12 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 
-<suite name="Several threads test" thread-count="2" parallel="methods">
-    <test name="AlertTests with several threads">
+<suite name="Test run" parallel="methods">
+    <test name="One test run">
         <classes>
-            <class name="TextBoxTests">
+            <class name="CheckBoxTests">
                 <methods>
-                    <include name="fillFieldWithInvalidEmailAndChangeToValid"/>
+                    <include name="clickCheckboxRandomly"/>
                 </methods>
             </class>
         </classes>

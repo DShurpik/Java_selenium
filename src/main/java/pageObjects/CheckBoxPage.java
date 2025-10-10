@@ -1,6 +1,7 @@
 package pageObjects;
 
 import basePages.BasePage;
+import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.*;
@@ -33,6 +34,8 @@ public class CheckBoxPage extends BasePage {
         List<WebElement> itemList = driver.findElements(items);
         Random random = new Random();
         WebElement item = itemList.get(random.nextInt(itemList.size()));
+        log.info(item.getText() + " was clicked");
+        Allure.addAttachment("Item was clicked", item.getText());
         item.click();
     }
 
@@ -52,7 +55,8 @@ public class CheckBoxPage extends BasePage {
                     .replaceAll("doc", "")
                     .replaceAll("\\.", ""));
         }
-        log.info("Get checked checkboxes name");
+        log.info("Get checked checkboxes name: " + str);
+        Allure.attachment("Checked checkboxes", str.toString());
         return str.toString();
     }
 
@@ -71,7 +75,8 @@ public class CheckBoxPage extends BasePage {
                     .replaceAll("doc", "")
                     .replaceAll("\\.", ""));
         }
-        log.info("Get output string with values");
+        log.info("Get output string with values: " + str);
+        Allure.attachment("Output result", str.toString());
         return str.toString();
     }
 

@@ -16,23 +16,6 @@ public class ElementsTests extends BaseTest {
 
     @Owner("John Doe")
     @Severity(SeverityLevel.NORMAL)
-    @TmsLink("TC-3")
-    @Story("Click checkbox randomly, and check result")
-    @Test(description = "Click checkbox randomly, and check result")
-    public void clickCheckboxRandomly() {
-        CheckBoxPage checkBoxPage = new CheckBoxPage();
-        checkBoxPage.open(getProperties().getProperty("url"));
-        checkBoxPage.navigateTo(ELEMENTS);
-        checkBoxPage.navigateToMenu(CHECK_BOX);
-
-        checkBoxPage.clickExpandAllBtn();
-        checkBoxPage.clickRandomItem();
-
-        Assert.assertEquals(checkBoxPage.getCheckedCheckBoxes(), checkBoxPage.getOutputResult());
-    }
-
-    @Owner("John Doe")
-    @Severity(SeverityLevel.NORMAL)
     @TmsLink("TC-4")
     @Story("Click a define checkbox and check result")
     @Test(description = "Click a define checkbox and check result",
