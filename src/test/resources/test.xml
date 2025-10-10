@@ -9,6 +9,7 @@
     <test name="Test all methods from TextBoxTests">
         <classes>
             <class name="TextBoxTests"/>
+            <class name="CheckBoxTests"/>
         </classes>
     </test>
 </suite>
