@@ -3,11 +3,14 @@
 
 
 <suite name="Test run" parallel="methods">
+    <listeners>
+        <listener class-name="utils.RetryTransformer"/>
+    </listeners>
     <test name="One test run">
         <classes>
             <class name="CheckBoxTests">
                 <methods>
-                    <include name="clickCheckboxRandomly"/>
+                    <include name="defineCheckBoxTest"/>
                 </methods>
             </class>
         </classes>

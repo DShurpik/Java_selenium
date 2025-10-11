@@ -16,24 +16,6 @@ public class ElementsTests extends BaseTest {
 
     @Owner("John Doe")
     @Severity(SeverityLevel.NORMAL)
-    @TmsLink("TC-4")
-    @Story("Click a define checkbox and check result")
-    @Test(description = "Click a define checkbox and check result",
-            dataProviderClass = TestData.class,
-            dataProvider = "All values for test")
-    public void defineCheckBoxTest(String checkBoxName, String expectedResult) {
-        CheckBoxPage checkBoxPage = new CheckBoxPage();
-        checkBoxPage.open(getProperties().getProperty("url"));
-        checkBoxPage.navigateTo(ELEMENTS);
-        checkBoxPage.navigateToMenu(CHECK_BOX);
-
-        checkBoxPage.clickExpandAllBtn();
-        checkBoxPage.clickCheckboxName(checkBoxName);
-        Assert.assertEquals(checkBoxPage.getExpectedResult(), expectedResult);
-    }
-
-    @Owner("John Doe")
-    @Severity(SeverityLevel.NORMAL)
     @TmsLink("TC-5")
     @Story("Radio buttons check")
     @Test(description = "Check radio button work",
