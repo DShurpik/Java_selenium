@@ -1,0 +1,4 @@
+FullName = Donald Duck
+Email = vio5@9.com
+CurrentAddress = New-York
+PermanentAddress = London
