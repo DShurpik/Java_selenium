@@ -1,0 +1,4 @@
+FullName = Ms. So Fritsch
+Email = lekisha.abshire@gmail.com
+CurrentAddress = 5786 Qiana Shores, Ruthemouth, FL 39170-6375
+PermanentAddress = Apt. 081 89622 Batz Lock, South Fernandehaven, TN 59674
