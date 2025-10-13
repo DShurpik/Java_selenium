@@ -8,9 +8,10 @@
     </listeners>
     <test name="One test run">
         <classes>
-            <class name="CheckBoxTests">
+            <class name="RadioButtonTests">
                 <methods>
-                    <include name="defineCheckBoxTest"/>
+                    <include name="radioButtonTest"/>
+                    <include name="radioButtonNoTest"/>
                 </methods>
             </class>
         </classes>

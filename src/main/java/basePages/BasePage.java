@@ -65,13 +65,22 @@ public abstract class BasePage {
         webElement.sendKeys(string);
     }
 
-    protected void click(By by) {
+    protected void click(Object locator) {
         int attempts = 0;
-        while (attempts < 3) {
+        int maxAttempts = 3;
+        while (attempts < maxAttempts) {
             try {
-                log.info("Attempt #{} to click on element: {}", attempts + 1, by);
-                WebElement element = wait.until(ExpectedConditions.refreshed(
-                        ExpectedConditions.elementToBeClickable(by)));
+                log.info("Attempt #{} to click on element: {}", attempts + 1, locator.toString());
+                WebElement element;
+                if (locator instanceof By) {
+                    element = wait.until(ExpectedConditions.refreshed(
+                            ExpectedConditions.elementToBeClickable((By) locator)));
+                } else if (locator instanceof WebElement) {
+                    element = wait.until(ExpectedConditions.refreshed(
+                            ExpectedConditions.elementToBeClickable((WebElement) locator)));
+                } else {
+                    throw new IllegalArgumentException("Locator must be of type By or WebElement, but was: " + locator.getClass().getSimpleName());
+                }
                 element.click();
                 return;
             } catch (StaleElementReferenceException | ElementClickInterceptedException e) {
@@ -83,7 +92,7 @@ public abstract class BasePage {
             attempts++;
         }
 
-        log.error("Failed to click on element after {} attempts: {}", attempts, by);
+        log.error("Failed to click on element after {} attempts: {}", attempts, locator.toString());
     }
 
     protected String getText(WebElement webElement) {

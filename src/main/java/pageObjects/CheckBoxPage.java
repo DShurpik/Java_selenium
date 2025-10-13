@@ -25,18 +25,18 @@ public class CheckBoxPage extends BasePage {
     @Step("Click on expand all button")
     public void clickExpandAllBtn() {
         log.info("Click on expand all button");
-        expandAllBtn.click();
+        click(expandAllBtn);
     }
 
     @Step("Click a random item")
     public void clickRandomItem() {
-        log.info("Click on an item randomly");
+        log.info("Click randomly on an item ");
         List<WebElement> itemList = driver.findElements(items);
         Random random = new Random();
         WebElement item = itemList.get(random.nextInt(itemList.size()));
         log.info(item.getText() + " was clicked");
         Allure.addAttachment("Item was clicked", item.getText());
-        item.click();
+        click(item);
     }
 
     @Step("Get checked checkboxes name")
