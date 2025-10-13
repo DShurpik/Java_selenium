@@ -10,6 +10,7 @@
         <classes>
             <class name="TextBoxTests"/>
             <class name="CheckBoxTests"/>
+            <class name="RadioButtonTests"/>
         </classes>
     </test>
 </suite>

@@ -1,7 +1,7 @@
 package pageObjects;
 
 import basePages.BasePage;
-import io.qameta.allure.Step;
+import io.qameta.allure.*;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.*;
@@ -24,11 +24,13 @@ public class RadioButtonPage extends BasePage {
     @Step("Get result from result field")
     public String getResult() {
         log.info("Get result from result field");
+        Allure.addAttachment("Field's value", "You have selected " + resultField.getText());
         return resultField.getText();
     }
 
     @Step("Check, that No radio button is enabled")
     public boolean noBtnIsEnabled() {
+        log.info("Check, that No radio button is enabled = " + noBtn.isEnabled());
         return noBtn.isEnabled();
     }
 }

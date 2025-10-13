@@ -16,38 +16,6 @@ public class ElementsTests extends BaseTest {
 
     @Owner("John Doe")
     @Severity(SeverityLevel.NORMAL)
-    @TmsLink("TC-5")
-    @Story("Radio buttons check")
-    @Test(description = "Check radio button work",
-            dataProviderClass = TestData.class,
-            dataProvider = "Radio buttons")
-    public void radioButtonTest(String buttonName, String expectedResult) {
-        RadioButtonPage radioButtonPage = new RadioButtonPage();
-        radioButtonPage.open(getProperties().getProperty("url"));
-        radioButtonPage.navigateTo(ELEMENTS);
-        radioButtonPage.navigateToMenu(RADIO_BUTTON);
-
-        radioButtonPage.click(buttonName);
-
-        Assert.assertEquals(radioButtonPage.getResult(), expectedResult);
-    }
-
-    @Owner("John Doe")
-    @Severity(SeverityLevel.NORMAL)
-    @TmsLink("TC-6")
-    @Story("No radio button check")
-    @Test(description = "Check No radio button isDisabled")
-    public void radioButtonNoTest() {
-        RadioButtonPage radioButtonPage = new RadioButtonPage();
-        radioButtonPage.open(getProperties().getProperty("url"));
-        radioButtonPage.navigateTo(ELEMENTS);
-        radioButtonPage.navigateToMenu(RADIO_BUTTON);
-
-        Assert.assertFalse(radioButtonPage.noBtnIsEnabled());
-    }
-
-    @Owner("John Doe")
-    @Severity(SeverityLevel.NORMAL)
     @TmsLink("TC-7")
     @Story("Delete a user from table")
     @Test(description = "After deleting user, count of lines equals 2")
@@ -401,7 +369,7 @@ public class ElementsTests extends BaseTest {
         brokenLinksPage.navigateToMenu(BROKEN_LINKS);
 
         brokenLinksPage.validLinkClick();
-        Assert.assertEquals(brokenLinksPage.googleTitle(),"Google");
+        Assert.assertEquals(brokenLinksPage.googleTitle(), "Google");
     }
 
     @Owner("John Doe")
