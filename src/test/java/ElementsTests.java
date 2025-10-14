@@ -16,48 +16,6 @@ public class ElementsTests extends BaseTest {
 
     @Owner("John Doe")
     @Severity(SeverityLevel.NORMAL)
-    @TmsLink("TC-7")
-    @Story("Delete a user from table")
-    @Test(description = "After deleting user, count of lines equals 2")
-    public void deleteUserTableTest() {
-        WebTablePage webTablePage = new WebTablePage();
-        webTablePage.open(getProperties().getProperty("url"));
-        webTablePage.navigateTo(ELEMENTS);
-        webTablePage.navigateToMenu(WEB_TABLES);
-
-        webTablePage.clickDeleteBtn();
-
-        Assert.assertEquals(webTablePage.getPersonsList().size(), 2);
-    }
-
-    @Owner("John Doe")
-    @Severity(SeverityLevel.NORMAL)
-    @TmsLink("TC-8")
-    @Story("Add a new user")
-    @Test(description = "Add a new user in table and check it")
-    public void addUserTableTest() {
-        WebTablePage webTablePage = new WebTablePage();
-        DataUserGenerator user = new DataUserGenerator();
-
-        webTablePage.open(getProperties().getProperty("url"));
-        webTablePage.navigateTo(ELEMENTS);
-        webTablePage.navigateToMenu(WEB_TABLES);
-
-        webTablePage.clickAddNewPersonBtn();
-        webTablePage.fillForm(TableUser.builder()
-                .firstName(user.getName())
-                .lastName(user.getLastName())
-                .age(user.getAge())
-                .email(user.getEmail())
-                .salary(user.getSalary())
-                .department(user.getDepartment())
-                .build());
-
-        Assert.assertTrue(webTablePage.checkPersonAdded(webTablePage.getPersonsList(), user));
-    }
-
-    @Owner("John Doe")
-    @Severity(SeverityLevel.NORMAL)
     @TmsLink("TC-9")
     @Story("Add a new user and check him in searh")
     @Test(description = "Add a new user in table and check him in search")

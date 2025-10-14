@@ -11,6 +11,7 @@
             <class name="TextBoxTests"/>
             <class name="CheckBoxTests"/>
             <class name="RadioButtonTests"/>
+            <class name="WebTableTests"/>
         </classes>
     </test>
 </suite>
