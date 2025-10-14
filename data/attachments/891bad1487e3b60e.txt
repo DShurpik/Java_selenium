@@ -1,0 +1,4 @@
+FullName = John Doe
+Email = 2vnmbyjx9@1xx9i7.net
+CurrentAddress = London
+PermanentAddress = New-York

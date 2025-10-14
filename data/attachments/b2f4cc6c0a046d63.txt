@@ -1,0 +1,4 @@
+FullName = Mr. Earleen Kreiger
+Email = cleveland.runolfsdottir@hotmail.com
+CurrentAddress = 2864 Luettgen Points, Lake Timothy, KY 10878-9917
+PermanentAddress = Suite 455 71995 Camila Field, Kleinville, MO 06340
