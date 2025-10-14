@@ -7,8 +7,8 @@ import models.ResponseData;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.devtools.DevTools;
-import org.openqa.selenium.devtools.v136.network.Network;
-import org.openqa.selenium.devtools.v136.network.model.Request;
+import org.openqa.selenium.devtools.v140.network.Network;
+import org.openqa.selenium.devtools.v140.network.model.Request;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import com.google.gson.Gson;
@@ -53,13 +53,15 @@ public class LinksPage extends BasePage {
         try {
             // Создаём сессию DevTools
             devTools.createSession();
-
+    /**
             // Включаем перехват сетевых запросов
             devTools.send(Network.enable(
                     Optional.of(1000000), // Максимальный размер буфера запросов (1 МБ)
                     Optional.of(1000000), // Максимальный размер ответа
                     Optional.empty()));  // Без фильтров
             log.info("Network interceptor enabled.");
+
+     */
         } catch (Exception e) {
             System.err.println("Ошибка при включении перехвата сетевых запросов: " + e.getMessage());
             e.printStackTrace();

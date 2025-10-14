@@ -51,44 +51,34 @@ public class WebTablePage extends BasePage {
 
     @Step("Click add new person button")
     public void clickAddNewPersonBtn() {
-        log.info("Click add new person button");
-        addNewPersonBtn.click();
+        click(addNewPersonBtn);
     }
 
     @Step("Click submit button")
     public void clickSubmitBtn() {
-        log.info("Click submit button");
-        submitBtn.click();
+        click(submitBtn);
     }
 
     @Step("Fill a new user's data with {0}")
     public void fillForm(TableUser userData) {
         log.info("Fill user data with values {}", userData.toString());
-        firstNameField.clear();
-        firstNameField.sendKeys(userData.getFirstName());
-        lastNameField.clear();
-        lastNameField.sendKeys(userData.getLastName());
-        emailField.clear();
-        emailField.sendKeys(userData.getEmail());
-        ageField.clear();
-        ageField.sendKeys(Integer.toString(userData.getAge()));
-        salaryField.clear();
-        salaryField.sendKeys(Integer.toString(userData.getSalary()));
-        departmentField.clear();
-        departmentField.sendKeys(userData.getDepartment());
+        sendText(userData.getFirstName(), firstNameField);
+        sendText(userData.getLastName(), lastNameField);
+        sendText(userData.getEmail(), emailField);
+        sendText(Integer.toString(userData.getAge()), ageField);
+        sendText(Integer.toString(userData.getSalary()), salaryField);
+        sendText(userData.getDepartment(), departmentField);
         clickSubmitBtn();
     }
 
     @Step("Click delete button")
     public void clickDeleteBtn() {
-        log.info("Click delete button");
-        deleteBtn.click();
+        click(deleteBtn);
     }
 
     @Step("Click edit user button")
     public void clickEditBtn() {
-        log.info("Click edit button");
-        editUserBtn.click();
+        click(editUserBtn);
     }
 
     @Step("Fill field search")

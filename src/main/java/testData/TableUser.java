@@ -2,9 +2,11 @@ package testData;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.With;
 
 @Data
 @Builder
+@With
 public class TableUser {
     private String firstName;
     private String lastName;
