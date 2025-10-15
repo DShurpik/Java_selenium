@@ -1,68 +1,25 @@
 package dataGenerator;
 
 import com.github.javafaker.Faker;
+import lombok.Getter;
 
+@Getter
 public class DataUserGenerator {
 
     Faker faker = new Faker();
 
-    private final String fullName;
-    private final String email;
-    private final String currentAddress;
-    private final String permanentAddress;
 
-    private final String name;
-    private final String lastName;
-    private final int age;
-    private final int salary;
-    private final String department;
+    // Data for Text Box tests
+    private final String fullName = faker.name().fullName();
+    private final String email = faker.internet().emailAddress();
+    private final String currentAddress = faker.address().fullAddress();
+    private final String permanentAddress = faker.address().fullAddress();
 
 
-    public DataUserGenerator() {
-        this.fullName = faker.name().fullName();
-        this.email = faker.internet().emailAddress();
-        this.currentAddress = faker.address().fullAddress();
-        this.permanentAddress = faker.address().fullAddress();
-        this.name = faker.name().name();
-        this.lastName = faker.name().lastName();
-        this.age = faker.number().numberBetween(18, 65);
-        this.salary = faker.number().numberBetween(2000, 200000);
-        this.department = faker.job().position();
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getCurrentAddress() {
-        return currentAddress;
-    }
-
-    public String getPermanentAddress() {
-        return permanentAddress;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public int getSalary() {
-        return salary;
-    }
-
-    public String getDepartment() {
-        return department;
-    }
+    // Data for Web Table tests
+    private final String name = faker.name().firstName();
+    private final String lastName = faker.name().lastName();
+    private final int age = faker.number().numberBetween(18, 65);
+    private final int salary = faker.number().numberBetween(1000, 200000);
+    private final String department = faker.job().position();
 }

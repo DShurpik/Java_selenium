@@ -6,8 +6,7 @@ import org.testng.annotations.Test;
 import pageObjects.WebTablePage;
 import testData.TableUser;
 
-import static pageObjects.Navigation.ELEMENTS;
-import static pageObjects.Navigation.WEB_TABLES;
+import static pageObjects.Navigation.*;
 
 public class WebTableTests extends BaseTest {
 
@@ -22,9 +21,11 @@ public class WebTableTests extends BaseTest {
         webTablePage.navigateTo(ELEMENTS);
         webTablePage.navigateToMenu(WEB_TABLES);
 
+        int tableSize = webTablePage.getPersonsList().size();
+
         webTablePage.clickDeleteBtn();
 
-        Assert.assertEquals(webTablePage.getPersonsList().size(), 2);
+        Assert.assertEquals(webTablePage.getPersonsList().size(), tableSize - 1);
     }
 
     @Owner("John Doe")
@@ -34,7 +35,7 @@ public class WebTableTests extends BaseTest {
     @Test(description = "Add a new user in table and check it")
     public void addUserTableTest() {
         WebTablePage webTablePage = new WebTablePage();
-        DataUserGenerator user = new DataUserGenerator();
+        TableUser user = TableUser.fromDataGenerator(new DataUserGenerator());
 
         webTablePage.open();
         webTablePage.navigateTo(ELEMENTS);
@@ -42,14 +43,30 @@ public class WebTableTests extends BaseTest {
 
         webTablePage.clickAddNewPersonBtn();
 
-        webTablePage.fillForm(TableUser.builder().build()
-                .withFirstName(user.getName())
-                .withLastName(user.getLastName())
-                .withAge(user.getAge())
-                .withEmail(user.getEmail())
-                .withSalary(user.getSalary())
-                .withDepartment(user.getDepartment()));
+        webTablePage.fillForm(user);
 
         Assert.assertTrue(webTablePage.checkPersonAdded(webTablePage.getPersonsList(), user));
+    }
+
+    @Owner("John Doe")
+    @Severity(SeverityLevel.NORMAL)
+    @TmsLink("FORM-TC-010")
+    @Story("Add a new user and check him in search")
+    @Test(description = "Add a new user in table and check him in search")
+    public void searchTableTest() {
+        WebTablePage webTablePage = new WebTablePage();
+        TableUser user = TableUser.fromDataGenerator(new DataUserGenerator());
+
+        webTablePage.open();
+        webTablePage.navigateTo(ELEMENTS);
+        webTablePage.navigateToMenu(WEB_TABLES);
+
+        webTablePage.clickAddNewPersonBtn();
+        webTablePage.fillForm(user);
+
+        webTablePage.search(user);
+
+        Assert.assertTrue(webTablePage.checkPersonAdded(webTablePage.getPersonsList(), user));
+        Assert.assertEquals(webTablePage.getPersonsList().size(), 1);
     }
 }

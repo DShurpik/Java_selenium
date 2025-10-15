@@ -1,7 +1,6 @@
 package pageObjects;
 
 import basePages.BasePage;
-import dataGenerator.DataUserGenerator;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
@@ -14,28 +13,28 @@ import java.util.*;
 @Log4j2
 public class WebTablePage extends BasePage {
 
-    @FindBy(id = "addNewRecordButton")
+    @FindBy(xpath = "//button[text()='Add' and @class='btn btn-primary']")
     private WebElement addNewPersonBtn;
 
-    @FindBy(id = "firstName")
+    @FindBy(xpath = "//input[@placeholder='First Name' and @class=' mr-sm-2 form-control']")
     private WebElement firstNameField;
 
-    @FindBy(id = "lastName")
+    @FindBy(xpath = "//input[@placeholder='Last Name' and @class=' mr-sm-2 form-control']")
     private WebElement lastNameField;
 
-    @FindBy(id = "userEmail")
+    @FindBy(xpath = "//input[@placeholder='name@example.com' and @class='mr-sm-2 form-control']")
     private WebElement emailField;
 
-    @FindBy(id = "age")
+    @FindBy(xpath = "//input[@placeholder='Age' and @class=' mr-sm-2 form-control']")
     private WebElement ageField;
 
-    @FindBy(id = "salary")
+    @FindBy(xpath = "//input[@placeholder='Salary' and @class=' mr-sm-2 form-control']")
     private WebElement salaryField;
 
-    @FindBy(id = "department")
+    @FindBy(xpath = "//input[@placeholder='Department' and @class=' mr-sm-2 form-control']")
     private WebElement departmentField;
 
-    @FindBy(id = "submit")
+    @FindBy(xpath = "//button[@class='btn btn-primary' and text()='Submit']")
     private WebElement submitBtn;
 
     @FindBy(xpath = "//input[@id='searchBox']")
@@ -62,7 +61,7 @@ public class WebTablePage extends BasePage {
     @Step("Fill a new user's data with {0}")
     public void fillForm(TableUser userData) {
         log.info("Fill user data with values {}", userData.toString());
-        sendText(userData.getFirstName(), firstNameField);
+        sendText(userData.getName(), firstNameField);
         sendText(userData.getLastName(), lastNameField);
         sendText(userData.getEmail(), emailField);
         sendText(Integer.toString(userData.getAge()), ageField);
@@ -84,14 +83,15 @@ public class WebTablePage extends BasePage {
     @Step("Fill field search")
     public void search(TableUser userData) {
         wait.until(driver -> getPersonsList().stream()
-                .anyMatch(row -> row.contains(userData.getFirstName()) &&
+                .anyMatch(row ->
+                        row.contains(userData.getName()) &&
                         row.contains(userData.getLastName()) &&
                         row.contains(userData.getEmail()) &&
                         row.contains(String.valueOf(userData.getAge())) &&
                         row.contains(String.valueOf(userData.getSalary())) &&
                         row.contains(userData.getDepartment())));
         log.info("Fill field search");
-        searchBoxField.sendKeys(userData.getFirstName());
+        searchBoxField.sendKeys(userData.getName());
     }
 
     @Step("Get list of users")
@@ -110,7 +110,7 @@ public class WebTablePage extends BasePage {
     }
 
     @Step("Check that a user has been added to table {0}")
-    public boolean checkPersonAdded(List<List<String>> userList, DataUserGenerator user) {
+    public boolean checkPersonAdded(List<List<String>> userList, TableUser user) {
         boolean userFound = false;
         for (List<String> userData : userList) {
             if (userData.contains(user.getName())

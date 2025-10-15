@@ -1,10 +1,12 @@
 package dataGenerator;
 
+import lombok.Getter;
 import org.instancio.Instancio;
 import org.instancio.Select;
 
 import java.util.List;
 
+@Getter
 public class UserBuilder {
     private String fullName;
     private String email;
@@ -23,68 +25,46 @@ public class UserBuilder {
                 .generate(Select.field(UserBuilder::getCurrentAddress), gen -> gen.oneOf(currentAddressList))
                 .generate(Select.field(UserBuilder::getPermanentAddress), gen -> gen.oneOf(permanentAddressList))
                 .create();
-
     }
 
-    public UserBuilder withFullName(String fullName) {
-        this.fullName = fullName;
-        return this;
+    public UserBuilder() {}
+
+    public UserBuilder(Builder builder) {
+        this.fullName = builder.fullName;
+        this.email = builder.email;
+        this.currentAddress = builder.currentAddress;
+        this.permanentAddress = builder.permanentAddress;
     }
 
-    public UserBuilder withEmail(String email) {
-        this.email = email;
-        return this;
-    }
+    public static class Builder {
+        private String fullName;
+        private String email;
+        private String currentAddress;
+        private String permanentAddress;
 
-    public UserBuilder withCurrentAddress(String currentAddress) {
-        this.currentAddress = currentAddress;
-        return this;
-    }
+        public Builder withFullName(String fullName) {
+            this.fullName = fullName;
+            return this;
+        }
 
-    public UserBuilder withPermanentAddress(String permanentAddress) {
-        this.permanentAddress = permanentAddress;
-        return this;
-    }
+        public Builder withEmail(String email) {
+            this.email = email;
+            return this;
+        }
 
-    public UserBuilder build() {
-        UserBuilder user = new UserBuilder();
-        user.setFullName(fullName);
-        user.setEmail(email);
-        user.setCurrentAddress(currentAddress);
-        user.setPermanentAddress(permanentAddress);
-        return user;
-    }
+        public Builder withCurrentAddress(String currentAddress) {
+            this.currentAddress = currentAddress;
+            return this;
+        }
 
-    public String getFullName() {
-        return fullName;
-    }
+        public Builder withPermanentAddress(String permanentAddress) {
+            this.permanentAddress = permanentAddress;
+            return this;
+        }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getCurrentAddress() {
-        return currentAddress;
-    }
-
-    public void setCurrentAddress(String currentAddress) {
-        this.currentAddress = currentAddress;
-    }
-
-    public String getPermanentAddress() {
-        return permanentAddress;
-    }
-
-    public void setPermanentAddress(String permanentAddress) {
-        this.permanentAddress = permanentAddress;
+        public UserBuilder build() {
+            return new UserBuilder(this);
+        }
     }
 
     @Override
