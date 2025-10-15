@@ -1,17 +1,33 @@
 package testData;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.With;
+import dataGenerator.DataUserGenerator;
+import lombok.*;
 
-@Data
+@Getter
 @Builder
-@With
 public class TableUser {
-    private String firstName;
-    private String lastName;
-    private String email;
-    private int age;
-    private int salary;
-    private String department;
+
+    private final String name;
+    private final String lastName;
+    private final String email;
+    private final int age;
+    private final int salary;
+    private final String department;
+
+    public static TableUser fromDataGenerator(DataUserGenerator generator) {
+        return TableUser.builder()
+                .name(generator.getName())
+                .lastName(generator.getLastName())
+                .email(generator.getEmail())
+                .age(generator.getAge())
+                .salary(generator.getSalary())
+                .department(generator.getDepartment())
+                .build();
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Name = %s%nLast name = %s%nEmail = %s%nAge=%d%nSalary=%d%nDepartment=%s",
+                name, lastName, email, age, salary, department);
+    }
 }

@@ -16,7 +16,7 @@ public class TestData {
 
         return new Object[][]{
                 {
-                        new UserBuilder()
+                        new UserBuilder.Builder()
                                 .withFullName(getProperties().getProperty("fullName"))
                                 .withEmail(getProperties().getProperty("email"))
                                 .withCurrentAddress(getProperties().getProperty("currentAddress"))
@@ -25,7 +25,7 @@ public class TestData {
                 },
 
                 {
-                        new UserBuilder()
+                        new UserBuilder.Builder()
                                 .withFullName(faker.name().fullName())
                                 .withEmail(faker.internet().emailAddress())
                                 .withCurrentAddress(faker.address().fullAddress())
@@ -36,8 +36,6 @@ public class TestData {
                 {
                         new UserBuilder().createUser()
                 }
-
-
         };
     }
 
