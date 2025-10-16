@@ -10,7 +10,7 @@
         <classes>
             <class name="WebTableTests">
                 <methods>
-                    <include name="searchTableTest"/>
+                    <include name="addUserTableFromExcelTest"/>
                 </methods>
             </class>
         </classes>

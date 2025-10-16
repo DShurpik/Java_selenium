@@ -6,6 +6,8 @@ import org.instancio.Select;
 
 import java.util.List;
 
+import static testData.ExcelDataLoader.readExcelData;
+
 @Getter
 public class UserBuilder {
     private String fullName;
@@ -13,15 +15,15 @@ public class UserBuilder {
     private String currentAddress;
     private String permanentAddress;
 
-    List<String> names = List.of("John Doe", "Jack Daniels", "Donald Duck", "Elon Mask", "Jeremy Clarkson");
-    //List<String> domains = List.of("gmail.com", "yahoo.com", "hotmail.com", "aol.com", "msn.com");
-    List<String> currentAddressList = List.of("London", "New-York", "Washington D.C.", "Paris", "Rome");
-    List<String> permanentAddressList = List.of("London", "New-York", "Washington D.C.", "Paris", "Rome");
+    List<String> names = readExcelData("src/test/resources/test_sheet.xlsx", 1, 0);
+    List<String> domains = readExcelData("src/test/resources/test_sheet.xlsx", 1, 1);
+    List<String> currentAddressList = readExcelData("src/test/resources/test_sheet.xlsx", 1, 2);
+    List<String> permanentAddressList = readExcelData("src/test/resources/test_sheet.xlsx", 1, 3);
 
     public UserBuilder createUser() {
         return Instancio.of(UserBuilder.class)
                 .generate(Select.field(UserBuilder::getFullName), gen -> gen.oneOf(names))
-                .generate(Select.field(UserBuilder::getEmail), gen -> gen.net().email())
+                .generate(Select.field(UserBuilder::getEmail), gen -> gen.oneOf(domains))
                 .generate(Select.field(UserBuilder::getCurrentAddress), gen -> gen.oneOf(currentAddressList))
                 .generate(Select.field(UserBuilder::getPermanentAddress), gen -> gen.oneOf(permanentAddressList))
                 .create();
