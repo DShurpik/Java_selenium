@@ -5,6 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.WebTablePage;
 import testData.TableUser;
+import testData.TestData;
 
 import static pageObjects.Navigation.*;
 
@@ -68,5 +69,25 @@ public class WebTableTests extends BaseTest {
 
         Assert.assertTrue(webTablePage.checkPersonAdded(webTablePage.getPersonsList(), user));
         Assert.assertEquals(webTablePage.getPersonsList().size(), 1);
+    }
+
+    @Owner("John Doe")
+    @Severity(SeverityLevel.NORMAL)
+    @TmsLink("FORM-TC-011")
+    @Story("Add multiple users from Excel file")
+    @Test(dataProviderClass = TestData.class, dataProvider = "Table user data",
+            description = "Add multiple users from Excel file and check them")
+    public void addUserTableFromExcelTest(TableUser user) {
+        WebTablePage webTablePage = new WebTablePage();
+
+        webTablePage.open();
+        webTablePage.navigateTo(ELEMENTS);
+        webTablePage.navigateToMenu(WEB_TABLES);
+
+        webTablePage.clickAddNewPersonBtn();
+
+        webTablePage.fillForm(user);
+
+        Assert.assertTrue(webTablePage.checkPersonAdded(webTablePage.getPersonsList(), user));
     }
 }

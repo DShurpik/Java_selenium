@@ -8,7 +8,6 @@ public class DataUserGenerator {
 
     Faker faker = new Faker();
 
-
     // Data for Text Box tests
     private final String fullName = faker.name().fullName();
     private final String email = faker.internet().emailAddress();

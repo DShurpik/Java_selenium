@@ -4,6 +4,10 @@ import com.github.javafaker.Faker;
 import dataGenerator.UserBuilder;
 import org.testng.annotations.DataProvider;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static testData.ExcelDataLoader.readExcelData;
 import static utils.PropertyReader.getProperties;
 
 public class TestData {
@@ -12,7 +16,6 @@ public class TestData {
 
     @DataProvider(name = "User data for text box")
     public static Object[][] getUserData() {
-
 
         return new Object[][]{
                 {
@@ -41,20 +44,14 @@ public class TestData {
 
     @DataProvider(name = "Invalid emails")
     public static Object[][] getInvalidEmails() {
-        return new Object[][]{
-                {"user.mail.com"},
-                {"user@com"},
-                {"user@@gmail.com"},
-                {".user@gmail.com"},
-                {"user@gmail..com"},
-                {"user@gmail,com"},
-                {"user@gmail com"},
-                {"user@.gmail.com"},
-                {"user()@gmail.com"},
-                {"user@gmail.c"},
-                {"user@gmail#com"},
-                {"user@ gmail.com"}
-        };
+        List<String> invalidEmails = readExcelData("src/test/resources/test_sheet.xlsx", 2, 0);
+
+        Object[][] data = new Object[invalidEmails.size()][1];
+        for (int i = 0; i < invalidEmails.size(); i++) {
+            data[i][0] = invalidEmails.get(i);
+        }
+
+        return data;
     }
 
     @DataProvider(name = "All values for test")
@@ -86,5 +83,31 @@ public class TestData {
                 {"yesRadio", "Yes"},
                 {"impressiveRadio", "Impressive"}
         };
+    }
+
+    @DataProvider(name = "Table user data")
+    public static Object[][] getTableUserData() {
+        List<String> firstNameList = readExcelData("src/test/resources/test_sheet.xlsx", 3, 0);
+        List<String> lastNameList = readExcelData("src/test/resources/test_sheet.xlsx", 3, 1);
+        List<String> emailList = readExcelData("src/test/resources/test_sheet.xlsx", 3, 2);
+        List<String> ageList = readExcelData("src/test/resources/test_sheet.xlsx", 3, 3);
+        List<String> salaryList = readExcelData("src/test/resources/test_sheet.xlsx", 3, 4);
+        List<String> departmentList = readExcelData("src/test/resources/test_sheet.xlsx", 3, 5);
+
+        List<TableUser> userList = new ArrayList<>();
+        for (int i = 0; i < firstNameList.size(); i++) {
+            userList.add(TableUser.fromDataExcel(
+                    firstNameList.get(i),
+                    lastNameList.get(i),
+                    emailList.get(i),
+                    Integer.parseInt(ageList.get(i)),
+                    Integer.parseInt(salaryList.get(i)), departmentList.get(i)));
+        }
+
+        Object[][] data = new Object[userList.size()][1];
+        for (int i = 0; i < userList.size(); i++) {
+            data[i][0] = userList.get(i);
+        }
+        return data;
     }
 }
