@@ -1,4 +1,0 @@
-FullName = Danilo Spencer DDS
-Email = santos.crona@gmail.com
-CurrentAddress = 55634 Agustin Orchard, Grimesshire, NV 91574
-PermanentAddress = Apt. 891 54005 Earl Road, New Abeton, NM 04625-9435

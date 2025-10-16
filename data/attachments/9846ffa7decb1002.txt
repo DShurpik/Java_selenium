@@ -1,4 +1,0 @@
-FullName = Jack Daniels
-Email = n@f4tu7.com
-CurrentAddress = New-York
-PermanentAddress = Rome
