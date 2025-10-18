@@ -2,10 +2,10 @@ package listeners;
 
 import lombok.extern.log4j.Log4j2;
 import org.testng.*;
-import utils.PropertyReader;
 
 @Log4j2
 public class ListenerForProperty implements ITestListener {
+
     @Override
     public void onTestStart(ITestResult result) {
         ITestListener.super.onTestStart(result);
@@ -44,12 +44,8 @@ public class ListenerForProperty implements ITestListener {
         String propertyName = context
                 .getSuite()
                 .getParameter("config") == null ? System.getProperty("config") : context.getSuite().getParameter("config");
-        new PropertyReader(propertyName);
-        // Теперь читаем browser из загруженных пропертей или System properties
-        String browser = System.getProperty("browser", PropertyReader.getProperties().getProperty("browser"));
 
         log.info("Property file: {}", propertyName);
-        log.info("Selected browser: {}", browser);
     }
 
     @Override
