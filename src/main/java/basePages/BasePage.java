@@ -1,5 +1,6 @@
 package basePages;
 
+import configLoader.ConfigLoader;
 import driver.DriverManager;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
@@ -53,7 +54,7 @@ public abstract class BasePage {
 
     @Step("Open website")
     public void open() {
-        String url = properties.getProperty("url");
+        String url = ConfigLoader.getProperty("url");
         log.info("Open page: {}", url);
         Allure.step("Opening URL: " + url);
         driver.get(url);
