@@ -1,4 +1,0 @@
-FullName = Dima Shurpik
-Email = ds@gmail.com
-CurrentAddress = Minsk
-PermanentAddress = Minsk

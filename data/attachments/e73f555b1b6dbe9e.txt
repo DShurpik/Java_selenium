@@ -1,4 +1,0 @@
-FullName = William Wilson
-Email = david.moore@yandex.com
-CurrentAddress = 1919 Walnut Circle, Milwaukee, WI 53202
-PermanentAddress = 567 Chestnut Place, Phoenix, AZ 85004
