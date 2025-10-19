@@ -1,0 +1,4 @@
+FullName = Robert Thomas
+Email = mark.lee@rocketmail.com
+CurrentAddress = 789 Pine Road, Austin, TX 78701
+PermanentAddress = 2222 Laurel Court, Miami, FL 33131

@@ -1,0 +1,4 @@
+FullName = Eddie Rath
+Email = jan.pagac@yahoo.com
+CurrentAddress = Apt. 538 42010 Blake Via, North Stacistad, NM 36530
+PermanentAddress = 840 Buster Park, New Eleonoreview, WI 24072
