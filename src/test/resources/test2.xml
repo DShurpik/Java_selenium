@@ -8,9 +8,9 @@
     </listeners>
     <test name="One test run">
         <classes>
-            <class name="WebTableTests">
+            <class name="TextBoxTests">
                 <methods>
-                    <include name="addUserTableFromExcelTest"/>
+                    <include name="fillFieldsByDataProviderTest"/>
                 </methods>
             </class>
         </classes>

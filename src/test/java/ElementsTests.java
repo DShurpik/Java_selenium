@@ -10,7 +10,7 @@ import testData.*;
 import java.util.*;
 
 import static pageObjects.Navigation.*;
-import static utils.PropertyReader.getProperties;
+import static utils.PropertyReader.getInstance;
 
 public class ElementsTests extends BaseTest {
 
@@ -24,7 +24,7 @@ public class ElementsTests extends BaseTest {
         DataUserGenerator dataUserGenerator = new DataUserGenerator();
         TableUser user = TableUser.fromDataGenerator(dataUserGenerator);
 
-        webTablePage.open(getProperties().getProperty("url"));
+        webTablePage.open(getInstance().getProperty("url"));
         webTablePage.navigateTo(ELEMENTS);
         webTablePage.navigateToMenu(WEB_TABLES);
 
@@ -53,7 +53,7 @@ public class ElementsTests extends BaseTest {
     public void doubleClickTest() {
         ButtonsPage buttonsPage = new ButtonsPage();
 
-        buttonsPage.open(getProperties().getProperty("url"));
+        buttonsPage.open(getInstance().getProperty("url"));
         buttonsPage.navigateTo(ELEMENTS);
         buttonsPage.navigateToMenu(BUTTONS);
 
@@ -75,10 +75,10 @@ public class ElementsTests extends BaseTest {
         LinksPage linksPage = new LinksPage();
         linksPage.enableNetworkInterceptor();
 
-        linksPage.addRequestListener(getProperties().getProperty("url.api") + "created");
-        linksPage.addResponseListener(getProperties().getProperty("url.api") + "created");
+        linksPage.addRequestListener(getInstance().getProperty("url") + "created");
+        linksPage.addResponseListener(getInstance().getProperty("url") + "created");
 
-        linksPage.open(getProperties().getProperty("url"));
+        linksPage.open(getInstance().getProperty("url"));
 
         linksPage.navigateTo(ELEMENTS);
         linksPage.navigateToMenu(LINKS);
@@ -104,10 +104,10 @@ public class ElementsTests extends BaseTest {
         LinksPage linksPage = new LinksPage();
         linksPage.enableNetworkInterceptor();
 
-        linksPage.addRequestListener(getProperties().getProperty("url.api") + "no-content");
-        linksPage.addResponseListener(getProperties().getProperty("url.api") + "no-content");
+        linksPage.addRequestListener(getInstance().getProperty("url") + "no-content");
+        linksPage.addResponseListener(getInstance().getProperty("url") + "no-content");
 
-        linksPage.open(getProperties().getProperty("url"));
+        linksPage.open(getInstance().getProperty("url"));
 
         linksPage.navigateTo(ELEMENTS);
         linksPage.navigateToMenu(LINKS);
@@ -133,10 +133,10 @@ public class ElementsTests extends BaseTest {
         LinksPage linksPage = new LinksPage();
         linksPage.enableNetworkInterceptor();
 
-        linksPage.addRequestListener(getProperties().getProperty("url.api") + "moved");
-        linksPage.addResponseListener(getProperties().getProperty("url.api") + "moved");
+        linksPage.addRequestListener(getInstance().getProperty("url") + "moved");
+        linksPage.addResponseListener(getInstance().getProperty("url") + "moved");
 
-        linksPage.open(getProperties().getProperty("url"));
+        linksPage.open(getInstance().getProperty("url"));
 
         linksPage.navigateTo(ELEMENTS);
         linksPage.navigateToMenu(LINKS);
@@ -162,10 +162,10 @@ public class ElementsTests extends BaseTest {
         LinksPage linksPage = new LinksPage();
         linksPage.enableNetworkInterceptor();
 
-        linksPage.addRequestListener(getProperties().getProperty("url.api") + "bad-request");
-        linksPage.addResponseListener(getProperties().getProperty("url.api") + "bad-request");
+        linksPage.addRequestListener(getInstance().getProperty("url") + "bad-request");
+        linksPage.addResponseListener(getInstance().getProperty("url") + "bad-request");
 
-        linksPage.open(getProperties().getProperty("url"));
+        linksPage.open(getInstance().getProperty("url"));
 
         linksPage.navigateTo(ELEMENTS);
         linksPage.navigateToMenu(LINKS);
@@ -191,10 +191,10 @@ public class ElementsTests extends BaseTest {
         LinksPage linksPage = new LinksPage();
         linksPage.enableNetworkInterceptor();
 
-        linksPage.addRequestListener(getProperties().getProperty("url.api") + "forbidden");
-        linksPage.addResponseListener(getProperties().getProperty("url.api") + "forbidden");
+        linksPage.addRequestListener(getInstance().getProperty("url") + "forbidden");
+        linksPage.addResponseListener(getInstance().getProperty("url") + "forbidden");
 
-        linksPage.open(getProperties().getProperty("url"));
+        linksPage.open(getInstance().getProperty("url"));
 
         linksPage.navigateTo(ELEMENTS);
         linksPage.navigateToMenu(LINKS);
@@ -220,10 +220,10 @@ public class ElementsTests extends BaseTest {
         LinksPage linksPage = new LinksPage();
         linksPage.enableNetworkInterceptor();
 
-        linksPage.addRequestListener(getProperties().getProperty("url.api") + "invalid-url");
-        linksPage.addResponseListener(getProperties().getProperty("url.api") + "invalid-url");
+        linksPage.addRequestListener(getInstance().getProperty("url") + "invalid-url");
+        linksPage.addResponseListener(getInstance().getProperty("url") + "invalid-url");
 
-        linksPage.open(getProperties().getProperty("url"));
+        linksPage.open(getInstance().getProperty("url"));
 
         linksPage.navigateTo(ELEMENTS);
         linksPage.navigateToMenu(LINKS);
@@ -249,10 +249,10 @@ public class ElementsTests extends BaseTest {
         LinksPage linksPage = new LinksPage();
         linksPage.enableNetworkInterceptor();
 
-        linksPage.addRequestListener(getProperties().getProperty("url.api") + "unauthorized");
-        linksPage.addResponseListener(getProperties().getProperty("url.api") + "unauthorized");
+        linksPage.addRequestListener(getInstance().getProperty("url") + "unauthorized");
+        linksPage.addResponseListener(getInstance().getProperty("url") + "unauthorized");
 
-        linksPage.open(getProperties().getProperty("url"));
+        linksPage.open(getInstance().getProperty("url"));
 
         linksPage.navigateTo(ELEMENTS);
         linksPage.navigateToMenu(LINKS);
@@ -276,7 +276,7 @@ public class ElementsTests extends BaseTest {
     @Test(description = "Checking a broken image on the page")
     public void brokenImageTest() {
         BrokenLinksPage brokenLinksPage = new BrokenLinksPage();
-        brokenLinksPage.open(getProperties().getProperty("url"));
+        brokenLinksPage.open(getInstance().getProperty("url"));
 
         brokenLinksPage.navigateTo(ELEMENTS);
         brokenLinksPage.navigateToMenu(BROKEN_LINKS);
@@ -292,7 +292,7 @@ public class ElementsTests extends BaseTest {
     @Test(description = "Checking valid link")
     public void validLinkTest() {
         BrokenLinksPage brokenLinksPage = new BrokenLinksPage();
-        brokenLinksPage.open(getProperties().getProperty("url"));
+        brokenLinksPage.open(getInstance().getProperty("url"));
 
         brokenLinksPage.navigateTo(ELEMENTS);
         brokenLinksPage.navigateToMenu(BROKEN_LINKS);
@@ -308,7 +308,7 @@ public class ElementsTests extends BaseTest {
     @Test(description = "Checking broken link by other page element")
     public void brokenLinkTest() {
         BrokenLinksPage brokenLinksPage = new BrokenLinksPage();
-        brokenLinksPage.open(getProperties().getProperty("url"));
+        brokenLinksPage.open(getInstance().getProperty("url"));
 
         brokenLinksPage.navigateTo(ELEMENTS);
         brokenLinksPage.navigateToMenu(BROKEN_LINKS);
@@ -325,7 +325,7 @@ public class ElementsTests extends BaseTest {
     @Test(description = "Checking element will enable in 5 seconds")
     public void elementWillBeEnableIn5sec() {
         DynamicPropertiesPage dynamicPropertiesPage = new DynamicPropertiesPage();
-        dynamicPropertiesPage.open(getProperties().getProperty("url"));
+        dynamicPropertiesPage.open(getInstance().getProperty("url"));
 
         dynamicPropertiesPage.navigateTo(ELEMENTS);
         dynamicPropertiesPage.navigateToMenu(DYNAMIC_PROPERTIES);
@@ -340,7 +340,7 @@ public class ElementsTests extends BaseTest {
     @Test(description = "Checking that color has changed")
     public void colorChangeTest() {
         DynamicPropertiesPage dynamicPropertiesPage = new DynamicPropertiesPage();
-        dynamicPropertiesPage.open(getProperties().getProperty("url"));
+        dynamicPropertiesPage.open(getInstance().getProperty("url"));
 
         dynamicPropertiesPage.navigateTo(ELEMENTS);
         dynamicPropertiesPage.navigateToMenu(DYNAMIC_PROPERTIES);
@@ -355,7 +355,7 @@ public class ElementsTests extends BaseTest {
     @Test(description = "Checking that element will be visible after 5 sec")
     public void visibleAfter5Sec() {
         DynamicPropertiesPage dynamicPropertiesPage = new DynamicPropertiesPage();
-        dynamicPropertiesPage.open(getProperties().getProperty("url"));
+        dynamicPropertiesPage.open(getInstance().getProperty("url"));
 
         dynamicPropertiesPage.navigateTo(ELEMENTS);
         dynamicPropertiesPage.navigateToMenu(DYNAMIC_PROPERTIES);
@@ -371,12 +371,12 @@ public class ElementsTests extends BaseTest {
     public void practiceFormTest() {
         PracticeFormPage practiceFormPage = new PracticeFormPage();
         FormData formData = new FormData.Builder()
-                .firstName(getProperties().getProperty("firstName"))
-                .lastName(getProperties().getProperty("lastName"))
-                .email(getProperties().getProperty("email"))
-                .number(getProperties().getProperty("phoneNumber"))
-                .gender(getProperties().getProperty("gender"))
-                .subject(getProperties().getProperty("subject"))
+                .firstName(getInstance().getProperty("url"))
+                .lastName(getInstance().getProperty("url"))
+                .email(getInstance().getProperty("url"))
+                .number(getInstance().getProperty("url"))
+                .gender(getInstance().getProperty("url"))
+                .subject(getInstance().getProperty("url"))
                 .day("20")
                 .month("January")
                 .year("1990")
@@ -384,15 +384,10 @@ public class ElementsTests extends BaseTest {
                 .build();
 
         List<String> expectedValues = List.of(
-                getProperties().getProperty("firstName"),
-                getProperties().getProperty("lastName"),
-                getProperties().getProperty("email"),
-                getProperties().getProperty("gender"),
-                getProperties().getProperty("phoneNumber"),
-                getProperties().getProperty("subject")
+                getInstance().getProperty("url")
         );
 
-        practiceFormPage.open(getProperties().getProperty("url"));
+        practiceFormPage.open(getInstance().getProperty("url"));
 
         practiceFormPage.navigateTo(FORMS);
         practiceFormPage.navigateToMenu(PRACTICE_FORM);

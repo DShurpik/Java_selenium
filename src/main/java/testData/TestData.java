@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static testData.ExcelDataLoader.readExcelData;
-import static utils.PropertyReader.getProperties;
+import static utils.PropertyReader.getInstance;
+
 
 public class TestData {
 
@@ -20,10 +21,10 @@ public class TestData {
         return new Object[][]{
                 {
                         new UserBuilder.Builder()
-                                .withFullName(getProperties().getProperty("fullName"))
-                                .withEmail(getProperties().getProperty("email"))
-                                .withCurrentAddress(getProperties().getProperty("currentAddress"))
-                                .withPermanentAddress(getProperties().getProperty("permanentAddress"))
+                                .withFullName(getInstance().getProperty("fullName"))
+                                .withEmail(getInstance().getProperty("email"))
+                                .withCurrentAddress(getInstance().getProperty("currentAddress"))
+                                .withPermanentAddress(getInstance().getProperty("permanentAddress"))
                                 .build()
                 },
 

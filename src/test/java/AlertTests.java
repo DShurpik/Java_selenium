@@ -5,8 +5,9 @@ import org.testng.annotations.Test;
 import pageObjects.AlertsPage;
 import pageObjects.BrowserWindowPage;
 
+import static java.lang.System.getProperties;
 import static pageObjects.Navigation.*;
-import static utils.PropertyReader.getProperties;
+
 
 public class AlertTests extends BaseTest {
     @Owner("John Doe")

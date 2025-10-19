@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 
-<suite name="Run all tests" thread-count="2" parallel="methods">
+<suite name="Run all tests" thread-count="1" parallel="methods">
     <listeners>
         <listener class-name="utils.RetryTransformer"/>
     </listeners>
