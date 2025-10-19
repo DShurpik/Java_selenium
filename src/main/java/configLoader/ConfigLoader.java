@@ -8,27 +8,34 @@ import java.util.Properties;
 
 @Log4j2
 public class ConfigLoader {
-    private static Properties properties = new Properties();
+    private final Properties properties = new Properties();
 
-    static {
-        String profile = System.getProperty("profile", "dev");
+    public ConfigLoader() {
+        this(System.getProperty("profile", "dev"));
+    }
+
+    public ConfigLoader(String profile) {
+        if (profile == null) {
+            profile = System.getProperty("profile", "dev");
+        }
+        String configFile = "c-" + profile + ".properties";
+        log.info("Loading system configuration for profile: {}", profile);
         try {
-            log.info("Loading configuration for profile: " + profile);
-            String configFile = "c-" + profile + ".properties";
             FileInputStream input = new FileInputStream(
                     ConfigLoader.class.getClassLoader().getResource(configFile).getFile());
             properties.load(input);
             input.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+            log.info("System configuration loaded from: {}", configFile);
+        } catch (IOException | NullPointerException e) {
+            log.error("Failed to load system configuration file: {}", configFile, e);
         }
     }
 
-    public static String getProperty(String key) {
+    public String getProperty(String key) {
         return properties.getProperty(key);
     }
 
-    public static String getProperty(String key, String defaultValue) {
+    public String getProperty(String key, String defaultValue) {
         return System.getProperty(key, properties.getProperty(key, defaultValue));
     }
 }

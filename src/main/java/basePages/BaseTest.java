@@ -17,7 +17,8 @@ public abstract class BaseTest {
 
     @BeforeMethod
     public void setUp() {
-        DriverManager.initDriver(ConfigLoader.getProperty("browser", "chrome").toUpperCase());
+        ConfigLoader configLoader = new ConfigLoader();
+        DriverManager.initDriver(configLoader.getProperty("browser", "chrome").toUpperCase());
         log.debug("New web driver is set up");
     }
 

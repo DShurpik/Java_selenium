@@ -15,7 +15,7 @@ import pageObjects.Navigation;
 import java.time.Duration;
 import java.util.Properties;
 
-import static utils.PropertyReader.getProperties;
+import static utils.PropertyReader.getInstance;
 
 @Log4j2
 public abstract class BasePage {
@@ -24,12 +24,14 @@ public abstract class BasePage {
     protected Actions actions;
     protected WebDriverWait wait;
     protected Properties properties;
+    protected ConfigLoader configLoader;
 
     public BasePage() {
         driver = DriverManager.getDriver();
         actions = new Actions(driver);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        properties = getProperties();
+        properties = getInstance().getProperties();
+        configLoader = new ConfigLoader();
         PageFactory.initElements(driver, this);
     }
 
@@ -54,7 +56,7 @@ public abstract class BasePage {
 
     @Step("Open website")
     public void open() {
-        String url = ConfigLoader.getProperty("url");
+        String url = configLoader.getProperty("url");
         log.info("Open page: {}", url);
         Allure.step("Opening URL: " + url);
         driver.get(url);
