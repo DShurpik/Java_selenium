@@ -1,0 +1,4 @@
+FullName = Paulina Schowalter
+Email = kemberly.tremblay@yahoo.com
+CurrentAddress = Apt. 508 67154 Patsy Highway, West Geraldineborough, WY 59395-6545
+PermanentAddress = Suite 341 7612 Strosin Islands, West Frederickland, ME 80986-5595
