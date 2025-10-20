@@ -1,6 +1,6 @@
 package basePages;
 
-import configLoader.ConfigLoader;
+import configLoader.ConfigProvider;
 import driver.DriverManager;
 import listeners.InvokedMethodListener;
 import listeners.ListenerForProperty;
@@ -17,8 +17,10 @@ public abstract class BaseTest {
 
     @BeforeMethod
     public void setUp() {
-        ConfigLoader configLoader = new ConfigLoader();
-        DriverManager.initDriver(configLoader.getProperty("browser", "chrome").toUpperCase());
+        log.info("Initializing the environment: {}, config file: {}",
+                ConfigProvider.getProfile(), ConfigProvider.getConfigFileName());
+
+        DriverManager.initDriver(ConfigProvider.readConfig().getString("browser.name").toUpperCase());
         log.debug("New web driver is set up");
     }
 

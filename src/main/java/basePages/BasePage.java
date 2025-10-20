@@ -1,6 +1,6 @@
 package basePages;
 
-import configLoader.ConfigLoader;
+import configLoader.ConfigProvider;
 import driver.DriverManager;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
@@ -24,14 +24,12 @@ public abstract class BasePage {
     protected Actions actions;
     protected WebDriverWait wait;
     protected Properties properties;
-    protected ConfigLoader configLoader;
 
     public BasePage() {
         driver = DriverManager.getDriver();
         actions = new Actions(driver);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         properties = getInstance().getProperties();
-        configLoader = new ConfigLoader();
         PageFactory.initElements(driver, this);
     }
 
@@ -56,7 +54,7 @@ public abstract class BasePage {
 
     @Step("Open website")
     public void open() {
-        String url = configLoader.getProperty("url");
+        String url = ConfigProvider.readConfig().getString("url.web");
         log.info("Open page: {}", url);
         Allure.step("Opening URL: " + url);
         driver.get(url);
