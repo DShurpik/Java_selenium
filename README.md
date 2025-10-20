@@ -11,4 +11,8 @@
 7. Have added a screenshot for failed tests
 8. Have added a thread local for driver to make tests run in parallel
 9. Have added a config properties file to store test data
-10. Have added a ConfigReader class to read data from the config properties file
+10. Have added a ConfigProvider interface to read data from the config properties file
+11. Have added a possibility to use different environments by using the command -Denv="environment name".
+    Default environment is "dev".
+    - Example: mvn clean test -DsuiteXml="suite name" -Dconfig="property name" -Denv="stage"
+    - Available environments: dev, test, prod

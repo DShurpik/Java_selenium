@@ -27,7 +27,7 @@ public class PropertyReader {
 
     public static PropertyReader getInstance() {
         if (instance == null) {
-            String propertyName = System.getProperty("config", "user");
+            String propertyName = System.getProperty("config");
             instance = new PropertyReader(propertyName);
         }
         return instance;
