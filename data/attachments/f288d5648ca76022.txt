@@ -1,0 +1,4 @@
+FullName = Michael Brown
+Email = sophia.martinez@zoho.com
+CurrentAddress = 111 Willow Street, San Francisco, CA 94102
+PermanentAddress = 2121 Magnolia Street, Austin, TX 78702

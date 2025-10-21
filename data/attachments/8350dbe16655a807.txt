@@ -1,0 +1,4 @@
+FullName = Mrs. Milagro Price
+Email = talia.beahan@hotmail.com
+CurrentAddress = 52890 Weissnat Divide, North Ervin, ND 74768
+PermanentAddress = 35893 Kris Mills, Deannaton, MS 69530-1059

@@ -1,4 +1,0 @@
-FullName = William Wilson
-Email = laura.martin@fastmail.com
-CurrentAddress = 999 Redwood Court, Minneapolis, MN 55401
-PermanentAddress = 888 Redwood Way, Minneapolis, MN 55402
