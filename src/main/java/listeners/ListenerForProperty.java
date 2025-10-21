@@ -2,6 +2,7 @@ package listeners;
 
 import lombok.extern.log4j.Log4j2;
 import org.testng.*;
+import utils.PropertyReader;
 
 @Log4j2
 public class ListenerForProperty implements ITestListener {
@@ -46,6 +47,7 @@ public class ListenerForProperty implements ITestListener {
                 .getParameter("config") == null ? System.getProperty("config") : context.getSuite().getParameter("config");
 
         log.info("Property file: {}", propertyName);
+        new PropertyReader(propertyName);
     }
 
     @Override
