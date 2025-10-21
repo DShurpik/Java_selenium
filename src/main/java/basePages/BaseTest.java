@@ -20,8 +20,11 @@ public abstract class BaseTest {
         log.info("Initializing the environment: {}, config file: {}",
                 ConfigProvider.getProfile(), ConfigProvider.getConfigFileName());
 
-        DriverManager.initDriver(ConfigProvider.readConfig().getString("browser.name").toUpperCase());
-        log.debug("New web driver is set up");
+        String browser = System.getProperty("browser",
+                ConfigProvider.getString("web.browser.name", "chrome")).toUpperCase();
+
+        DriverManager.initDriver(browser);
+        log.debug("New web {} driver is set up", browser);
     }
 
     @AfterMethod

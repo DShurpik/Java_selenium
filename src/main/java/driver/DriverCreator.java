@@ -12,24 +12,24 @@ public abstract class DriverCreator {
     public abstract WebDriver createDriver();
 
     protected void configure(WebDriver driver) {
-        int width = ConfigProvider.readConfig().getInt("browser.window.width");
-        int height = ConfigProvider.readConfig().getInt("browser.window.height");
+        int width = ConfigProvider.readConfig().getInt("web.browser.window.width");
+        int height = ConfigProvider.readConfig().getInt("web.browser.window.height");
         driver.manage().window().setSize(new Dimension(width, height));
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(
-                ConfigProvider.readConfig().getInt("browser.timeout.implicit"))
+                ConfigProvider.readConfig().getInt("web.browser.timeout.implicit"))
         );
 
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(
-                ConfigProvider.readConfig().getInt("browser.timeout.pageLoad"))
+                ConfigProvider.readConfig().getInt("web.browser.timeout.pageLoad"))
         );
 
         driver.manage().timeouts().scriptTimeout(Duration.ofSeconds(
-                ConfigProvider.readConfig().getInt("browser.timeout.script"))
+                ConfigProvider.readConfig().getInt("web.browser.timeout.script"))
         );
     }
 
     protected boolean isHeadless() {
-        return ConfigProvider.readConfig().getBoolean("browser.headless");
+        return ConfigProvider.readConfig().getBoolean("web.browser.headless");
     }
 }

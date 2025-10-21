@@ -8,15 +8,16 @@ import java.util.Properties;
 
 @Log4j2
 public class PropertyReader {
+
     private static PropertyReader instance = null;
     private final Properties properties = new Properties();
 
     public PropertyReader(String propertyName) {
         String fileName = propertyName + ".properties";
+        FileInputStream inputStream;
         log.info("Loading user data from: {}", fileName);
         try {
-            FileInputStream inputStream = new FileInputStream(
-                    PropertyReader.class.getClassLoader().getResource(fileName).getFile());
+            inputStream = new FileInputStream("src/main/resources/" + propertyName + ".properties");
             properties.load(inputStream);
             inputStream.close();
             log.info("User data loaded from: {}", fileName);
