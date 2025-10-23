@@ -39,7 +39,7 @@ public class ElementsTests extends BaseTest {
         webTablePage.clickEditBtn();
         webTablePage.fillForm(tableUser);
 
-        webTablePage.search(tableUser);
+        webTablePage.search(tableUser, true);
 
         Assert.assertTrue(webTablePage.checkPersonAdded(webTablePage.getPersonsList(), user));
         Assert.assertEquals(webTablePage.getPersonsList().size(), 1);

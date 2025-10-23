@@ -81,17 +81,24 @@ public class WebTablePage extends BasePage {
     }
 
     @Step("Fill field search")
-    public void search(TableUser userData) {
-        wait.until(driver -> getPersonsList().stream()
-                .anyMatch(row ->
-                        row.contains(userData.getName()) &&
-                        row.contains(userData.getLastName()) &&
-                        row.contains(userData.getEmail()) &&
-                        row.contains(String.valueOf(userData.getAge())) &&
-                        row.contains(String.valueOf(userData.getSalary())) &&
-                        row.contains(userData.getDepartment())));
-        log.info("Fill field search");
-        searchBoxField.sendKeys(userData.getName());
+    public void search(TableUser userData, boolean expectExisting) {
+        log.info("Waiting for table to load");
+
+        if (expectExisting) {
+            wait.until(driver -> getPersonsList().stream()
+                    .anyMatch(row ->
+                            row.contains(userData.getName()) &&
+                                    row.contains(userData.getLastName()) &&
+                                    row.contains(userData.getEmail()) &&
+                                    row.contains(String.valueOf(userData.getAge())) &&
+                                    row.contains(String.valueOf(userData.getSalary())) &&
+                                    row.contains(userData.getDepartment())));
+            log.info("Fill field search");
+            searchBoxField.sendKeys(userData.getName());
+        } else {
+            log.info("Searching non-existing user, no pre-check needed");
+            searchBoxField.sendKeys(userData.getName());
+        }
     }
 
     @Step("Get list of users")
