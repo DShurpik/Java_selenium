@@ -1,5 +1,6 @@
 import basePages.BaseTest;
 import dataGenerator.DataUserGenerator;
+import dataGenerator.UserBuilder;
 import io.qameta.allure.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -65,7 +66,7 @@ public class WebTableTests extends BaseTest {
         webTablePage.clickAddNewPersonBtn();
         webTablePage.fillForm(user);
 
-        webTablePage.search(user);
+        webTablePage.search(user, true);
 
         Assert.assertTrue(webTablePage.checkPersonAdded(webTablePage.getPersonsList(), user));
         Assert.assertEquals(webTablePage.getPersonsList().size(), 1);
@@ -89,5 +90,24 @@ public class WebTableTests extends BaseTest {
         webTablePage.fillForm(user);
 
         Assert.assertTrue(webTablePage.checkPersonAdded(webTablePage.getPersonsList(), user));
+    }
+
+    @Owner("John Doe")
+    @Severity(SeverityLevel.NORMAL)
+    @TmsLink("FORM-TC-012")
+    @Story("Search non-existing user in table")
+    @Test(description = "Search non-existing user in table and check that no results are found")
+    public void searchNonExistingUserTableTest() {
+        WebTablePage webTablePage = new WebTablePage();
+
+        TableUser user = TableUser.fromDataGenerator(new DataUserGenerator());
+
+        webTablePage.open();
+        webTablePage.navigateTo(ELEMENTS);
+        webTablePage.navigateToMenu(WEB_TABLES);
+
+        webTablePage.search(user, false);
+
+        Assert.assertEquals(webTablePage.getPersonsList().size(), 0);
     }
 }
