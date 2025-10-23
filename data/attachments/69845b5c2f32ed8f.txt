@@ -1,0 +1,4 @@
+FullName = Emma Johnson
+Email = mark.lee@rocketmail.com
+CurrentAddress = 789 Pine Road, Austin, TX 78701
+PermanentAddress = 1818 Walnut Boulevard, Salt Lake City, UT 84102
