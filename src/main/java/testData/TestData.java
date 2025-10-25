@@ -1,6 +1,7 @@
 package testData;
 
 import com.github.javafaker.Faker;
+import dataGenerator.DataUserGenerator;
 import dataGenerator.UserBuilder;
 import org.testng.annotations.DataProvider;
 
@@ -110,5 +111,29 @@ public class TestData {
             data[i][0] = userList.get(i);
         }
         return data;
+    }
+
+    @DataProvider(name = "Data for web table non-existing user")
+    public static Object[][] getNonExistingUserData() {
+        return new Object[][]{
+                {
+                        TableUser.fromDataGenerator(new DataUserGenerator()).getName()
+                },
+                {
+                        TableUser.fromDataGenerator(new DataUserGenerator()).getLastName()
+                },
+                {
+                        TableUser.fromDataGenerator(new DataUserGenerator()).getAge()
+                },
+                {
+                        TableUser.fromDataGenerator(new DataUserGenerator()).getEmail()
+                },
+                {
+                        TableUser.fromDataGenerator(new DataUserGenerator()).getSalary()
+                },
+                {
+                        TableUser.fromDataGenerator(new DataUserGenerator()).getDepartment()
+                }
+        };
     }
 }
