@@ -1,4 +1,0 @@
-FullName = Kellie Tillman
-Email = lemuel.collier@hotmail.com
-CurrentAddress = Suite 317 735 Ruecker Common, New Marcelo, ND 16880-2220
-PermanentAddress = Suite 918 64711 Shaunda Harbors, Marshallport, AZ 93177

@@ -1,0 +1,4 @@
+FullName = Deanne Stark
+Email = robbin.hettinger@yahoo.com
+CurrentAddress = 1514 Herbert Avenue, Lake Charlesmouth, IN 73031-0064
+PermanentAddress = Suite 419 1162 Tyler Walk, Valenechester, UT 74065
