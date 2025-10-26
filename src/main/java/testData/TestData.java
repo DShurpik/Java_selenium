@@ -136,4 +136,16 @@ public class TestData {
                 }
         };
     }
+
+    @DataProvider(name = "columnData")
+    public Object[][] columnData() {
+        return new Object[][]{
+                {0, "First Name", List.of("Alden", "Cierra", "Kierra")},
+                {1, "Last Name", List.of("Cantrell", "Gentry", "Vega")},
+                {2, "Age", List.of("29", "39", "45")},
+                {3, "Email", List.of("alden@example.com", "cierra@example.com", "kierra@example.com")},
+                {4, "Salary", List.of("2000", "10000", "12000")},
+                {5, "Department", List.of("Compliance", "Insurance", "Legal")}
+        };
+    }
 }

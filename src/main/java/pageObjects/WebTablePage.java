@@ -80,8 +80,23 @@ public class WebTablePage extends BasePage {
         click(editUserBtn);
     }
 
+    @Step("Click table first name header")
+    public void clickTableHeader(String headerName) {
+        log.info("Click table header: {}", headerName);
+        click(By.xpath("//div[@class='rt-resizable-header-content' and text()='" + headerName + "']"));
+    }
+
     @Step("Fill field search")
     public void searchExitingUser(TableUser userData) {
+        log.info("Waiting until the user appears in the table: {}", userData.toString());
+        wait.until(driver -> getPersonsList().stream()
+                .anyMatch(row ->
+                        row.contains(userData.getName()) &&
+                                row.contains(userData.getLastName()) &&
+                                row.contains(userData.getEmail()) &&
+                                row.contains(String.valueOf(userData.getAge())) &&
+                                row.contains(String.valueOf(userData.getSalary())) &&
+                                row.contains(userData.getDepartment())));
         log.info("Fill field search, using existing user name: {}", userData.getName());
         sendText(userData.getName(), searchBoxField);
     }
@@ -110,6 +125,7 @@ public class WebTablePage extends BasePage {
 
     @Step("Check that a user has been added to table {0}")
     public boolean checkPersonAdded(List<List<String>> userList, TableUser user) {
+        log.info("Check that a user has been added to table: {}", user.toString());
         boolean userFound = false;
         for (List<String> userData : userList) {
             if (userData.contains(user.getName())
@@ -123,6 +139,17 @@ public class WebTablePage extends BasePage {
             }
         }
         return userFound;
+    }
+
+    @Step("Get column data by index {0}")
+    public List<String> getColumnData(int columnIndex, List<List<String>> personsList) {
+        log.info("Get column data by index: {}", columnIndex);
+        List<String> actualValues;
+        actualValues = new ArrayList<>();
+        for (List<String> row : personsList) {
+            actualValues.add(String.valueOf(row.get(columnIndex)));
+        }
+        return actualValues;
     }
 
 }

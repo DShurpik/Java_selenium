@@ -24,7 +24,7 @@ public class CheckBoxTests extends BaseTest {
         checkBoxPage.clickExpandAllBtn();
         checkBoxPage.clickRandomItem();
 
-        Assert.assertEquals(checkBoxPage.getCheckedCheckBoxes(), checkBoxPage.getOutputResult());
+        Assert.assertEquals(checkBoxPage.getCheckedCheckBoxes(), checkBoxPage.getOutputResult(), "Checked checkboxes do not match the output result");
     }
 
     @Owner("John Doe")
@@ -42,6 +42,6 @@ public class CheckBoxTests extends BaseTest {
 
         checkBoxPage.clickExpandAllBtn();
         checkBoxPage.clickCheckboxName(checkBoxName);
-        Assert.assertEquals(checkBoxPage.getExpectedResult(), expectedResult);
+        Assert.assertEquals(checkBoxPage.getExpectedResult(), expectedResult, "The checkbox selection result is not correct");
     }
 }
