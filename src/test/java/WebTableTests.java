@@ -3,9 +3,15 @@ import dataGenerator.DataUserGenerator;
 import io.qameta.allure.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 import pageObjects.WebTablePage;
 import testData.TableUser;
 import testData.TestData;
+
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static pageObjects.Navigation.*;
 
@@ -26,7 +32,7 @@ public class WebTableTests extends BaseTest {
 
         webTablePage.clickDeleteBtn();
 
-        Assert.assertEquals(webTablePage.getPersonsList().size(), tableSize - 1);
+        Assert.assertEquals(webTablePage.getPersonsList().size(), tableSize - 1, "The user was not deleted from the table.");
     }
 
     @Owner("John Doe")
@@ -46,7 +52,7 @@ public class WebTableTests extends BaseTest {
 
         webTablePage.fillForm(user);
 
-        Assert.assertTrue(webTablePage.checkPersonAdded(webTablePage.getPersonsList(), user));
+        Assert.assertTrue(webTablePage.checkPersonAdded(webTablePage.getPersonsList(), user), "The added user was not found in the table.");
     }
 
     @Owner("John Doe")
@@ -67,8 +73,11 @@ public class WebTableTests extends BaseTest {
 
         webTablePage.searchExitingUser(user);
 
-        Assert.assertTrue(webTablePage.checkPersonAdded(webTablePage.getPersonsList(), user));
-        Assert.assertEquals(webTablePage.getPersonsList().size(), 1);
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(webTablePage.getPersonsList().size(), 1, "Expected 1 person, but found " + webTablePage.getPersonsList().size());
+        softAssert.assertTrue(webTablePage.checkPersonAdded(webTablePage.getPersonsList(), user), "The added user was not found in the search results.");
+        softAssert.assertAll();
+
     }
 
     @Owner("John Doe")
@@ -88,7 +97,7 @@ public class WebTableTests extends BaseTest {
 
         webTablePage.fillForm(user);
 
-        Assert.assertTrue(webTablePage.checkPersonAdded(webTablePage.getPersonsList(), user));
+        Assert.assertTrue(webTablePage.checkPersonAdded(webTablePage.getPersonsList(), user), "The added user was not found in the table.");
     }
 
     @Owner("John Doe")
@@ -106,6 +115,28 @@ public class WebTableTests extends BaseTest {
 
         webTablePage.searchNonExistingUser(data);
 
-        Assert.assertEquals(webTablePage.getPersonsList().size(), 0);
+        Assert.assertEquals(webTablePage.getPersonsList().size(), 0, "Expected 0 persons, but found " + webTablePage.getPersonsList().size());
+    }
+
+    @Owner("John Doe")
+    @Severity(SeverityLevel.NORMAL)
+    @TmsLink("FORM-TC-013")
+    @Story("Checking of sorting by name in web table")
+    @Test(dataProviderClass = TestData.class, dataProvider = "columnData",
+            description = "Check sorting by header name in web table")
+    public void testColumnSort(int columnIndex, String headerName, List<String> expectedResult) {
+        WebTablePage webTablePage = new WebTablePage();
+
+        webTablePage.open();
+        webTablePage.navigateTo(ELEMENTS);
+        webTablePage.navigateToMenu(WEB_TABLES);
+
+        webTablePage.clickTableHeader(headerName);
+
+        List<List<String>> personsList = webTablePage.getPersonsList();
+        List<String> actualColumnData = webTablePage.getColumnData(columnIndex, personsList);
+
+        Assert.assertEquals(actualColumnData, expectedResult, "The column data is not sorted as expected.");
+
     }
 }

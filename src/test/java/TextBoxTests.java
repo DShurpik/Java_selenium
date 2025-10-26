@@ -5,6 +5,7 @@ import dataGenerator.UserBuilder;
 import io.qameta.allure.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 import pageObjects.TextBoxPage;
 import testData.TestData;
 
@@ -27,10 +28,12 @@ public class TextBoxTests extends BaseTest {
         textBoxPage.fillFields(user)
                 .clickSubmitBtn();
 
-        Assert.assertEquals(textBoxPage.getNameText(), user.getFullName(), "User name is not correct");
-        Assert.assertEquals(textBoxPage.getEmailText(), user.getEmail(), "User email is not correct");
-        Assert.assertEquals(textBoxPage.getCurrentAddressText(), user.getCurrentAddress(), "User current address is not correct");
-        Assert.assertEquals(textBoxPage.getPermanentAddressText(), user.getPermanentAddress(), "User permanent address is not correct");
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(textBoxPage.getNameText(), user.getFullName(), "User name is not correct");
+        softAssert.assertEquals(textBoxPage.getEmailText(), user.getEmail(), "User email is not correct");
+        softAssert.assertEquals(textBoxPage.getCurrentAddressText(), user.getCurrentAddress(), "User current address is not correct");
+        softAssert.assertEquals(textBoxPage.getPermanentAddressText(), user.getPermanentAddress(), "User permanent address is not correct");
+        softAssert.assertAll();
     }
 
     @Owner("John Doe")
@@ -71,11 +74,13 @@ public class TextBoxTests extends BaseTest {
                 .fillEmailField(invalidEmail);
         textBoxPage.clickSubmitBtn();
 
-        Assert.assertTrue(textBoxPage.invalidEmailFieldIsDisplayed(), "The email field is not highlighted in red");
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(textBoxPage.invalidEmailFieldIsDisplayed(), "The email field is not highlighted in red");
 
         textBoxPage.fillEmailField(validEmail);
         textBoxPage.clickSubmitBtn();
 
-        Assert.assertTrue(textBoxPage.getEmailText().contains(validEmail), "User email is not correct");
+        softAssert.assertTrue(textBoxPage.getEmailText().contains(validEmail), "User email is not correct");
+        softAssert.assertAll();
     }
 }

@@ -2,16 +2,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 
-<suite name="Test one method from element tests, but only one method">
-    <test name="Test one method from element tests, but only one method">
+<suite name="Test one class">
+    <test name="Test one class">
         <classes>
-            <class name="TextBoxTests">
-                <methods>
-                    <include name="fillTextForm"/>
-                    <include name="test11"/>
-                </methods>
-            </class>
-
+            <class name="WebTableTests"/>
         </classes>
     </test>
 </suite>

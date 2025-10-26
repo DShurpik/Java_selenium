@@ -24,7 +24,7 @@ public class RadioButtonTests extends BaseTest {
 
         radioButtonPage.click(buttonName);
 
-        Assert.assertEquals(radioButtonPage.getResult(), expectedResult);
+        Assert.assertEquals(radioButtonPage.getResult(), expectedResult, "Radio button selection result is not correct");
     }
 
     @Owner("John Doe")
@@ -38,6 +38,6 @@ public class RadioButtonTests extends BaseTest {
         radioButtonPage.navigateTo(ELEMENTS);
         radioButtonPage.navigateToMenu(RADIO_BUTTON);
 
-        Assert.assertFalse(radioButtonPage.noBtnIsEnabled());
+        Assert.assertFalse(radioButtonPage.noBtnIsEnabled(), "No radio button is enabled");
     }
 }
