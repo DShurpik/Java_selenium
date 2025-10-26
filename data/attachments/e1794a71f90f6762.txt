@@ -1,4 +1,0 @@
-FullName = William Wilson
-Email = david.moore@yandex.com
-CurrentAddress = 456 Oak Avenue, Portland, OR 97205
-PermanentAddress = 1616 Elm Road, Las Vegas, NV 89102
