@@ -1,4 +1,0 @@
-FullName = John Smith
-Email = julia.green@tutanota.com
-CurrentAddress = 444 Ash Lane, Houston, TX 77002
-PermanentAddress = 333 Spruce Lane, Houston, TX 77003

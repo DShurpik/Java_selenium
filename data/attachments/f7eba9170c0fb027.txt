@@ -1,4 +1,0 @@
-FullName = Tari Schamberger
-Email = michal.kub@yahoo.com
-CurrentAddress = Suite 662 63697 Gibson Cliffs, Hettingerberg, CT 73448-8229
-PermanentAddress = Suite 453 88987 Regan Curve, Brownborough, IA 98829-0984
