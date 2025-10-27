@@ -10,6 +10,7 @@ import testData.TestData;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -121,10 +122,10 @@ public class WebTableTests extends BaseTest {
     @Owner("John Doe")
     @Severity(SeverityLevel.NORMAL)
     @TmsLink("FORM-TC-013")
-    @Story("Checking of sorting by name in web table")
+    @Story("Checking of sorting in ascending order by header name in web table")
     @Test(dataProviderClass = TestData.class, dataProvider = "columnData",
             description = "Check sorting by header name in web table")
-    public void testColumnSort(int columnIndex, String headerName, List<String> expectedResult) {
+    public void testColumnSortAscending(int columnIndex, String headerName, List<String> expectedResult) {
         WebTablePage webTablePage = new WebTablePage();
 
         webTablePage.open();
@@ -139,4 +140,30 @@ public class WebTableTests extends BaseTest {
         Assert.assertEquals(actualColumnData, expectedResult, "The column data is not sorted as expected.");
 
     }
+
+    @Owner("John Doe")
+    @Severity(SeverityLevel.NORMAL)
+    @TmsLink("FORM-TC-014")
+    @Story("Checking of sorting in descending order by header name in web table")
+    @Test(dataProviderClass = TestData.class, dataProvider = "columnData",
+            description = "Check sorting by header name in web table in descending order")
+    public void testColumnSortDescending(int columnIndex, String headerName, List<String> expectedResult) {
+        WebTablePage webTablePage = new WebTablePage();
+
+        webTablePage.open();
+        webTablePage.navigateTo(ELEMENTS);
+        webTablePage.navigateToMenu(WEB_TABLES);
+
+        webTablePage
+                .clickTableHeader(headerName)
+                .clickTableHeader(headerName);
+
+        List<List<String>> personsList = webTablePage.getPersonsList();
+        List<String> actualColumnData = webTablePage.getColumnData(columnIndex, personsList);
+        List<String> reversedExpected = webTablePage.reverseList(expectedResult);
+
+        Assert.assertEquals(actualColumnData, reversedExpected, "The column data is not sorted as expected in descending order.");
+    }
+
+
 }
