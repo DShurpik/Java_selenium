@@ -81,9 +81,10 @@ public class WebTablePage extends BasePage {
     }
 
     @Step("Click table first name header")
-    public void clickTableHeader(String headerName) {
+    public WebTablePage clickTableHeader(String headerName) {
         log.info("Click table header: {}", headerName);
         click(By.xpath("//div[@class='rt-resizable-header-content' and text()='" + headerName + "']"));
+        return this;
     }
 
     @Step("Fill field search")
@@ -149,7 +150,15 @@ public class WebTablePage extends BasePage {
         for (List<String> row : personsList) {
             actualValues.add(String.valueOf(row.get(columnIndex)));
         }
+        log.info("Actual column data: {}", actualValues);
         return actualValues;
+    }
+
+    public List<String> reverseList(List<String> list) {
+        log.info("Reversing the list: {}", list);
+        List<String> reversedList = new ArrayList<>(list);
+        Collections.reverse(reversedList);
+        return reversedList;
     }
 
 }

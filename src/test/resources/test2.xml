@@ -10,7 +10,7 @@
         <classes>
             <class name="WebTableTests">
                 <methods>
-                    <include name="testColumnSort"/>
+                    <include name="testColumnSortDescending"/>
                 </methods>
             </class>
         </classes>
