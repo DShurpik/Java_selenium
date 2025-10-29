@@ -8,11 +8,7 @@ import pageObjects.WebTablePage;
 import testData.TableUser;
 import testData.TestData;
 
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static pageObjects.Navigation.*;
 
