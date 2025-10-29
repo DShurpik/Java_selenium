@@ -3,14 +3,11 @@
 
 
 <suite name="Test run" parallel="methods">
-    <listeners>
-        <listener class-name="utils.RetryTransformer"/>
-    </listeners>
     <test name="One test run">
         <classes>
-            <class name="WebTableTests">
+            <class name="ButtonsTest">
                 <methods>
-                    <include name="testColumnSortDescending"/>
+                    <include name="doubleRightMouseClicksTest"/>
                 </methods>
             </class>
         </classes>
