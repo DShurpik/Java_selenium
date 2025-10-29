@@ -1,4 +1,0 @@
-FullName = Moses Schneider II
-Email = lucas.dare@hotmail.com
-CurrentAddress = Suite 876 963 Predovic Street, North Raefurt, VT 21131-5704
-PermanentAddress = 3631 Hermann Plaza, Lake Renayville, GA 28006-7465

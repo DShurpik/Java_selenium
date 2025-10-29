@@ -1,4 +1,0 @@
-FullName = Michael Brown
-Email = julia.green@tutanota.com
-CurrentAddress = 999 Redwood Court, Minneapolis, MN 55401
-PermanentAddress = 888 Redwood Way, Minneapolis, MN 55402

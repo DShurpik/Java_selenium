@@ -1,0 +1,4 @@
+FullName = Gema Blick
+Email = carisa.mclaughlin@yahoo.com
+CurrentAddress = 16253 Williamson Fall, East Aleida, ME 65575
+PermanentAddress = 126 Karima Ways, New Delena, CA 74328
