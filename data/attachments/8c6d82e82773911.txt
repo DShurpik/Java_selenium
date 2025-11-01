@@ -1,0 +1,4 @@
+FullName = Emma Johnson
+Email = john.smith@gmail.com
+CurrentAddress = 789 Pine Road, Austin, TX 78701
+PermanentAddress = 123 Pine Boulevard, Boston, MA 02110
