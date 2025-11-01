@@ -1,17 +1,17 @@
 package pageObjects;
 
 import basePages.BasePage;
+import driver.DriverManager;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import models.ResponseData;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.devtools.DevTools;
-import org.openqa.selenium.devtools.v140.network.Network;
-import org.openqa.selenium.devtools.v140.network.model.Request;
+import org.openqa.selenium.devtools.v141.network.Network;
+import org.openqa.selenium.devtools.v141.network.model.Request;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import com.google.gson.Gson;
 
 import java.util.*;
 
@@ -38,63 +38,80 @@ public class LinksPage extends BasePage {
 
     @FindBy(id = "invalid-url")
     private WebElement notFoundLink;
+
     protected DevTools devTools;
-    private List<Request> interceptedRequests = new ArrayList<>();
-    private List<ResponseData> interceptedResponses = new ArrayList<>();
-    private List<Integer> interceptedStatusCodes = new ArrayList<>();
-    private final Gson gson = new Gson();
+    private final List<Request> interceptedRequests = new ArrayList<>();
+    private final List<ResponseData> interceptedResponses = new ArrayList<>();
+    private final List<Integer> interceptedStatusCodes = new ArrayList<>();
 
     public LinksPage() {
-        this.devTools = ((ChromeDriver) driver).getDevTools();
+        this.driver = DriverManager.getDriver();
+        if (driver instanceof ChromeDriver chromeDriver) {
+            this.devTools = chromeDriver.getDevTools();
+            log.info("DevTools initialized for ChromeDriver.");
+        }
         PageFactory.initElements(driver, this);
     }
 
-    public void enableNetworkInterceptor() {
-        try {
-            // Создаём сессию DevTools
-            devTools.createSession();
-    /**
-            // Включаем перехват сетевых запросов
-            devTools.send(Network.enable(
-                    Optional.of(1000000), // Максимальный размер буфера запросов (1 МБ)
-                    Optional.of(1000000), // Максимальный размер ответа
-                    Optional.empty()));  // Без фильтров
-            log.info("Network interceptor enabled.");
+    @Step("Clear intercepted data (without closing session)")
+    public void clearInterceptedData() {
+        interceptedRequests.clear();
+        interceptedResponses.clear();
+        interceptedStatusCodes.clear();
+        log.info("Intercepted data cleared. DevTools session remains active.");
+    }
 
-     */
+    @Step("Enable network interceptor")
+    public void enableNetworkInterceptor() {
+        if (devTools == null) {
+            throw new IllegalStateException("DevTools is not initialized");
+        }
+        try {
+            devTools.createSession();
+
+            devTools.send(Network.enable(
+                    Optional.of(1000000),
+                    Optional.of(1000000),
+                    Optional.of(1000000),
+                    Optional.empty(),
+                    Optional.empty()
+            ));
+            log.info("Network interceptor enabled.");
         } catch (Exception e) {
-            System.err.println("Ошибка при включении перехвата сетевых запросов: " + e.getMessage());
-            e.printStackTrace();
+            log.error("Error enabling interception: {}", e.getMessage(), e);
+            throw new RuntimeException("Failed to enable network interceptor", e);
         }
     }
 
+    @Step("Add request listener for URL: {targetUrl}")
     public void addRequestListener(String targetUrl) {
         devTools.addListener(Network.requestWillBeSent(), request -> {
             Request req = request.getRequest();
             if (req.getUrl().contains(targetUrl)) {
-                log.info("Перехвачен запрос:");
-                log.info("URL: " + req.getUrl());
-                log.info("Метод: " + req.getMethod());
-                log.info("Заголовки: " + req.getHeaders());
-                log.info("Тело: " + req.getPostData().orElse("Отсутствует тело запроса"));
-
+                log.info("Request intercepted:");
+                log.info("URL: {}", req.getUrl());
+                log.info("Method: {}", req.getMethod());
+                log.info("Headers: {}", req.getHeaders());
+                log.info("Body: {}", req.getPostData().orElse("Request body is missing"));
                 interceptedRequests.add(req);
             }
         });
     }
 
+    @Step("Add response listener for URL: {targetUrl}")
     public void addResponseListener(String targetUrl) {
         devTools.addListener(Network.responseReceived(), response -> {
             String responseUrl = response.getResponse().getUrl();
             if (responseUrl.contains(targetUrl)) {
-                log.info("Перехвачен ответ:");
-                log.info("URL: " + responseUrl);
-                log.info("Статус код: " + response.getResponse().getStatus());
-                log.info("Заголовки: " + response.getResponse().getHeaders());
+                log.info("Request intercepted:");
+                log.info("URL: {}", responseUrl);
+                log.info("Status code: {}", response.getResponse().getStatus());
+                log.info("Headers: {}", response.getResponse().getHeaders());
+                interceptedStatusCodes.add(response.getResponse().getStatus());
 
                 try {
                     String responseBody = devTools.send(Network.getResponseBody(response.getRequestId())).getBody();
-                    log.info("Тело ответа: " + responseBody);
+                    log.info("Body: {}", responseBody);
 
                     ResponseData responseData = new ResponseData(
                             responseUrl,
@@ -104,60 +121,76 @@ public class LinksPage extends BasePage {
                     );
                     interceptedResponses.add(responseData);
                 } catch (Exception e) {
-                    System.out.println("Ошибка при получении тела ответа: " + e.getMessage());
+                    log.error("Error getting response body: {}", e.getMessage(), e);
                 }
             }
         });
     }
 
+    @Step("Wait for response with URL: {targetUrl}")
+    public void waitForResponse(String targetUrl) {
+        wait.until(d -> interceptedResponses
+                .stream()
+                .anyMatch(r -> r.getUrl().contains(targetUrl)));
+        log.info("Response with URL containing '{}' received.", targetUrl);
+    }
+
+    public void waitForStatusCode(int statusCode) {
+        wait.until(d -> interceptedStatusCodes.contains(statusCode));
+        log.info("Response with status code '{}' received.", statusCode);
+    }
+
     public List<Request> getInterceptedRequests() {
-        return interceptedRequests;
+        return new ArrayList<>(interceptedRequests);
     }
 
     public List<ResponseData> getInterceptedResponses() {
-        return interceptedResponses;
+        return new ArrayList<>(interceptedResponses);
     }
 
+    public List<Integer> getInterceptedStatusCodes() {
+        return new ArrayList<>(interceptedStatusCodes);
+    }
 
     @Step("Click on created link")
     public void clickCreatedLink() {
         log.info("Click on created link");
-        createdLink.click();
+        click(createdLink);
     }
 
     @Step("Click on No Content link")
     public void clickNoContentLink() {
         log.info("Click on No Content link");
-        noContentLink.click();
+        click(noContentLink);
     }
 
     @Step("Click on Moved link")
     public void clickMovedLink() {
         log.info("Click on Moved link");
-        movedLink.click();
+        click(movedLink);
     }
 
     @Step("Click on Bad Request link")
     public void clickBadRequestLink() {
         log.info("Click on Bad Request link");
-        badRequestLink.click();
+        click(badRequestLink);
     }
 
     @Step("Click on Unauthorized link")
     public void clickUnauthorizedLink() {
         log.info("Click on Unauthorized link");
-        unauthorizedLink.click();
+        click(unauthorizedLink);
     }
 
     @Step("Click on forbidden link")
     public void clickForbiddenLink() {
         log.info("Click on forbidden link");
-        forbiddenLink.click();
+        click(forbiddenLink);
     }
 
     @Step("Click on Not Found link")
     public void clickNotFound() {
         log.info("Click on Not Found link");
-        notFoundLink.click();
+        click(notFoundLink);
     }
 }

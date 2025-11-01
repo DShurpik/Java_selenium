@@ -13,6 +13,7 @@
             <class name="RadioButtonTests"/>
             <class name="WebTableTests"/>
             <class name="ButtonsTest"/>
+            <class name="LinksTests"/>
         </classes>
     </test>
 </suite>

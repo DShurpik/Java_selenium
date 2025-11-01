@@ -148,4 +148,16 @@ public class TestData {
                 {5, "Department", List.of("Compliance", "Insurance", "Legal")}
         };
     }
+
+    @DataProvider(name = "linkTests")
+    public Object[][] linkTestData() {
+        return new Object[][] {
+                {"created", 201, "clickCreatedLink"},
+                {"no-content", 204, "clickNoContentLink"},
+                {"moved", 301, "clickMovedLink"},
+                {"bad-request", 400, "clickBadRequestLink"},
+                {"forbidden", 403, "clickForbiddenLink"},
+                {"invalid-url", 404, "clickNotFound"}
+        };
+    }
 }
