@@ -3,11 +3,12 @@
 
 
 <suite name="Test run" parallel="methods">
+
     <test name="One test run">
         <classes>
-            <class name="ButtonsTest">
+            <class name="LinksTests">
                 <methods>
-                    <include name="doubleRightMouseClicksTest"/>
+                    <include name="testLinkResponse"/>
                 </methods>
             </class>
         </classes>
