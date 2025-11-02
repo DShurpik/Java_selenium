@@ -1,4 +1,0 @@
-FullName = Royal Wilderman
-Email = sung.langosh@hotmail.com
-CurrentAddress = 89292 Stoltenberg Estate, Malcolmstad, FL 67785-9485
-PermanentAddress = Apt. 622 04968 Dickinson Estate, Lake Merilyn, NH 24390
