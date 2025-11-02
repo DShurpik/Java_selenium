@@ -11,7 +11,7 @@ public class ButtonsTest extends BaseTest {
 
     @Owner("John Doe")
     @Severity(SeverityLevel.NORMAL)
-    @TmsLink("FORM-TC-014")
+    @TmsLink("FORM-TC-015")
     @Story("Mouse clicks")
     @Test(description = "Different kind of clicks")
     public void doubleRightMouseClicksTest() {
