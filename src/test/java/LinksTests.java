@@ -1,5 +1,6 @@
 import basePages.BaseTest;
 import configLoader.ConfigProvider;
+import io.qameta.allure.*;
 import models.ResponseData;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -13,6 +14,10 @@ import static pageObjects.Navigation.LINKS;
 
 public class LinksTests extends BaseTest {
 
+    @Owner("John Doe")
+    @Severity(SeverityLevel.NORMAL)
+    @TmsLink("FORM-TC-016")
+    @Story("Checking intercepted requests through devtool")
     @Test(dataProviderClass = TestData.class, dataProvider = "linkTests")
     public void testLinkResponse(String endpoint, int expectedStatus, String clickMethod) throws Exception {
         LinksPage linksPage = new LinksPage();

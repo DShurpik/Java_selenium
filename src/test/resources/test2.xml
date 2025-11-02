@@ -2,15 +2,11 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 
-<suite name="Test run" parallel="methods">
+<suite name="Test run">
 
     <test name="One test run">
         <classes>
-            <class name="LinksTests">
-                <methods>
-                    <include name="testLinkResponse"/>
-                </methods>
-            </class>
+            <class name="BrokenLinksTests"/>
         </classes>
     </test>
 </suite>

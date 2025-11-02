@@ -44,55 +44,6 @@ public class ElementsTests extends BaseTest {
 
     @Owner("John Doe")
     @Severity(SeverityLevel.NORMAL)
-    @TmsLink("TC-19")
-    @Story("Check that Broken image has 0x0 size")
-    @Test(description = "Checking a broken image on the page")
-    public void brokenImageTest() {
-        BrokenLinksPage brokenLinksPage = new BrokenLinksPage();
-        brokenLinksPage.open(getInstance().getProperty("url"));
-
-        brokenLinksPage.navigateTo(ELEMENTS);
-        brokenLinksPage.navigateToMenu(BROKEN_LINKS);
-
-        Assert.assertEquals(brokenLinksPage.clientHeight(), 0);
-        Assert.assertEquals(brokenLinksPage.clientWidth(), 0);
-    }
-
-    @Owner("John Doe")
-    @Severity(SeverityLevel.NORMAL)
-    @TmsLink("TC-20")
-    @Story("Check that valid link refers to google.com")
-    @Test(description = "Checking valid link")
-    public void validLinkTest() {
-        BrokenLinksPage brokenLinksPage = new BrokenLinksPage();
-        brokenLinksPage.open(getInstance().getProperty("url"));
-
-        brokenLinksPage.navigateTo(ELEMENTS);
-        brokenLinksPage.navigateToMenu(BROKEN_LINKS);
-
-        brokenLinksPage.validLinkClick();
-        Assert.assertEquals(brokenLinksPage.googleTitle(), "Google");
-    }
-
-    @Owner("John Doe")
-    @Severity(SeverityLevel.NORMAL)
-    @TmsLink("TC-21")
-    @Story("Check that broken link refers to a page with 500 status code")
-    @Test(description = "Checking broken link by other page element")
-    public void brokenLinkTest() {
-        BrokenLinksPage brokenLinksPage = new BrokenLinksPage();
-        brokenLinksPage.open(getInstance().getProperty("url"));
-
-        brokenLinksPage.navigateTo(ELEMENTS);
-        brokenLinksPage.navigateToMenu(BROKEN_LINKS);
-
-        brokenLinksPage.clickBrokenLink();
-
-        Assert.assertTrue(brokenLinksPage.statusCodeIsDisplayed());
-    }
-
-    @Owner("John Doe")
-    @Severity(SeverityLevel.NORMAL)
     @TmsLink("TC-22")
     @Story("Check that element will be enable in 5 seconds")
     @Test(description = "Checking element will enable in 5 seconds")

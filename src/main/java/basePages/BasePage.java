@@ -102,12 +102,18 @@ public abstract class BasePage {
         return webElement.getText();
     }
 
-    protected Boolean isElementDisplayed(By by) {
-        log.info("Check if element is displayed: {}", by);
+    protected Boolean isElementDisplayed(Object locator) {
+        log.info("Check if element is displayed: {}", locator.toString());
         try {
-            return driver.findElement(by).isDisplayed();
+            if (locator instanceof By) {
+                return driver.findElement((By) locator).isDisplayed();
+            } else if (locator instanceof WebElement) {
+                return ((WebElement) locator).isDisplayed();
+            } else {
+                throw new IllegalArgumentException("Locator must be of type By or WebElement, but was: " + locator.getClass().getSimpleName());
+            }
         } catch (NoSuchElementException e) {
-            log.error("Element not found: {}", driver.findElement(by), e);
+            log.error("Element not found: {}", locator.toString(), e);
             return false;
         }
     }

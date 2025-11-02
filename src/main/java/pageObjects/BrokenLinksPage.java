@@ -6,6 +6,8 @@ import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.Objects;
+
 @Log4j2
 public class BrokenLinksPage extends BasePage {
 
@@ -27,19 +29,19 @@ public class BrokenLinksPage extends BasePage {
     @Step("Get broken image height")
     public int clientHeight() {
         log.info("Get broken image height");
-        return Integer.parseInt(brokenImage.getAttribute("naturalHeight"));
+        return Integer.parseInt(Objects.requireNonNull(brokenImage.getAttribute("naturalHeight")));
     }
 
     @Step("Get broken image width")
     public int clientWidth() {
         log.info("Get broken image width");
-        return Integer.parseInt(brokenImage.getAttribute("naturalWidth"));
+        return Integer.parseInt(Objects.requireNonNull(brokenImage.getAttribute("naturalWidth")));
     }
 
     @Step("Click on Valid Link")
     public void validLinkClick() {
         log.info("Click on Valid Link");
-        validLink.click();
+        click(validLink);
     }
 
     @Step("Open google page")
@@ -51,12 +53,12 @@ public class BrokenLinksPage extends BasePage {
     @Step("Click on Broken Link")
     public void clickBrokenLink() {
         log.info("Click on Broken Link");
-        brokenLink.click();
+        click(brokenLink);
     }
 
     @Step("Page with status code 500 is displayed")
     public boolean statusCodeIsDisplayed() {
         log.info("Page with status code 500 is opened");
-        return statusCodeElement.isDisplayed();
+        return isElementDisplayed(statusCodeElement);
     }
 }
