@@ -1,4 +1,0 @@
-FullName = Fiona Orn Sr.
-Email = noah.kuhn@hotmail.com
-CurrentAddress = Apt. 270 8159 Trantow Parkway, Barrytown, MN 92630
-PermanentAddress = 57910 Rogahn Spring, Lake Julieann, MD 61280

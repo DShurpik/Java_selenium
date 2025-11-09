@@ -1,0 +1,4 @@
+FullName = Emma Johnson
+Email = david.moore@yandex.com
+CurrentAddress = 567 Birch Boulevard, Seattle, WA 98101
+PermanentAddress = 1717 Birch Drive, Milwaukee, WI 53203

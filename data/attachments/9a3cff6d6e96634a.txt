@@ -1,4 +1,0 @@
-FullName = John Smith
-Email = anna.white@live.com
-CurrentAddress = 987 Magnolia Place, Phoenix, AZ 85003
-PermanentAddress = 654 Cedar Avenue, Raleigh, NC 27603
