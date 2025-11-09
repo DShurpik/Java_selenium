@@ -15,6 +15,7 @@
             <class name="ButtonsTest"/>
             <class name="LinksTests"/>
             <class name="BrokenLinksTests"/>
+            <class name="DynamicPropertiesTests"/>
         </classes>
     </test>
 </suite>

@@ -8,18 +8,23 @@ import org.openqa.selenium.WebDriver;
 @Log4j2
 public class DriverManager {
     private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+    private static Capabilities capabilities;
 
     public static void initDriver(String browser) {
         log.info("Initializing WebDriver for browser: {}", browser);
         WebDriver webDriver = DriverFactory.createDriver(browser);
         driver.set(webDriver);
 
-        Capabilities capabilities = ((HasCapabilities) driver.get()).getCapabilities();
+        capabilities = ((HasCapabilities) driver.get()).getCapabilities();
         log.info("WebDriver created -> Browser: {} | Version: {} | OS: {} | ID: {}",
                 capabilities.getBrowserName(),
                 capabilities.getBrowserVersion(),
                 System.getProperty("os.name"),
                 driver.get());
+    }
+
+    public static Capabilities getLastCapabilities() {
+        return capabilities;
     }
 
     public static WebDriver getDriver() {

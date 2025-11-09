@@ -5,9 +5,8 @@ import driver.DriverManager;
 import listeners.InvokedMethodListener;
 import listeners.ListenerForProperty;
 import lombok.extern.log4j.Log4j2;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Listeners;
+import org.testng.annotations.*;
+import utils.AllureEnvironmentWriter;
 
 
 @Listeners({ListenerForProperty.class, InvokedMethodListener.class})
@@ -32,4 +31,8 @@ public abstract class BaseTest {
         DriverManager.closeDriver();
     }
 
+    @AfterSuite(alwaysRun = true)
+    public void writeEnvironment() {
+        AllureEnvironmentWriter.writeEnvironment();
+    }
 }
