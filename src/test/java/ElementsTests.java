@@ -44,51 +44,6 @@ public class ElementsTests extends BaseTest {
 
     @Owner("John Doe")
     @Severity(SeverityLevel.NORMAL)
-    @TmsLink("TC-22")
-    @Story("Check that element will be enable in 5 seconds")
-    @Test(description = "Checking element will enable in 5 seconds")
-    public void elementWillBeEnableIn5sec() {
-        DynamicPropertiesPage dynamicPropertiesPage = new DynamicPropertiesPage();
-        dynamicPropertiesPage.open(getInstance().getProperty("url"));
-
-        dynamicPropertiesPage.navigateTo(ELEMENTS);
-        dynamicPropertiesPage.navigateToMenu(DYNAMIC_PROPERTIES);
-
-        Assert.assertTrue(dynamicPropertiesPage.elementIsEnableIn5Sec());
-    }
-
-    @Owner("John Doe")
-    @Severity(SeverityLevel.NORMAL)
-    @TmsLink("TC-23")
-    @Story("Check that color has changed")
-    @Test(description = "Checking that color has changed")
-    public void colorChangeTest() {
-        DynamicPropertiesPage dynamicPropertiesPage = new DynamicPropertiesPage();
-        dynamicPropertiesPage.open(getInstance().getProperty("url"));
-
-        dynamicPropertiesPage.navigateTo(ELEMENTS);
-        dynamicPropertiesPage.navigateToMenu(DYNAMIC_PROPERTIES);
-
-        Assert.assertTrue(dynamicPropertiesPage.colorHasChanged());
-    }
-
-    @Owner("John Doe")
-    @Severity(SeverityLevel.NORMAL)
-    @TmsLink("TC-24")
-    @Story("Check that element will be visible after 5 sec")
-    @Test(description = "Checking that element will be visible after 5 sec")
-    public void visibleAfter5Sec() {
-        DynamicPropertiesPage dynamicPropertiesPage = new DynamicPropertiesPage();
-        dynamicPropertiesPage.open(getInstance().getProperty("url"));
-
-        dynamicPropertiesPage.navigateTo(ELEMENTS);
-        dynamicPropertiesPage.navigateToMenu(DYNAMIC_PROPERTIES);
-
-        Assert.assertTrue(dynamicPropertiesPage.buttonIsVisibleIn5Sec());
-    }
-
-    @Owner("John Doe")
-    @Severity(SeverityLevel.NORMAL)
     @TmsLink("TC-25")
     @Story("Fill practice form by valid values")
     @Test(description = "Fill practice form by valid values")

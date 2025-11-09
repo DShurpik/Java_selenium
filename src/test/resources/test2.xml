@@ -6,7 +6,7 @@
 
     <test name="One test run">
         <classes>
-            <class name="BrokenLinksTests"/>
+            <class name="DynamicPropertiesTests"/>
         </classes>
     </test>
 </suite>

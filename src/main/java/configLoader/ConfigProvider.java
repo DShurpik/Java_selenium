@@ -16,12 +16,10 @@ public interface ConfigProvider {
         }
     }
 
-    // Получение профиля (env)
     static String getProfile() {
         return System.getProperty("env", "dev");
     }
 
-    // Получение имени файла конфигурации
     static String getConfigFileName() {
         return getProfile() + ".properties";
     }
