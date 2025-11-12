@@ -38,14 +38,31 @@ public abstract class BasePage {
     @Step("Navigate to {0} menu")
     public void navigateTo(Navigation menuName) {
         log.info("Navigate to -> {}", menuName.getItem());
-        actions.moveToElement(driver.findElement(By.xpath("//div[h5=" + menuName.getItem() + "]")));
-        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//div[h5=" + menuName.getItem() + "]")))).click();
+        By menuLocator = By.xpath(String.format("//div[h5[text()=%s]]", menuName.getItem()));
+        try {
+            WebElement menuElement = wait.until(ExpectedConditions.elementToBeClickable(menuLocator));
+            actions.moveToElement(menuElement).perform();
+            menuElement.click();
+            log.debug("Successfully navigated to menu: {}", menuName.getItem());
+        } catch (Exception e) {
+            log.error("Failed to navigate to menu: {}", menuName.getItem(), e);
+            throw new RuntimeException("Navigation failed for: " + menuName.getItem(), e);
+        }
     }
 
     @Step("Navigate to {0} menu field")
     public void navigateToMenu(Navigation menuItem) {
         log.info("Navigate to -> {}", menuItem.getItem());
-        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//span[contains(text(), " + menuItem.getItem() + ")]")))).click();
+        By menuItemLocator = By.xpath(String.format("//span[contains(text(), %s)]", menuItem.getItem()));
+
+        try {
+            WebElement menuItemElement = wait.until(ExpectedConditions.elementToBeClickable(menuItemLocator));
+            menuItemElement.click();
+            log.debug("Successfully navigated to menu item: {}", menuItem.getItem());
+        } catch (Exception e) {
+            log.error("Failed to navigate to menu item: {}", menuItem.getItem(), e);
+            throw new RuntimeException("Navigation failed for menu item: " + menuItem.getItem(), e);
+        }
     }
 
     @Step("Open website with {0} address")
