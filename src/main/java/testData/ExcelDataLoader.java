@@ -12,7 +12,7 @@ public class ExcelDataLoader {
 
     public static List<String> readExcelData(String filePath, int sheetIndex, int... columnIndices) {
         if (columnIndices.length == 0) {
-            throw new IllegalArgumentException("Укажите хотя бы один индекс столбца!");
+            throw new IllegalArgumentException("At least one column index must be specified!");
         }
         List<String> data = new ArrayList<>();
         try (Workbook workbook = new XSSFWorkbook(new FileInputStream(filePath))) {

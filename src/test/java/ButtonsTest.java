@@ -14,7 +14,7 @@ public class ButtonsTest extends BaseTest {
     @TmsLink("FORM-TC-015")
     @Story("Mouse clicks")
     @Test(description = "Different kind of clicks")
-    public void doubleRightMouseClicksTest() {
+    public void differentClicksTest() {
         ButtonsPage buttonsPage = new ButtonsPage();
 
         buttonsPage.open();
