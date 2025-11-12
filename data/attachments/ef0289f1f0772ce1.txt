@@ -1,4 +1,0 @@
-FullName = Lawrence Bednar
-Email = abraham.wolf@gmail.com
-CurrentAddress = Suite 008 685 Bins Stream, South Dayna, OH 80551-7363
-PermanentAddress = 370 Orlando Forks, Stromanfurt, MT 42538-5740

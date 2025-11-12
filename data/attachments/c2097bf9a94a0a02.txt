@@ -1,0 +1,4 @@
+FullName = Sarah Davis
+Email = chris.jackson@gmx.com
+CurrentAddress = 101 Elm Lane, Boston, MA 02108
+PermanentAddress = 777 Ash Circle, Dallas, TX 75202
