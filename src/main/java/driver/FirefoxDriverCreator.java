@@ -13,7 +13,7 @@ public class FirefoxDriverCreator extends DriverCreator {
         log.info("Creating FirefoxDriver");
         FirefoxOptions options = new FirefoxOptions();
         if (isHeadless()) {
-            options.addArguments("--headless", "--disable-gpu");
+            options.addArguments("--headless=new", "--disable-gpu");
         }
 
         WebDriver driver = new FirefoxDriver(options);

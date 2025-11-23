@@ -13,7 +13,7 @@ public class ChromeDriverCreator extends DriverCreator {
         log.info("Creating ChromeDriver");
         ChromeOptions options = new ChromeOptions();
         if (isHeadless()) {
-            options.addArguments("--headless", "--disable-gpu");
+            options.addArguments("--headless=new", "--disable-gpu");
         }
 
         WebDriver driver = new ChromeDriver(options);

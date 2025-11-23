@@ -2,11 +2,15 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 
-<suite name="Test run">
+<suite name="Test run" thread-count="2" parallel="methods">
 
     <test name="One test run">
         <classes>
-            <class name="DynamicPropertiesTests"/>
+            <class name="PracticeFormTests">
+                <methods>
+                    <include name="fillPracticeFormTest"/>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>
