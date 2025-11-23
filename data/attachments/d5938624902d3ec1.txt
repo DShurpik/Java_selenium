@@ -1,4 +1,0 @@
-FullName = Ivory Kilback
-Email = wade.legros@gmail.com
-CurrentAddress = Apt. 627 670 Loretta Common, Edberg, IA 76759-6933
-PermanentAddress = Apt. 359 6317 Klein Hills, New Dennyborough, RI 83493
