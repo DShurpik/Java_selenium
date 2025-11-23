@@ -1,85 +1,60 @@
 package testData;
 
-import java.util.HashSet;
-import java.util.Set;
+import lombok.Getter;
 
+import java.time.LocalDate;
+import java.util.*;
+
+@Getter
 public class FormData {
+
     private final String firstName;
     private final String lastName;
     private final String email;
-    private final String number;
     private final String gender;
-    private final String subject;
-    private final String day;
-    private final String month;
-    private final String year;
+    private final long mobile;
+    private final LocalDate dateOfBirth;
+    private final List<String> subjects;
     private final Set<String> hobbies;
+    private final String currentAddress;
 
-    public FormData(String firstName, String lastName, String email, String number, String gender,
-                    String subject, String day, String month, String year, Set<String> hobbies) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.number = number;
-        this.gender = gender;
-        this.subject = subject;
-        this.day = day;
-        this.month = month;
-        this.year = year;
-        this.hobbies = hobbies;
+
+    @Override
+    public String toString() {
+        return String.format("%s %s, %s, %s, %d, %s, %s, %s",
+                getFirstName(),
+                getLastName(),
+                getEmail(),
+                getGender(),
+                getMobile(),
+                getSubjects(),
+                getHobbies(),
+                getCurrentAddress()
+        );
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public String getDay() {
-        return day;
-    }
-
-    public String getMonth() {
-        return month;
-    }
-
-    public String getYear() {
-        return year;
-    }
-
-    public Set<String> getHobbies() {
-        return hobbies;
+    public FormData(Builder builder) {
+        this.firstName = builder.firstName;
+        this.lastName = builder.lastName;
+        this.email = builder.email;
+        this.gender = builder.gender;
+        this.mobile = builder.mobile;
+        this.dateOfBirth = builder.dateOfBirth;
+        this.subjects = builder.subjects;
+        this.hobbies = builder.hobbies;
+        this.currentAddress = builder.currentAddress;
     }
 
     public static class Builder {
         private String firstName;
         private String lastName;
         private String email;
-        private String number;
         private String gender;
-        private String subject;
-        private String day;
-        private String month;
-        private String year;
+        private long mobile;
+        private LocalDate dateOfBirth;
+        private List<String> subjects = new ArrayList<>();
         private Set<String> hobbies = new HashSet<>();
+        private String currentAddress;
 
         public Builder firstName(String firstName) {
             this.firstName = firstName;
@@ -91,13 +66,13 @@ public class FormData {
             return this;
         }
 
-        public Builder email(String email) {
-            this.email = email;
+        public Builder mobile(long mobile) {
+            this.mobile = mobile;
             return this;
         }
 
-        public Builder number(String number) {
-            this.number = number;
+        public Builder email(String email) {
+            this.email = email;
             return this;
         }
 
@@ -106,23 +81,23 @@ public class FormData {
             return this;
         }
 
-        public Builder subject(String subject) {
-            this.subject = subject;
+        public Builder dateOfBirth(int y, int m, int d) {
+            this.dateOfBirth = LocalDate.of(y, m, d);
             return this;
         }
 
-        public Builder day(String day) {
-            this.day = day;
+        public Builder dateOfBirth(LocalDate date) {
+            this.dateOfBirth = date;
             return this;
         }
 
-        public Builder month(String month) {
-            this.month = month;
+        public Builder subjects(List<String> subjects) {
+            this.subjects = subjects;
             return this;
         }
 
-        public Builder year(String year) {
-            this.year = year;
+        public Builder subjects(String... subjects) {
+            this.subjects = Arrays.asList(subjects);
             return this;
         }
 
@@ -131,8 +106,18 @@ public class FormData {
             return this;
         }
 
+        public Builder hobbies(String... hobbies) {
+            this.hobbies = new HashSet<>(Arrays.asList(hobbies));
+            return this;
+        }
+
+        public Builder currentAddress(String currentAddress) {
+            this.currentAddress = currentAddress;
+            return this;
+        }
+
         public FormData build() {
-            return new FormData(firstName, lastName, email, number, gender, subject, day, month, year, hobbies);
+            return new FormData(this);
         }
     }
 }

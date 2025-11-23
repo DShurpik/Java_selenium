@@ -21,8 +21,8 @@ public class Retry implements IRetryAnalyzer {
 
         if (!iTestResult.isSuccess() && currentAttempt < MAX_RETRY) {
             log.warn("Test '{}' failed. Retrying attempt {}/{}",
-                    testName, currentAttempt, MAX_RETRY);
-            currentAttempt++;
+                    testName, currentAttempt + 1, MAX_RETRY);
+            attempt.set(currentAttempt + 1);
             return true;
         }
 

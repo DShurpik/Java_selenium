@@ -13,6 +13,9 @@ import java.util.*;
 @Log4j2
 public class PracticeFormPage extends BasePage {
 
+    private String selectedState;
+    private String selectedCity;
+
     @FindBy(id = "firstName")
     private WebElement firstNameField;
 
@@ -34,44 +37,69 @@ public class PracticeFormPage extends BasePage {
     @FindBy(id = "subjectsInput")
     private WebElement subjectInput;
 
+
+    @FindBy(id = "currentAddress")
+    private WebElement currentAddressField;
+
+    @FindBy(xpath = "//div[text()='Select State']")
+    private WebElement stateDropdown;
+
+    @FindBy(id = "city")
+    private WebElement cityDropdown;
+
     @FindBy(id = "submit")
     private WebElement submitBtn;
 
-    @FindBy(xpath = "//table[@class='table table-dark table-striped table-bordered table-hover']")
+    @FindBy(xpath = "//tbody//td[2]")
     private WebElement resultTable;
 
+    public String getSelectedState() {
+        return selectedState;
+    }
+
+    public String getSelectedCity() {
+        return selectedCity;
+    }
+
     @Step("Fill out the practice form with provided data")
-    public void fillPracticeForm(FormData data) {
-        enterFirstName(data.getFirstName());
-        enterLastName(data.getLastName());
-        enterEmail(data.getEmail());
-        enterNumber(data.getNumber());
-        chooseGender(data.getGender());
-        chooseDate(data.getDay(), data.getMonth(), data.getYear());
-        enterSubject(data.getSubject());
-        selectRandomHobbies(data.getHobbies());
+    public void fillPracticeForm(FormData formData) {
+        enterFirstName(formData.getFirstName());
+        enterLastName(formData.getLastName());
+        enterEmail(formData.getEmail());
+        enterNumber(formData.getMobile());
+        chooseGender(formData.getGender());
+        //chooseDate(data.getDay(), data.getMonth(), data.getYear());
+        enterSubject(formData.getSubjects());
+        selectHobbies(formData.getHobbies());
+        enterCurrentAddress(formData.getCurrentAddress());
+
+        chooseState();
+        chooseCity();
     }
 
     @Step("Enter {0} like first name")
-    public void enterFirstName(String name) {
+    public PracticeFormPage enterFirstName(String name) {
         log.info("Enter {} in first name field", name);
-        firstNameField.sendKeys(name);
+        sendText(name, firstNameField);
+        return this;
     }
 
     @Step("Enter {0} like last name")
-    public void enterLastName(String lastName) {
+    public PracticeFormPage enterLastName(String lastName) {
         log.info("Enter {} in last name field", lastName);
-        lastNameField.sendKeys(lastName);
+        sendText(lastName, lastNameField);
+        return this;
     }
 
     @Step("Enter {0} like email")
-    public void enterEmail(String email) {
+    public PracticeFormPage enterEmail(String email) {
         log.info("Enter {} in email field", email);
-        emailField.sendKeys(email);
+        sendText(email, emailField);
+        return this;
     }
 
     @Step("Click on {0}")
-    public void chooseGender(String genderName) {
+    public PracticeFormPage chooseGender(String genderName) {
         log.info("Click on {} radio button", genderName);
         Map<String, String> genderMap = Map.of(
                 "Male", "gender-radio-1",
@@ -79,12 +107,14 @@ public class PracticeFormPage extends BasePage {
                 "Other", "gender-radio-3"
         );
         driver.findElement(By.cssSelector("label[for='" + genderMap.get(genderName) + "']")).click();
+        return this;
     }
 
     @Step("Enter {0} in number field")
-    public void enterNumber(String number) {
+    public PracticeFormPage enterNumber(long number) {
         log.info("Enter {} in number field", number);
-        userNumberField.sendKeys(number);
+        sendText(String.valueOf(number), userNumberField);
+        return this;
     }
 
     @Step("Choose data with {0} day, {1} month, {2} year")
@@ -99,41 +129,153 @@ public class PracticeFormPage extends BasePage {
         driver.findElement(By.xpath("//div[contains(@class, 'react-datepicker__day') and text()='" + formattedDay + "']")).click();
     }
 
-    @Step("Enter {0} like a subject")
-    public void enterSubject(String subject) {
-        WebElement container = wait.until(ExpectedConditions.elementToBeClickable(subjectField));
-        log.info("Click on {}", subjectField.toString());
-        container.click();
-        WebElement inputField = wait.until(ExpectedConditions.elementToBeClickable(subjectInput));
-        log.info("Enter {} in subject field", subject);
-        inputField.sendKeys(subject);
-        inputField.sendKeys(Keys.ENTER);
+    @Step("Enter subjects: {0}")
+    public PracticeFormPage enterSubject(List<String> subjects) {
+        if (subjects == null || subjects.isEmpty()) {
+            log.info("No subjects to enter");
+            return this;
+        }
+        click(subjectField);
+
+        for (String subject : subjects) {
+            WebElement input = wait.until(ExpectedConditions.visibilityOf(subjectInput));
+            input.sendKeys(subject);
+            log.info("Enter subject: {}", subject);
+
+            By suggestionLocator = By.xpath("//div[contains(@class,'subjects-auto-complete__option') and contains(.,'" + subject + "')]");
+            wait.until(ExpectedConditions.elementToBeClickable(suggestionLocator)).click();
+        }
+        return this;
     }
 
-    @Step("Select hobbies randomly")
-    public void selectRandomHobbies(Set<String> hobbies) {
-        Random random = new Random();
-        List<WebElement> labels = driver.findElements(By.cssSelector(".col-md-9 .custom-control.custom-checkbox.custom-control-inline .custom-control-input + .custom-control-label"));
-        int count = random.nextInt(hobbies.size() + 1);
-        java.util.Collections.shuffle(labels);
-        log.info("Select {} hobbies", hobbies);
-        for (int i = 0; i < count; i++) {
-            if (!labels.get(i).isSelected()) {
-                labels.get(i).click();
-            }
+    @Step("Select hobbies {0}")
+    public PracticeFormPage selectHobbies(Set<String> hobbies) {
+        if (hobbies == null || hobbies.isEmpty()) {
+            log.info("No hobbies requested - skipping");
+            return this;
         }
+
+        for (String hobby : hobbies) {
+            WebElement webElement = driver.findElement(By.xpath("//label[text()='" + hobby + "']"));
+            log.info("Select hobby: {}", hobby);
+            click(webElement);
+        }
+        return this;
+    }
+
+    @Step("Enter current address {0}")
+    public PracticeFormPage enterCurrentAddress(String address) {
+        log.info("Enter current address: {}", address);
+        sendText(address, currentAddressField);
+        return this;
+    }
+
+    @Step("Choose state randomly")
+    public PracticeFormPage chooseState() {
+        click(stateDropdown);
+
+        By optionsLocator = By.xpath("//div[@id='state']//div[contains(@class,'option') and not(contains(@class,'disabled'))]");
+
+        List<WebElement> stateOptions = wait.until(
+                ExpectedConditions.visibilityOfAllElementsLocatedBy(optionsLocator));
+
+        if (stateOptions.isEmpty()) {
+            throw new RuntimeException("No state options available to select");
+        }
+
+        int randomIndex = new Random().nextInt(stateOptions.size());
+        WebElement randomState = stateOptions.get(randomIndex);
+        selectedState = randomState.getText().trim();
+        log.info("Selected state: {}", selectedState);
+        click(randomState);
+
+        return this;
+    }
+
+    @Step("Choose city randomly")
+    public PracticeFormPage chooseCity() {
+        click(cityDropdown);
+
+        By optionLocator = By.xpath("//div[@id='city']//div[contains(@class,'option') and not(contains(@class,'disabled'))]");
+
+        List<WebElement> cityOptions = wait.until(
+                ExpectedConditions.visibilityOfAllElementsLocatedBy(optionLocator)
+        );
+
+        if (cityOptions.isEmpty()) {
+            throw new RuntimeException("No city options available to select");
+        }
+
+        int randomIndex = new Random().nextInt(cityOptions.size());
+        WebElement randomState = cityOptions.get(randomIndex);
+        selectedCity = randomState.getText().trim();
+        log.info("Selected city: {}", selectedCity);
+        click(randomState);
+
+        return this;
     }
 
     @Step("Click submit button")
     public void clickSubmitBtn() {
         log.info("Click submit button");
-        submitBtn.click();
+        click(submitBtn);
+    }
+
+    @Step("Create form data list from provided form data")
+    public List<String> getExpectedValues(FormData formData) {
+        List<String> expectedValues = new ArrayList<>();
+        expectedValues.add(formData.getFirstName() + " " + formData.getLastName());
+        expectedValues.add(formData.getEmail());
+        expectedValues.add(formData.getGender());
+        expectedValues.add(String.valueOf(formData.getMobile()));
+        //expectedValues.add(formData.getDay() + " " + formData.getMonth() + "," + formData.getYear());
+        expectedValues.add(String.join(", ", formData.getSubjects()));
+        expectedValues.add(String.join(", ", formData.getHobbies()));
+        expectedValues.add(formData.getCurrentAddress());
+        expectedValues.add(getSelectedState() + " " + getSelectedCity());
+        log.info("Expected values: {}", expectedValues);
+        return expectedValues;
     }
 
     @Step("Get result table")
-    public String getResultTable() {
-        wait.until(ExpectedConditions.elementToBeClickable(resultTable));
+    public List<String> getResultTable() {
+        wait.until(ExpectedConditions.visibilityOf(resultTable));
         log.info("Get result table");
-        return resultTable.getText();
+        List<WebElement> rows = driver.findElements(By.xpath("//tbody//td[2]"));
+        List<String> results = new ArrayList<>();
+        for (WebElement row : rows) {
+            results.add(row.getText().trim());
+        }
+        log.info("Result table values: {}", results);
+        return results;
     }
+
+    @Step("Assert that all expected values are present in result table")
+    public boolean assertResults(List<String> expectedValues, List<String> actualValues) {
+        if (expectedValues == null || expectedValues.isEmpty()) {
+            log.warn("No expected values provided for assertion");
+            return false;
+        }
+
+        boolean allMatch = true;
+
+        for (String expected : expectedValues) {
+            if (expected == null || expected.trim().isEmpty()) {
+                continue;
+            }
+
+            boolean found = actualValues.stream()
+                    .anyMatch(row -> row != null && row.contains(expected.trim()));
+
+            if (!found) {
+                log.error("Not found expected value: '{}'. Actual values: \n{}",
+                        expected, String.join("\n", actualValues));
+                allMatch = false;
+            } else {
+                log.info("Found expected value: '{}' in actual values list", expected);
+            }
+        }
+        return allMatch;
+    }
+
 }

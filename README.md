@@ -449,7 +449,7 @@ This test automation framework represents a **production-ready solution** with:
 
 <div align="center">
 
-**⭐ If you find this framework useful, consider emailing me with job prepositions ⭐**
+**⭐ If you find this framework useful, consider emailing me with job propositions ⭐**
 
 Made with Java ☕ and Selenium 🚗
 

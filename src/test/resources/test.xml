@@ -16,6 +16,7 @@
             <class name="LinksTests"/>
             <class name="BrokenLinksTests"/>
             <class name="DynamicPropertiesTests"/>
+            <class name="PracticeFormTests"/>
         </classes>
     </test>
 </suite>
