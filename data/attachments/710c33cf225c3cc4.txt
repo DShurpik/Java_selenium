@@ -1,4 +1,0 @@
-FullName = James Anderson
-Email = laura.martin@fastmail.com
-CurrentAddress = 2121 Sycamore Court, Boise, ID 83702
-PermanentAddress = 789 Elm Drive, Denver, CO 80203
