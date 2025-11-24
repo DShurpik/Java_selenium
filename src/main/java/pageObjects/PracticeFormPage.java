@@ -73,8 +73,8 @@ public class PracticeFormPage extends BasePage {
         selectHobbies(formData.getHobbies());
         enterCurrentAddress(formData.getCurrentAddress());
 
-        chooseState();
-        chooseCity();
+        chooseState(formData.isChooseStateAndCity());
+        chooseCity(formData.isChooseStateAndCity());
     }
 
     @Step("Enter {0} like first name")
@@ -165,13 +165,21 @@ public class PracticeFormPage extends BasePage {
 
     @Step("Enter current address {0}")
     public PracticeFormPage enterCurrentAddress(String address) {
+        if (address == null || address.isEmpty()) {
+            log.info("No current address provided - skipping");
+            return this;
+        }
         log.info("Enter current address: {}", address);
         sendText(address, currentAddressField);
         return this;
     }
 
     @Step("Choose state randomly")
-    public PracticeFormPage chooseState() {
+    public PracticeFormPage chooseState(boolean chooseState) {
+        if (!chooseState) {
+            log.info("State selection not requested - skipping");
+            return this;
+        }
         click(stateDropdown);
 
         By optionsLocator = By.xpath("//div[@id='state']//div[contains(@class,'option') and not(contains(@class,'disabled'))]");
@@ -193,7 +201,11 @@ public class PracticeFormPage extends BasePage {
     }
 
     @Step("Choose city randomly")
-    public PracticeFormPage chooseCity() {
+    public PracticeFormPage chooseCity(boolean chooseCity) {
+        if (!chooseCity) {
+            log.info("City selection not requested - skipping");
+            return this;
+        }
         click(cityDropdown);
 
         By optionLocator = By.xpath("//div[@id='city']//div[contains(@class,'option') and not(contains(@class,'disabled'))]");
@@ -224,15 +236,15 @@ public class PracticeFormPage extends BasePage {
     @Step("Create form data list from provided form data")
     public List<String> getExpectedValues(FormData formData) {
         List<String> expectedValues = new ArrayList<>();
-        expectedValues.add(formData.getFirstName() + " " + formData.getLastName());
+        expectedValues.add(String.format("%s %s",formData.getFirstName(), formData.getLastName()));
         expectedValues.add(formData.getEmail());
         expectedValues.add(formData.getGender());
         expectedValues.add(String.valueOf(formData.getMobile()));
         //expectedValues.add(formData.getDay() + " " + formData.getMonth() + "," + formData.getYear());
         expectedValues.add(String.join(", ", formData.getSubjects()));
         expectedValues.add(String.join(", ", formData.getHobbies()));
-        expectedValues.add(formData.getCurrentAddress());
-        expectedValues.add(getSelectedState() + " " + getSelectedCity());
+        if (formData.getCurrentAddress() != null) expectedValues.add(formData.getCurrentAddress());
+        if (formData.isChooseStateAndCity()) expectedValues.add(getSelectedState() + " " + getSelectedCity());
         log.info("Expected values: {}", expectedValues);
         return expectedValues;
     }
