@@ -37,6 +37,29 @@ public class FormDataProvider {
                                 .subjects(subjectList.subList(0, subjectCount))
                                 .hobbies(hobbiesList.stream().limit(hobbiesCount).collect(Collectors.toSet()))
                                 .currentAddress(currentAddressList.get(addressIndex))
+                                .chooseStateAndCity(true)
+                                .build()
+                },
+                {
+                        new FormData.Builder()
+                                .firstName(safePick(firstNameList))
+                                .lastName(safePick(lastNameList))
+                                .email(safePick(emailList))
+                                .gender(safePick(genderList))
+                                .mobile(randomMobile())
+                                .subjects(subjectList.subList(0, subjectCount))
+                                .hobbies(hobbiesList.stream().limit(hobbiesCount).collect(Collectors.toSet()))
+                                .currentAddress(currentAddressList.get(addressIndex))
+                                .chooseStateAndCity(false)
+                                .build()
+                },
+                {
+                        new FormData.Builder()
+                                .firstName(safePick(firstNameList))
+                                .lastName(safePick(lastNameList))
+                                .email(safePick(emailList))
+                                .gender(safePick(genderList))
+                                .mobile(randomMobile())
                                 .build()
                 }
         };

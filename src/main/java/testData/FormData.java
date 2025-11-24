@@ -17,7 +17,7 @@ public class FormData {
     private final List<String> subjects;
     private final Set<String> hobbies;
     private final String currentAddress;
-
+    private final boolean chooseStateAndCity;
 
     @Override
     public String toString() {
@@ -43,6 +43,7 @@ public class FormData {
         this.subjects = builder.subjects;
         this.hobbies = builder.hobbies;
         this.currentAddress = builder.currentAddress;
+        this.chooseStateAndCity = builder.chooseStateAndCity;
     }
 
     public static class Builder {
@@ -55,6 +56,7 @@ public class FormData {
         private List<String> subjects = new ArrayList<>();
         private Set<String> hobbies = new HashSet<>();
         private String currentAddress;
+        private boolean chooseStateAndCity;
 
         public Builder firstName(String firstName) {
             this.firstName = firstName;
@@ -113,6 +115,11 @@ public class FormData {
 
         public Builder currentAddress(String currentAddress) {
             this.currentAddress = currentAddress;
+            return this;
+        }
+
+        public Builder chooseStateAndCity(boolean chooseStateAndCity) {
+            this.chooseStateAndCity = chooseStateAndCity;
             return this;
         }
 
