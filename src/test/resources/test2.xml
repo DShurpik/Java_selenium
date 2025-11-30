@@ -6,9 +6,10 @@
 
     <test name="One test run">
         <classes>
-            <class name="PracticeFormTests">
+            <class name="BrowserWindowsTests">
                 <methods>
-                    <include name="fillPracticeFormTest"/>
+                    <include name="newTabTest"/>
+                    <include name="newWindowTest"/>
                 </methods>
             </class>
         </classes>

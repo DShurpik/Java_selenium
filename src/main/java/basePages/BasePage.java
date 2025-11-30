@@ -136,4 +136,19 @@ public abstract class BasePage {
             return false;
         }
     }
+
+    @Step("Switch to newly opened window/tab")
+    public void switchToNewWindowOrTab() {
+        String mainWindow = driver.getWindowHandle();
+
+        wait.until(ExpectedConditions.numberOfWindowsToBe(2));
+
+        for (String handle : driver.getWindowHandles()) {
+            if (!handle.equals(mainWindow)) {
+                driver.switchTo().window(handle);
+                log.info("Switched to new window/tab with handle: {}", handle);
+                break;
+            }
+        }
+    }
 }
