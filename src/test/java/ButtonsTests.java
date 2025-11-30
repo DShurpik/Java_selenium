@@ -7,7 +7,7 @@ import pageObjects.ButtonsPage;
 import static pageObjects.Navigation.BUTTONS;
 import static pageObjects.Navigation.ELEMENTS;
 
-public class ButtonsTest extends BaseTest {
+public class ButtonsTests extends BaseTest {
 
     @Owner("John Doe")
     @Severity(SeverityLevel.NORMAL)

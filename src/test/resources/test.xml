@@ -12,11 +12,12 @@
             <class name="CheckBoxTests"/>
             <class name="RadioButtonTests"/>
             <class name="WebTableTests"/>
-            <class name="ButtonsTest"/>
+            <class name="ButtonsTests"/>
             <class name="LinksTests"/>
             <class name="BrokenLinksTests"/>
             <class name="DynamicPropertiesTests"/>
             <class name="PracticeFormTests"/>
+            <class name="BrowserWindowsTests"/>
         </classes>
     </test>
 </suite>
