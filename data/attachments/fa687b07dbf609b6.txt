@@ -1,0 +1,4 @@
+FullName = Ricky Schowalter
+Email = ozie.emard@yahoo.com
+CurrentAddress = Apt. 155 797 Considine Springs, Legrosberg, NM 11073-9178
+PermanentAddress = 37399 Wiza Island, East Amy, TX 38856

@@ -1,4 +1,0 @@
-FullName = Emma Johnson
-Email = michael.brown@outlook.com
-CurrentAddress = 456 Oak Avenue, Portland, OR 97205
-PermanentAddress = 1818 Walnut Boulevard, Salt Lake City, UT 84102

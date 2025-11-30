@@ -1,4 +1,0 @@
-FullName = Millard Leannon
-Email = antone.feest@gmail.com
-CurrentAddress = 39960 Fleta Islands, Ottoborough, RI 87939-1723
-PermanentAddress = 9603 Billy Loaf, East Osvaldo, NV 99633-7522
