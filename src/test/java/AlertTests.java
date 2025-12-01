@@ -4,20 +4,20 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.AlertsPage;
 
-import static java.lang.System.getProperties;
 import static pageObjects.Navigation.*;
+import static utils.PropertyReader.getInstance;
 
 
 public class AlertTests extends BaseTest {
 
     @Owner("John Doe")
     @Severity(SeverityLevel.NORMAL)
-    @TmsLink("TC-28")
+    @TmsLink("FORM-TC-022")
     @Story("Check that alert is visible")
     @Test(description = "Check, that alert is visible after clicking")
     public void alertTest() {
         AlertsPage alertsPage = new AlertsPage();
-        alertsPage.open(getProperties().getProperty("url"));
+        alertsPage.open();
         alertsPage.navigateTo(ALERTS);
         alertsPage.navigateToMenu(ALERTS_MENU);
 
@@ -29,12 +29,12 @@ public class AlertTests extends BaseTest {
 
     @Owner("John Doe")
     @Severity(SeverityLevel.NORMAL)
-    @TmsLink("TC-29")
+    @TmsLink("FORM-TC-023")
     @Story("Check that timer alert is visible")
     @Test(description = "Check, that timer alert is visible after clicking")
     public void timerAlertTest() {
         AlertsPage alertsPage = new AlertsPage();
-        alertsPage.open(getProperties().getProperty("url"));
+        alertsPage.open();
         alertsPage.navigateTo(ALERTS);
         alertsPage.navigateToMenu(ALERTS_MENU);
 
@@ -46,12 +46,12 @@ public class AlertTests extends BaseTest {
 
     @Owner("John Doe")
     @Severity(SeverityLevel.NORMAL)
-    @TmsLink("TC-30")
+    @TmsLink("FORM-TC-024")
     @Story("Check that confirm alert is visible")
     @Test(description = "Check, that confirm alert is visible after clicking")
     public void confirmAlertTest() {
         AlertsPage alertsPage = new AlertsPage();
-        alertsPage.open(getProperties().getProperty("url"));
+        alertsPage.open();
         alertsPage.navigateTo(ALERTS);
         alertsPage.navigateToMenu(ALERTS_MENU);
 
@@ -64,20 +64,24 @@ public class AlertTests extends BaseTest {
 
     @Owner("John Doe")
     @Severity(SeverityLevel.NORMAL)
-    @TmsLink("TC-31")
+    @TmsLink("FORM-TC-025")
     @Story("Check that prompt alert is visible")
     @Test(description = "Check, that prompt alert is visible after clicking and check text")
     public void promptAlertTest() {
         AlertsPage alertsPage = new AlertsPage();
-        alertsPage.open(getProperties().getProperty("url"));
+        String name = getInstance().getProperty("firstName");
+
+        alertsPage.open();
         alertsPage.navigateTo(ALERTS);
         alertsPage.navigateToMenu(ALERTS_MENU);
 
         alertsPage.clickOnPromtBtn();
-        alertsPage.sendTextToAlert(getProperties().getProperty("firstName"));
+        alertsPage.waitForAlert();
+        alertsPage.sendTextToAlert(name);
 
         Assert.assertTrue(alertsPage.isAlertPresent());
         alertsPage.acceptAlert();
-        Assert.assertEquals(alertsPage.getPromptResult(), "You entered John");
+        Assert.assertEquals(alertsPage.getPromptResult(),
+                String.format("You entered %s", getInstance().getProperty("firstName")));
     }
 }

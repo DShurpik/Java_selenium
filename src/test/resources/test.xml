@@ -18,6 +18,7 @@
             <class name="DynamicPropertiesTests"/>
             <class name="PracticeFormTests"/>
             <class name="BrowserWindowsTests"/>
+            <class name="AlertTests"/>
         </classes>
     </test>
 </suite>
