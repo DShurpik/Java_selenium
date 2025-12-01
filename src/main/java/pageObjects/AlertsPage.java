@@ -8,6 +8,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import static utils.PropertyReader.getInstance;
+
 @Log4j2
 public class AlertsPage extends BasePage {
 
@@ -31,26 +33,22 @@ public class AlertsPage extends BasePage {
 
     @Step("Click on alert button")
     public void clickOnAlertBtn() {
-        log.info("Click on alert button");
-        alertBtn.click();
+        click(alertBtn);
     }
 
     @Step("Click on timer alert button")
     public void clickOnTimerAlertBtn() {
-        log.info("Click on timer alert button");
-        timerAlertBtn.click();
+        click(timerAlertBtn);
     }
 
     @Step("Click on confirm button")
     public void clickOnConfirmBtn() {
-        log.info("Click on confirm button");
-        confirmBtn.click();
+        click(confirmBtn);
     }
 
     @Step("Get confirm result")
     public String getConfirmResult() {
-        log.info("Get confirm result");
-        return confirmResult.getText();
+        return getText(confirmResult);
     }
 
     @Step("Click on promt button")
@@ -66,25 +64,32 @@ public class AlertsPage extends BasePage {
     }
 
     @Step("Send text to alert")
-    public void sendTextToAlert(String text) {
-        log.info("Send text to alert");
-        driver.switchTo().alert().sendKeys(text);
+    public void sendTextToAlert(String name) {
+        log.info("Send text {} to alert", name);
+        driver.switchTo().alert().sendKeys(name);
     }
 
     @Step("Check that alert is present")
     public boolean isAlertPresent() {
-        log.info("Alert is present");
         try {
             wait.until(ExpectedConditions.alertIsPresent());
+            log.info("Alert is present");
             return true;
         } catch (NoAlertPresentException e) {
+            log.info("Alert isn't present");
             return false;
         }
     }
 
     @Step("Accept alert")
     public void acceptAlert() {
-        log.info("Accept alert");
         driver.switchTo().alert().accept();
+        log.info("Accept alert");
+    }
+
+    @Step("Wait for alert to be present")
+    public void waitForAlert() {
+        wait.until(ExpectedConditions.alertIsPresent());
+        log.info("Alert is present and switched to it");
     }
 }

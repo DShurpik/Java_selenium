@@ -6,12 +6,7 @@
 
     <test name="One test run">
         <classes>
-            <class name="BrowserWindowsTests">
-                <methods>
-                    <include name="newTabTest"/>
-                    <include name="newWindowTest"/>
-                </methods>
-            </class>
+            <class name="AlertTests"/>
         </classes>
     </test>
 </suite>
