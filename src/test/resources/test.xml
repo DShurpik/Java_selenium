@@ -19,6 +19,7 @@
             <class name="PracticeFormTests"/>
             <class name="BrowserWindowsTests"/>
             <class name="AlertTests"/>
+            <class name="FramesTests"/>
         </classes>
     </test>
 </suite>
