@@ -1,0 +1,4 @@
+FullName = Sophia Martinez
+Email = james.anderson@protonmail.com
+CurrentAddress = 654 Sycamore Court, Atlanta, GA 30303
+PermanentAddress = 666 Linden Boulevard, Charlotte, NC 28203

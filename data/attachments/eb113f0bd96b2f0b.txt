@@ -1,4 +1,0 @@
-FullName = Emily Clark
-Email = sarah.davis@hotmail.com
-CurrentAddress = 2020 Chestnut Way, Salt Lake City, UT 84101
-PermanentAddress = 1818 Walnut Boulevard, Salt Lake City, UT 84102

@@ -1,0 +1,4 @@
+FullName = Ms. Rex Gottlieb
+Email = jeffrey.kautzer@hotmail.com
+CurrentAddress = 49252 Minna Ferry, Lake Warnerport, IN 12917-1267
+PermanentAddress = Apt. 787 131 Ronny Rapid, Wunschburgh, MI 43237-7867
