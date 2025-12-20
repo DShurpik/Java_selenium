@@ -17,7 +17,8 @@ public enum Navigation {
     BROKEN_LINKS ("'Broken Links - Images'"),
     DYNAMIC_PROPERTIES ("'Dynamic Properties'"),
     PRACTICE_FORM ("'Practice Form'"),
-    FRAMES ("'Frames'");
+    FRAMES ("'Frames'"),
+    MODAL_DIALOGS ("'Modal Dialogs'");
 
     private final String item;
 

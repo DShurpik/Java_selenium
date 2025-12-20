@@ -20,6 +20,7 @@
             <class name="BrowserWindowsTests"/>
             <class name="AlertTests"/>
             <class name="FramesTests"/>
+            <class name="ModalDialogsTests"/>
         </classes>
     </test>
 </suite>

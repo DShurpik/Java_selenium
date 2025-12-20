@@ -6,7 +6,6 @@ import org.openqa.selenium.WebDriver;
 
 import java.time.Duration;
 
-
 public abstract class DriverCreator {
 
     public abstract WebDriver createDriver();

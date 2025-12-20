@@ -8,8 +8,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import static utils.PropertyReader.getInstance;
-
 @Log4j2
 public class AlertsPage extends BasePage {
 

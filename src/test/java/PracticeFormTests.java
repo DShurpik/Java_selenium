@@ -6,8 +6,7 @@ import pageObjects.PracticeFormPage;
 import testData.FormData;
 import testData.FormDataProvider;
 
-import static pageObjects.Navigation.FORMS;
-import static pageObjects.Navigation.PRACTICE_FORM;
+import static pageObjects.Navigation.*;
 
 public class PracticeFormTests extends BaseTest {
 

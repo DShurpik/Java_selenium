@@ -4,8 +4,7 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import pageObjects.ButtonsPage;
 
-import static pageObjects.Navigation.BUTTONS;
-import static pageObjects.Navigation.ELEMENTS;
+import static pageObjects.Navigation.*;
 
 public class ButtonsTests extends BaseTest {
 
