@@ -4,8 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.BrokenLinksPage;
 
-import static pageObjects.Navigation.BROKEN_LINKS;
-import static pageObjects.Navigation.ELEMENTS;
+import static pageObjects.Navigation.*;
 
 public class BrokenLinksTests extends BaseTest {
 

@@ -4,8 +4,7 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import pageObjects.DynamicPropertiesPage;
 
-import static pageObjects.Navigation.DYNAMIC_PROPERTIES;
-import static pageObjects.Navigation.ELEMENTS;
+import static pageObjects.Navigation.*;
 
 public class DynamicPropertiesTests extends BaseTest {
 

@@ -5,8 +5,7 @@ import org.testng.annotations.Test;
 import pageObjects.FramesPage;
 import pageObjects.Navigation.*;
 
-import static pageObjects.Navigation.ALERTS;
-import static pageObjects.Navigation.FRAMES;
+import static pageObjects.Navigation.*;
 
 public class FramesTests extends BaseTest {
 

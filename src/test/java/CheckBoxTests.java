@@ -5,8 +5,7 @@ import org.testng.annotations.Test;
 import pageObjects.CheckBoxPage;
 import testData.TestData;
 
-import static pageObjects.Navigation.CHECK_BOX;
-import static pageObjects.Navigation.ELEMENTS;
+import static pageObjects.Navigation.*;
 
 public class CheckBoxTests extends BaseTest {
 

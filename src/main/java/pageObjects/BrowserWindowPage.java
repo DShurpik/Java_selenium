@@ -3,13 +3,8 @@ package pageObjects;
 import basePages.BasePage;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.*;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import java.util.ArrayList;
-
 
 @Log4j2
 public class BrowserWindowPage extends BasePage {

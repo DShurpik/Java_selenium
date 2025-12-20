@@ -7,7 +7,6 @@ import pageObjects.AlertsPage;
 import static pageObjects.Navigation.*;
 import static utils.PropertyReader.getInstance;
 
-
 public class AlertTests extends BaseTest {
 
     @Owner("John Doe")

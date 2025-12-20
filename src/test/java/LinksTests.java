@@ -9,8 +9,7 @@ import testData.TestData;
 
 import java.util.List;
 
-import static pageObjects.Navigation.ELEMENTS;
-import static pageObjects.Navigation.LINKS;
+import static pageObjects.Navigation.*;
 
 public class LinksTests extends BaseTest {
 
