@@ -21,6 +21,7 @@
             <class name="AlertTests"/>
             <class name="FramesTests"/>
             <class name="ModalDialogsTests"/>
+            <class name="AccordionTests"/>
         </classes>
     </test>
 </suite>
