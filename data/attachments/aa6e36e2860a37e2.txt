@@ -1,4 +1,0 @@
-FullName = Mr. Tonja McLaughlin
-Email = jospeh.runte@yahoo.com
-CurrentAddress = Suite 707 912 Kshlerin Lodge, Lizbethton, OR 14287
-PermanentAddress = Suite 926 229 Padberg Place, Kandraland, SC 63645

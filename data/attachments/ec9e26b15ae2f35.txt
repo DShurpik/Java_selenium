@@ -1,0 +1,4 @@
+FullName = Michael Brown
+Email = laura.martin@fastmail.com
+CurrentAddress = 777 Hazel Circle, Charlotte, NC 28202
+PermanentAddress = 123 Pine Boulevard, Boston, MA 02110

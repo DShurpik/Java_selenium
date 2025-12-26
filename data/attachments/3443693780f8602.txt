@@ -1,4 +1,0 @@
-FullName = Robert Thomas
-Email = sophia.martinez@zoho.com
-CurrentAddress = 1818 Birch Boulevard, Las Vegas, NV 89101
-PermanentAddress = 2222 Laurel Court, Miami, FL 33131
