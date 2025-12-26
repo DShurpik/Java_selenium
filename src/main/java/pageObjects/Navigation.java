@@ -18,7 +18,9 @@ public enum Navigation {
     DYNAMIC_PROPERTIES ("'Dynamic Properties'"),
     PRACTICE_FORM ("'Practice Form'"),
     FRAMES ("'Frames'"),
-    MODAL_DIALOGS ("'Modal Dialogs'");
+    MODAL_DIALOGS ("'Modal Dialogs'"),
+    ACCORDION ("'Accordian'"),
+    WIDGETS ("'Widgets'");
 
     private final String item;
 
