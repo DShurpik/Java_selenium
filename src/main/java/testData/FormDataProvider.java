@@ -12,7 +12,7 @@ import static utils.FormDataUtils.*;
 public class FormDataProvider {
 
     @DataProvider(name = "Form data provider")
-    public static Object[][] pravticeFormData() {
+    public static Object[][] practiceFormData() {
         List<String> firstNameList = readExcelData("src/test/resources/test_sheet.xlsx", 4, 0);
         List<String> lastNameList = readExcelData("src/test/resources/test_sheet.xlsx", 4, 1);
         List<String> emailList = readExcelData("src/test/resources/test_sheet.xlsx", 4, 2);
