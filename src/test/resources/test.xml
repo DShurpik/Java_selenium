@@ -22,6 +22,7 @@
             <class name="FramesTests"/>
             <class name="ModalDialogsTests"/>
             <class name="AccordionTests"/>
+            <class name="AutoCompleteTests"/>
         </classes>
     </test>
 </suite>

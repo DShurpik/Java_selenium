@@ -2,14 +2,12 @@ package basePages;
 
 import configLoader.ConfigProvider;
 import driver.DriverManager;
-import io.qameta.allure.Allure;
-import io.qameta.allure.Step;
+import io.qameta.allure.*;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.*;
 import pageObjects.Navigation;
 
 import java.time.Duration;
@@ -80,7 +78,7 @@ public abstract class BasePage {
     }
 
     protected void sendText(String string, WebElement webElement) {
-        log.info("Enter {} into {} field", string, webElement);
+        log.info("Enter text: {} into {} field", string, webElement);
         webElement.clear();
         webElement.sendKeys(string);
     }
@@ -116,8 +114,8 @@ public abstract class BasePage {
     }
 
     protected String getText(WebElement webElement) {
-        log.info("Get text from element: {}", webElement);
         wait.until(ExpectedConditions.visibilityOf(webElement));
+        log.info("Get text: {} from element: {}", webElement.getText(), webElement);
         return webElement.getText();
     }
 

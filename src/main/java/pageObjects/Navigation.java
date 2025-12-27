@@ -20,7 +20,8 @@ public enum Navigation {
     FRAMES ("'Frames'"),
     MODAL_DIALOGS ("'Modal Dialogs'"),
     ACCORDION ("'Accordian'"),
-    WIDGETS ("'Widgets'");
+    WIDGETS ("'Widgets'"),
+    AUTO_COMPLETE ("'Auto Complete'"),;
 
     private final String item;
 
