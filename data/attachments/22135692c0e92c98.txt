@@ -1,0 +1,4 @@
+FullName = Sarah Davis
+Email = hannah.scott@msn.com
+CurrentAddress = 2222 Magnolia Place, Albuquerque, NM 87101
+PermanentAddress = 101 Walnut Circle, Chicago, IL 60602

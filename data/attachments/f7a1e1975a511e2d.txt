@@ -1,4 +1,0 @@
-FullName = Madalene Smitham I
-Email = anderson.rolfson@gmail.com
-CurrentAddress = 02428 Elijah Mission, Koelpinstad, ND 83669
-PermanentAddress = 213 Collin Island, North Stefantown, MS 71878-7400
