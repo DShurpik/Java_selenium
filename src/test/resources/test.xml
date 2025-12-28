@@ -23,6 +23,7 @@
             <class name="ModalDialogsTests"/>
             <class name="AccordionTests"/>
             <class name="AutoCompleteTests"/>
+            <class name="DatePickerTests"/>
         </classes>
     </test>
 </suite>

@@ -21,7 +21,8 @@ public enum Navigation {
     MODAL_DIALOGS ("'Modal Dialogs'"),
     ACCORDION ("'Accordian'"),
     WIDGETS ("'Widgets'"),
-    AUTO_COMPLETE ("'Auto Complete'"),;
+    AUTO_COMPLETE ("'Auto Complete'"),
+    DATE_PICKER ("'Date Picker'"),;
 
     private final String item;
 
