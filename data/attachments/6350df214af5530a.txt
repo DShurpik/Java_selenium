@@ -1,0 +1,4 @@
+FullName = Jessika Brown
+Email = barney.tremblay@hotmail.com
+CurrentAddress = Apt. 482 102 Arden Via, Port Aureliohaven, CA 05373-9095
+PermanentAddress = Apt. 168 95567 Reginia Camp, Marvinmouth, SC 75505-9984

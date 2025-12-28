@@ -1,0 +1,4 @@
+FullName = Emily Clark
+Email = steven.baker@verizon.net
+CurrentAddress = 555 Poplar Drive, Philadelphia, PA 19103
+PermanentAddress = 111 Laurel Street, New York, NY 10002

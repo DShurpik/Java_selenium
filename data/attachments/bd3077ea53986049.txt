@@ -1,4 +1,0 @@
-FullName = Ezequiel Casper
-Email = tonie.weber@gmail.com
-CurrentAddress = 598 Elvin Ramp, East Felicita, MI 65565-6233
-PermanentAddress = Apt. 508 4811 Russel Drives, Charlynfurt, MS 14265
