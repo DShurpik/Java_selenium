@@ -1,0 +1,4 @@
+FullName = Olivia Taylor
+Email = hannah.scott@msn.com
+CurrentAddress = 1818 Birch Boulevard, Las Vegas, NV 89101
+PermanentAddress = 666 Linden Boulevard, Charlotte, NC 28203
