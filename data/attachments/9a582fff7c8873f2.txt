@@ -1,4 +1,0 @@
-FullName = Daniell Emard
-Email = emilio.jakubowski@yahoo.com
-CurrentAddress = 423 Caroyln Light, East Adrianfort, TX 79735-1373
-PermanentAddress = Apt. 446 3590 Herman Port, Lake Breanne, CT 19692-0860

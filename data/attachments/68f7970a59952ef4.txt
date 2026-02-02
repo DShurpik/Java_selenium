@@ -1,0 +1,4 @@
+FullName = John Smith
+Email = william.wilson@aol.com
+CurrentAddress = 111 Willow Street, San Francisco, CA 94102
+PermanentAddress = 1515 Maple Lane, Indianapolis, IN 46205

@@ -1,0 +1,4 @@
+FullName = Damien Rau
+Email = mauro.ferry@gmail.com
+CurrentAddress = 0719 Cassin Mountain, West Sherlenehaven, IN 00242-9765
+PermanentAddress = 4931 Blick Mall, Port Josefine, MA 32528
