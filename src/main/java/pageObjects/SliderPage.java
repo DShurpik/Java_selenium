@@ -23,16 +23,27 @@ public class SliderPage extends BasePage {
         int min = Integer.parseInt(Objects.requireNonNull(slider.getAttribute("min")));
         int max = Integer.parseInt(Objects.requireNonNull(slider.getAttribute("max")));
 
+        if (targetValue < min || targetValue > max) {
+            throw new IllegalArgumentException("Target value out of slider range");
+        }
+
+        wait.until(ExpectedConditions.elementToBeClickable(slider));
+
         int width = slider.getSize().getWidth();
+        int height = slider.getSize().getHeight();
 
-        int xOffset = (width * (targetValue - min)) / (max - min);
-        int yOffset = slider.getSize().getHeight() / 2 - 1;
-        int clickOffsetFromCenter = xOffset - width / 2;
+        int xOffset = (width * (targetValue - min)) / (max - min) - width / 2;
+        int yOffset = height / 2;
 
-        actions
-                .moveToElement(slider, clickOffsetFromCenter, yOffset)
+        actions.moveToElement(slider)
+                .moveByOffset(xOffset, yOffset)
                 .click()
                 .perform();
+
+        wait.until(d -> {
+            String val = slider.getAttribute("value");
+            return val != null && !val.isEmpty() && Integer.parseInt(val) == targetValue;
+        });
     }
 
     @Step("Get current slider value")
