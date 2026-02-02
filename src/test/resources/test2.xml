@@ -6,7 +6,7 @@
 
     <test name="One test run">
         <classes>
-            <class name="AlertTests"/>
+            <class name="SliderTests"/>
         </classes>
     </test>
 </suite>
