@@ -35,7 +35,13 @@ public class SliderPage extends BasePage {
 
     @Step("Get current slider value")
     public int getSliderValue() {
-        return Integer.parseInt(Objects.requireNonNull(sliderValue.getAttribute("value")));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("sliderValue")));
+        String value = wait.until(d -> {
+            String v = sliderValue.getAttribute("value");
+            return (v != null && !v.isEmpty()) ? v : null;
+        });
+
+        return Integer.parseInt(value);
     }
 
 
