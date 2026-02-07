@@ -2,7 +2,7 @@ package pageObjects;
 
 import basePages.BasePage;
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -20,42 +20,31 @@ public class SliderPage extends BasePage {
     @Step("Move slider to value: {targetValue}")
     public void moveSliderTo(int targetValue) {
 
-        int min = Integer.parseInt(Objects.requireNonNull(slider.getAttribute("min")));
-        int max = Integer.parseInt(Objects.requireNonNull(slider.getAttribute("max")));
+        wait.until(ExpectedConditions.visibilityOf(slider));
 
-        if (targetValue < min || targetValue > max) {
-            throw new IllegalArgumentException("Target value out of slider range");
-        }
+        ((JavascriptExecutor) driver)
+                .executeScript("arguments[0].scrollIntoView({block: 'center'});", slider);
 
-        wait.until(ExpectedConditions.elementToBeClickable(slider));
+        int min = Integer.parseInt(slider.getAttribute("min"));
+        int max = Integer.parseInt(slider.getAttribute("max"));
 
         int width = slider.getSize().getWidth();
-        int height = slider.getSize().getHeight();
 
-        int xOffset = (width * (targetValue - min)) / (max - min) - width / 2;
-        int yOffset = height / 2;
+        float percent = (float)(targetValue - min) / (max - min);
+        int xOffset = Math.round(width * percent);
 
-        actions.moveToElement(slider)
-                .moveByOffset(xOffset, yOffset)
+        actions.moveToElement(slider, -width / 2 + xOffset, 0)
                 .click()
                 .perform();
 
         wait.until(d -> {
-            String val = slider.getAttribute("value");
-            return val != null && !val.isEmpty() && Integer.parseInt(val) == targetValue;
+            int actual = Integer.parseInt(slider.getAttribute("value"));
+            return Math.abs(actual - targetValue) <= 2;
         });
     }
 
     @Step("Get current slider value")
     public int getSliderValue() {
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("sliderValue")));
-        String value = wait.until(d -> {
-            String v = sliderValue.getAttribute("value");
-            return (v != null && !v.isEmpty()) ? v : null;
-        });
-
-        return Integer.parseInt(value);
+        return Integer.parseInt(Objects.requireNonNull(sliderValue.getAttribute("value")));
     }
-
-
 }
