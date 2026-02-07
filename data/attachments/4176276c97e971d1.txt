@@ -1,4 +1,0 @@
-FullName = William Wilson
-Email = steven.baker@verizon.net
-CurrentAddress = 2020 Chestnut Way, Salt Lake City, UT 84101
-PermanentAddress = 101 Walnut Circle, Chicago, IL 60602

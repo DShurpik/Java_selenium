@@ -1,0 +1,4 @@
+FullName = Sophia Martinez
+Email = chris.jackson@gmx.com
+CurrentAddress = 1616 Maple Lane, Kansas City, MO 64105
+PermanentAddress = 789 Elm Drive, Denver, CO 80203

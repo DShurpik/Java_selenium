@@ -1,0 +1,4 @@
+FullName = Chantay Ullrich
+Email = phyllis.collier@gmail.com
+CurrentAddress = Suite 815 7160 Gaylord Greens, Felixview, UT 45847
+PermanentAddress = Apt. 890 13941 Susan Ridges, Greenfelderland, MT 29812
