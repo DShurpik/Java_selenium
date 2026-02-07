@@ -23,7 +23,8 @@ public enum Navigation {
     WIDGETS ("'Widgets'"),
     AUTO_COMPLETE ("'Auto Complete'"),
     DATE_PICKER ("'Date Picker'"),
-    SLIDER ("'Slider'"),;
+    SLIDER ("'Slider'"),
+    PROGRESS_BAR ("'Progress Bar'"),;
 
     private final String item;
 

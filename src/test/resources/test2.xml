@@ -2,11 +2,11 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 
-<suite name="Test run" thread-count="2" parallel="methods">
+<suite name="Test run" thread-count="1" parallel="methods">
 
     <test name="One test run">
         <classes>
-            <class name="SliderTests"/>
+            <class name="ProgressBarTests"/>
         </classes>
     </test>
 </suite>
