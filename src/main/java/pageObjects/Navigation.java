@@ -22,7 +22,8 @@ public enum Navigation {
     ACCORDION ("'Accordian'"),
     WIDGETS ("'Widgets'"),
     AUTO_COMPLETE ("'Auto Complete'"),
-    DATE_PICKER ("'Date Picker'"),;
+    DATE_PICKER ("'Date Picker'"),
+    SLIDER ("'Slider'"),;
 
     private final String item;
 

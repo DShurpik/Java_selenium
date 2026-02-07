@@ -160,4 +160,15 @@ public class TestData {
                 {"invalid-url", 404, "clickNotFound"}
         };
     }
+
+    @DataProvider(name = "sliderValues")
+    public Object[][] sliderValues() {
+        return new Object[][] {
+                {0},
+                {25},
+                {50},
+                {75},
+                {100}
+        };
+    }
 }

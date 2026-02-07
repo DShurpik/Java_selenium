@@ -24,6 +24,7 @@
             <class name="AccordionTests"/>
             <class name="AutoCompleteTests"/>
             <class name="DatePickerTests"/>
+            <class name="SliderTests"/>
         </classes>
     </test>
 </suite>
