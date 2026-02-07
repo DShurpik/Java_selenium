@@ -1,0 +1,4 @@
+FullName = Ok Lockman Jr.
+Email = deedee.larson@gmail.com
+CurrentAddress = 158 Sharonda Crossing, Nathanialbury, KS 72745-7827
+PermanentAddress = 35120 Ratke Turnpike, Raumouth, OH 31436-9457

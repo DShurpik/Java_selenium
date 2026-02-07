@@ -1,4 +1,0 @@
-FullName = Sophia Martinez
-Email = emily.clark@inbox.com
-CurrentAddress = 888 Dogwood Way, Dallas, TX 75201
-PermanentAddress = 123 Pine Boulevard, Boston, MA 02110

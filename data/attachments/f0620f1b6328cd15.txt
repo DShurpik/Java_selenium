@@ -1,4 +1,0 @@
-FullName = Miss Edmond Purdy
-Email = jamison.hudson@gmail.com
-CurrentAddress = 229 Wiza Manors, Robertsshire, WA 99384-2378
-PermanentAddress = Suite 109 3292 Mayert Camp, New Leilani, HI 28824
